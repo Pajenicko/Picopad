@@ -1,4 +1,5 @@
 # Picopad
+Picopad - open source gaming console based on Raspberry Pi Pico (RP2040)
 
 ![Picopad](IMG/picopad.jpg)
 
