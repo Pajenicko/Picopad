@@ -1,6 +1,5 @@
 # Picopad
-Picopad - open source gaming console based on Raspberry Pi Pico (RP2040)
-
+Picopad - open source gaming console based on Raspberry Pi Pico (RP2040)  
 Picopad - open-source herní konzole založená na Raspberry Pi Pico (RP2040)
 
 ![Picopad](hardware/images/picopad.jpg)
