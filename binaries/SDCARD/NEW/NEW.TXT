@@ -1,0 +1,5 @@
+^YNew project^0
+
+Base of new project
+
+^WY^0 ....... quit

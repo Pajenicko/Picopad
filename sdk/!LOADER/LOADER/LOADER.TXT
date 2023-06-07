@@ -1,0 +1,12 @@
+^YPicoPad Boot Loader^0
+
+Boot Loader can be loaded
+only over USB interface.
+Do not run it directly.
+
+^WUP/DOWN^0 ...... move cursor
+^WLEFT/RIGHT^0 ... move page
+^WA^0 ... run program/directory
+^WB^0 ... directory up
+^WY^0 ... run last program
+^WX^0 ... battery status (or screenshot)

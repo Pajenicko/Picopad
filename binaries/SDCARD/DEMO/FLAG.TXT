@@ -1,0 +1,5 @@
+^YFlag^0
+
+Demo - fluttering flag
+
+^WY^0 ....... quit

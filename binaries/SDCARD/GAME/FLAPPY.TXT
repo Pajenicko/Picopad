@@ -1,0 +1,14 @@
+^YFlappy^0 for MZ-800
+(c) dB-Soft 1984
+
+Logic game - move blue
+ball to blue wall.
+
+^WRIGHT^0 ... right
+^WUP^0 ...... up
+^WLEFT^0 .... left
+^WDOWN^0 .... down
+^WA^0 ....... shoot mushroom
+^WX^0 ....... solve scene
+    (only first 8 scenes)
+^WY^0 ....... quit

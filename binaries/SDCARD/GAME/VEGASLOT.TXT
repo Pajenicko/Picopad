@@ -1,0 +1,24 @@
+^YVegaslot^0
+
+Winning Slot Machine
+
+^WA^0 ...... start game
+^WX^0 ...... autostart
+^WB^0 ...... change bet
+^WLEFT^0 ... toss game,
+         win to bank
+^WRIGHT^0 .. win to credit
+^WUP^0 ..... fill 10 credits
+^WDOWN^0 ... bank to credits
+^WY^0 ...... exit game
+
+- Maximal win is 750. Higher winnings can be used as a bonus in the next game (no credits are subtracted
+  in the bonus game and the reels spin in the opposite direction)
+- The win rate is 94%.
+- Minimum game time is 1 second (also applies to even/odd game).
+- Credits can be transferred to the bank using the odd/even game (with 100% win rate).
+- Winnings can be doubled in the 'Risk' game, transferred to the bank or transferred to credit.
+- A win occurs when 3 of the same symbol appears on a win line. The bet determines how many win lines
+  a win can occur on. The first line is the middle row of symbols, the second line is the top row
+  of symbols and the third line is the bottom row of symbols. The fourth line is the top left to bottom
+  right diagonal. The fifth line is from the bottom left diagonally to the top right.

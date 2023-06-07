@@ -1,0 +1,5 @@
+^YSpots^0
+
+Demo - random spots
+
+^WY^0 ....... quit

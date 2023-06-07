@@ -1,0 +1,10 @@
+^YTetris^0
+
+Game stacking blocks
+
+^WLEFT^0 ........ left
+^WRIGHT^0 ....... right
+^WUP or X^0 ..... turn stone
+^WDOWN or A^0 ... drop stone
+^WB^0 ........... pause
+^WY^0 ........... quit

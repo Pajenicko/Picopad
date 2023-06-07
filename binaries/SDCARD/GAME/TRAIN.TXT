@@ -1,0 +1,12 @@
+^YTrain^0
+
+Logic game
+
+^WRIGHT^0 ... right
+^WUP^0 ...... up
+^WLEFT^0 .... left
+^WDOWN^0 .... down
+^WA^0 ....... enter password
+^WB^0 ....... escape password
+^WX^0 ....... help solve scene
+^WY^0 ....... quit

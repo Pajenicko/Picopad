@@ -1,0 +1,13 @@
+Generator of Bernoulli numbers, used by linear factorials.
+Project of MS VC++ 2005 (for Windows)
+
+Picoino SDK: Copyright (c) 2023 Miroslav Nemecek, Panda38@seznam.cz
+
+Uses files from up-directory:
+../bernoulli.c
+../bigint.c
+../bigint.h
+
+Generaters files:
+bernoulli.c (Bernoulli numbers in C code)
+bernoulli.csv (Bernoulli numbers as CSV list with commas)

@@ -1,0 +1,15 @@
+^YLife^0
+
+Cell life simulator
+^WLEFT^0 ..... left
+^WRIGHT^0 .... right
+^WUP^0 ....... up
+^WDOWN^0 ..... down
+^WA^0 ........ flip state
+^WB^0 ........ run life
+^WX^0 ........ next slot
+^WY^0 ........ quit
+Cell rules:
+^W3 cells^0 ... born new cell
+^W2 cells^0 ... stable state
+^Wother^0 ..... dead 

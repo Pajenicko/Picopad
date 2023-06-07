@@ -1,0 +1,6 @@
+^YFlag 2^0
+
+Demo - fluttering flag
+       with custom image
+
+^WY^0 ....... quit

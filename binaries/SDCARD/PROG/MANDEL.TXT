@@ -1,0 +1,17 @@
+^YMandelbrot^0
+
+Fractal pattern generator.
+Uses both CPU cores.
+
+^WUP^0 .......... move up
+^WLEFT^0 ........ move left
+^WRIGHT^0 ....... move right
+^WDOWN^0 ........ move down
+^WA+UP^0 ........ zoom in
+^WA+DOWN^0 ...... zoom out
+^WA+RIGHT^0 ..... incr. steps
+^WA+LEFT^0 ...... decr. steps
+^WY^0 ........... quit
+
+Blinking LED indicates
+render completed.

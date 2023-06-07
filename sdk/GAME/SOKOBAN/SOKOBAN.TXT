@@ -1,0 +1,18 @@
+^YSokoban^0
+
+Program control:
+
+^WRIGHT^0 .......... right
+^WUP^0 ............. up
+^WLEFT^0 ........... left
+^WDOWN^0 ........... down
+
+^WA^0 .............. OK, Enter
+^WB^0 .............. restart scene
+^WX^0 .............. help solution
+^WY^0 .............. escape
+
+^WLEFT+A^0 ......... previous level
+^WRIGHT+A^0 ........ next level
+^WUP+A^0 ........... select fast mode
+^WDOWN+A^0 ......... select slow mode (default)

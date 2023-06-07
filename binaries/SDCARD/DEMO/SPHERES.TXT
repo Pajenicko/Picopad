@@ -1,0 +1,5 @@
+^YSpheres^0
+
+Demo - random spheres
+
+^WY^0 ....... quit

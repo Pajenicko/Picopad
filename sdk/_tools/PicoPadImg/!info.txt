@@ -1,0 +1,7 @@
+Input image must be in Windows-BMP 24-bit, 8-bit or 4-bit color format, no compress, switch ON flip row order.
+
+To generate uncompressed image 16-bit, 8-bit or 4-bit:
+  PicoPadImg input.bmp output.c name
+
+To generate RLE compressed image 8-bit or 4-bit:
+  PicoPadImg input.bmp output.c name r

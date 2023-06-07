@@ -1,0 +1,8 @@
+^YTV Tennis^0
+
+Classic game
+
+^WUP/DOWN^0 .... left player
+^WX/A^0 ........ right player
+^WB/LEFT/RIGHT^0 ... serve
+^WY^0 .......... exit game

@@ -1,0 +1,5 @@
+^YBattery^0
+
+Display battery status.
+
+^WY^0 ....... quit

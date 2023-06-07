@@ -1,0 +1,6 @@
+^YOscilloscope^0
+
+Demo - simulation of
+       oscilloscope signal 
+
+^WY^0 ....... quit

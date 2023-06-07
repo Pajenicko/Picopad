@@ -1,0 +1,7 @@
+^YWater Surface^0
+
+Demo - simulation of
+       rippling water
+       surface
+
+^WY^0 ....... quit

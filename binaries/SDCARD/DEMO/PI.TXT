@@ -1,0 +1,6 @@
+^YPi^0
+
+Demo - calculating number
+       Pi to 1180 digits
+
+^WY^0 ....... quit

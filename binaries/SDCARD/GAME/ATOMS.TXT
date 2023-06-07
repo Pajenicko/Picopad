@@ -1,0 +1,10 @@
+^YExploding Atoms^0
+
+Game of exploding atoms
+
+^WLEFT^0 .... left
+^WRIGHT^0 ... right
+^WUP^0 ...... up
+^WDOWN^0 .... down
+^WA^0 ....... put stone
+^WY^0 ....... quit

@@ -1,0 +1,13 @@
+@echo off
+rem Compilation...
+
+set TARGET=GINGER
+set DEVICE=picopad
+call ..\..\_c1.bat
+
+if not exist %TARGET%.uf2 goto stop
+..\..\_tools\PicoPadLoaderCrc\LoaderCrc.exe %TARGET%.bin %TARGET%.uf2
+if errorlevel 1 goto stop
+if not exist ..\..\!PicoPad\BOOK\*.UF2 md ..\..\!PicoPad\BOOK
+copy /b %TARGET%.uf2 ..\..\!PicoPad\BOOK\%TARGET%.UF2 > nul
+:stop

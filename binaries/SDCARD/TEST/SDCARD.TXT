@@ -1,0 +1,5 @@
+^YSD Card^0
+
+Test SD card and files.
+
+^WY^0 ....... quit

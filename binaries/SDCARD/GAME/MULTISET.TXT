@@ -1,0 +1,12 @@
+^YGame Multiset^0
+
+Multiset of 16 games
+
+^WLEFT^0 .... left
+^WRIGHT^0 ... right
+^WUP^0 ...... up
+^WDOWN^0 .... down
+^WA^0 ....... run game
+^WB^0 ....... sound ON/OFF
+^WX^0 ....... battery
+^WY^0 ....... quit

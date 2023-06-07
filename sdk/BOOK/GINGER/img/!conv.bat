@@ -1,0 +1,22 @@
+@echo off
+PicoPadImg 01.bmp 01.cpp Img01 r
+PicoPadImg 02.bmp 02.cpp Img02 r
+PicoPadImg 03.bmp 03.cpp Img03 r
+PicoPadImg 04.bmp 04.cpp Img04 r
+PicoPadImg 05.bmp 05.cpp Img05 r
+PicoPadImg 06.bmp 06.cpp Img06 r
+PicoPadImg 07.bmp 07.cpp Img07 r
+PicoPadImg 08.bmp 08.cpp Img08 r
+PicoPadImg 09.bmp 09.cpp Img09 r
+PicoPadImg 10.bmp 10.cpp Img10 r
+PicoPadImg 11.bmp 11.cpp Img11 r
+PicoPadImg 12.bmp 12.cpp Img12 r
+PicoPadImg 13.bmp 13.cpp Img13 r
+PicoPadImg 14.bmp 14.cpp Img14 r
+PicoPadImg 15.bmp 15.cpp Img15 r
+PicoPadImg 16.bmp 16.cpp Img16 r
+PicoPadImg 17.bmp 17.cpp Img17 r
+PicoPadImg 18.bmp 18.cpp Img18 r
+PicoPadImg 19.bmp 19.cpp Img19 r
+PicoPadImg 20.bmp 20.cpp Img20 r
+PicoPadImg 22.bmp 22.cpp Img22 r

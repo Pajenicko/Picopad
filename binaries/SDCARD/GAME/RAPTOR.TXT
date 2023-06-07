@@ -1,0 +1,11 @@
+^YRaptor^0
+
+Shooting game
+
+^WLEFT^0 .... left
+^WRIGHT^0 ... right
+^WUP^0 ...... up
+^WDOWN^0 .... down
+^WA^0 ....... shooting
+^WB^0 ....... select weapon
+^WY^0 ....... quit

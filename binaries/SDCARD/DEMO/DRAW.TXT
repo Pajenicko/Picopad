@@ -1,0 +1,6 @@
+^YDraw^0
+
+Demo - drawing graphic
+       elements
+
+^WY^0 ....... quit

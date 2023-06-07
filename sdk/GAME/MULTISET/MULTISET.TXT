@@ -1,0 +1,248 @@
+^YGame Multiset^0
+
+Game selection control:
+
+^WLEFT^0 .... left
+^WRIGHT^0 ... right
+^WUP^0 ...... up
+^WDOWN^0 .... down
+^WA^0 ....... run selected game
+^WB^0 ....... sound ON/OFF
+^WX^0 ....... display battery status
+^WY^0 ....... quit
+
+
+Ants
+====
+Program control:
+
+LEFT ... left
+RIGHT ... right
+DOWN, A ... select
+UP, B ... discard
+X ... help
+Y ... quit
+
+
+Exploding Atoms
+===============
+Program control:
+
+LEFT .... left
+RIGHT ... right
+UP ...... up
+DOWN .... down
+A ....... select
+Y ....... exit
+
+
+Eggs
+====
+Start game:
+LEFT .... play eggs
+RIGHT ... play hens
+DOWN .... 2 players
+UP ...... demo
+
+Game control:
+LEFT .... left
+RIGHT ... right
+UP ...... up
+DOWN .... down
+A ....... put stone
+X ....... help turn
+Y ....... quit, restart game
+
+
+Fifteen
+=======
+Program control:
+
+RIGHT ... right
+UP ...... up
+LEFT .... left
+DOWN .... down
+A ....... new game
+X ....... help hint, solver
+Y ....... quit
+
+
+Flappy
+======
+Flappy MZ-800
+Original copyright by dB-Soft, 1984
+
+Program control:
+
+RIGHT ....... right
+UP .......... up
+LEFT ........ left
+DOWN ........ down
+A ........... Shoot mushroom
+X ........... help solve scene, only first 8 scenes of "MZ-800" game set
+Y ........... exit to game select
+
+
+Ghost Racing
+============
+Program control:
+
+UP ...... spead up
+DOWN .... breaks
+LEFT .... turn left
+RIGHT ... turn right
+
+
+Chess
+=====
+Program control:
+
+LEFT .... left
+RIGHT ... right
+UP ...... up
+DOWN .... down
+A ....... use selected piece
+B ....... cancel moving piece
+X ....... help, move using computer
+Y ....... quit, return to open menu
+
+Levels of computer move difficulty: Beginner = 2 forward moves,
+Advanced = 3 forward moves, Pro = 4 forward moves, SuperPro = 5 forward moves.
+
+One turn of the computer at the 'super-pro' level can take approximately 1 to 2 minutes.
+A move at the 'pro' level takes approximately 5 to 10 seconds.
+
+
+Life
+====
+Program control:
+
+LEFT ..... left
+RIGHT .... right
+UP ....... up
+DOWN ..... down
+A ........ flip state
+B ........ run life
+X ........ select slot
+
+
+Cell rules:
+
+3 cells ... born new cell
+2 cells ... stable state
+other ..... dead 
+
+
+Maze
+====
+Program control:
+
+LEFT .... left
+RIGHT ... right
+UP ...... up
+DOWN .... down
+A ...... help, show door
+
+
+PacMan
+======
+Program control:
+
+LEFT .... left
+UP ...... up
+RIGHT ... right
+DOWN .... down
+A ....... pause
+
+
+Raptor
+======
+Program control:
+
+LEFT .... left
+RIGHT ... right
+UP ...... up
+DOWN .... down
+A ....... shooting
+B ....... select weapon
+
+
+Sokoban
+=======
+Program control:
+
+RIGHT .......... right
+UP ............. up
+LEFT ........... left
+DOWN ........... down
+
+A .............. OK, Enter
+B .............. restart scene
+X .............. help solution
+Y .............. escape
+
+LEFT+A ......... previous level
+RIGHT+A ........ next level
+UP+A ........... select fast mode
+DOWN+A ......... select slow mode (default)
+
+
+Tetris
+======
+Program control:
+
+LEFT ........... left
+RIGHT .......... right
+UP, X .......... turn stone
+DOWN, A ........ drop stone
+B .............. pause
+Y .............. quit
+
+
+Train
+=====
+Program control:
+
+RIGHT ....... right
+UP .......... up
+LEFT ........ left
+DOWN ........ down
+A ........... OK, enter password
+B ........... restart scene
+X ........... help solve scene
+Y ........... escape
+
+
+
+TV Tennis
+=========
+Program control:
+
+UP/DOWN ... control left player
+X/A ... control right player
+B or LEFT or RIGHT ... serve ball
+Y ... exit game
+
+
+Vegaslot
+========
+Program control:
+
+A ...... (Start) on game: start game, on toss: roll, on winning: risk
+X ...... (Auto) autostart on (can be also used during toss and winning, press any key to off the autostart)
+B ...... (Bet) change the bet amount (1..5 credits = 1..5 lines, H = high game of 5 credits + 15 bank)
+LEFT ... (Toss/Win-Bank) start/stop toss game Odd/Even, on winning: transfer all or part of the winnings to the bank.
+RIGHT .. (Win-Credit) on winning: transfer all or part of the winnings to the credit.
+UP ..... (Refill-In) add 10 credits (drop 10 coins into the coin acceptor)
+DOWN ... (Cash-Out) convert bank to credits, credit payout (pay coins from hopper)
+
+- Maximal win is 750. Higher winnings can be used as a bonus in the next game (no credits are subtracted
+  in the bonus game and the reels spin in the opposite direction)
+- The win rate is 94%.
+- Minimum game time is 1 second (also applies to even/odd game).
+- Credits can be transferred to the bank using the odd/even game (with 100% win rate).
+- Winnings can be doubled in the 'Risk' game, transferred to the bank or transferred to credit.
+- A win occurs when 3 of the same symbol appears on a win line. The bet determines how many win lines
+  a win can occur on. The first line is the middle row of symbols, the second line is the top row
+  of symbols and the third line is the bottom row of symbols. The fourth line is the top left to bottom
+  right diagonal. The fifth line is from the bottom left diagonally to the top right.

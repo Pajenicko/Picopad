@@ -1,0 +1,11 @@
+^YGhost Racing^0
+
+Game of car racing.
+You can race with your
+ghost from last lap.
+
+^WUP or X^0 ..... spead up
+^WDOWN or A^0 ... breaks
+^WLEFT^0 ........ turn left
+^WRIGHT^0 ....... turn right
+^WY^0 ........... quit

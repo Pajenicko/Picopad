@@ -1,0 +1,9 @@
+^YPacMan^0
+
+Program control:
+
+^WLEFT^0 .... left
+^WUP^0 ...... up
+^WRIGHT^0 ... right
+^WDOWN^0 .... down
+^WA^0 ....... pause

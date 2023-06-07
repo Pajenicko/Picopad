@@ -1,0 +1,7 @@
+^YSpace Invaders^0
+
+Program control:
+
+^WLEFT/RIGHT^0 .... moving
+^WA^0 ............. shooting
+^WY^0 ............. restart game

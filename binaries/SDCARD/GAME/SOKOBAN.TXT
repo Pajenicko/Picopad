@@ -1,0 +1,13 @@
+^YSokoban^0
+
+Logic game
+
+^Warrows^0 .... move
+^WA^0 ......... OK, Enter
+^WY^0 ......... escape
+^WX^0 ......... help solution
+^WB^0 ......... restart scene
+^WLEFT+A^0 .... previous level
+^WRIGHT+A^0 ... next level
+^WUP+A^0 ...... fast mode
+^WDOWN+A^0 .... slow mode
