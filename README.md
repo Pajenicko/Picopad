@@ -1,7 +1,36 @@
 # Picopad
 Picopad - open source gaming console based on Raspberry Pi Pico (RP2040)
+Picopad - open-source herní konzole založená na Raspberry Pi Pico (RP2040)
 
 ![Picopad](hardware/images/picopad.jpg)
+
+## Folder descriptions:
+
+### `binaries`
+The `binaries` folder contains UF2 images used for flashing the device and the contents of the SD card for flashing from the card.
+
+### `hardware`
+The `hardware` folder contains schematics and photos of the Picopad.
+
+### `micropython`
+The `micropython` folder contains libraries and examples for MicroPython.
+
+### `sdk`
+The `sdk` folder contains the C language SDK for Picopad.
+
+## Popis složek:
+
+### `binaries`
+Složka `binaries` obsahuje UF2 obrazy, které slouží k flashování zařízení, a obsah SD karty pro flashování ze karty.
+
+### `hardware`
+Složka `hardware` obsahuje schémata a fotografie Picopadu.
+
+### `micropython`
+Složka `micropython` obsahuje knihovny a příklady pro MicroPython.
+
+### `sdk`
+Složka `sdk` obsahuje SDK v jazyce C pro Picopad.
 
 ## License
 GNU GENERAL PUBLIC LICENSE
