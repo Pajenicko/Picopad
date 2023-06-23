@@ -17,6 +17,13 @@ The `micropython` folder contains libraries and examples for MicroPython.
 ### `sdk`
 The `sdk` folder contains the C language SDK for Picopad.
 
+## External connector
+The console also features an external connector that provides battery power, 3.3V, and GND. It supports communication through UART, has two I2C interfaces, three analog inputs, and six GPIO pins.
+
+![Picopad connector](hardware/images/picopad-connector-schema.jpg)
+<img src="hardware/images/picopad-connector.jpg" alt="Picopad connector picture" height="350">
+
+
 ## License
 GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
