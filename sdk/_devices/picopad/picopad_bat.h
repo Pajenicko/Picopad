@@ -20,9 +20,11 @@ extern "C" {
 //#define BAT_MUL		2		// voltage multiplier
 
 // Using Pico internal divider 1:2
-#define BAT_PIN		29		// input from battery
-#define BAT_ADC		ADC_MUX_GPIO29	// ADC input
-#define BAT_MUL		3		// voltage multiplier
+#define BAT_PIN				29		// input from battery
+#define BAT_ADC				ADC_MUX_GPIO29	// ADC input
+#define BAT_MUL				3		// voltage multiplier
+#define BAT_DIODE_FV_INT 	311		// voltage drop in mV on diode
+#define BAT_DIODE_FV 		0.311f		// voltage drop in mV on diode
 
 // init battery measurement
 void BatInit();

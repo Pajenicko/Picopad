@@ -514,11 +514,11 @@ by VGA driver rendering service.
 #endif
 
 #ifndef BATTERY_EMPTY
-#define BATTERY_EMPTY	3.2f		// voltage of empty battery
+#define BATTERY_EMPTY	3.1f		// voltage of empty battery
 #endif
 
 #ifndef BATTERY_EMPTY_INT
-#define BATTERY_EMPTY_INT 3200		// voltage of empty battery
+#define BATTERY_EMPTY_INT 3100		// voltage of empty battery
 #endif
 
 #ifndef USE_SCREENSHOT			// use screen shots
