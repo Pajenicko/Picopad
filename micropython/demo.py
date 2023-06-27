@@ -10,15 +10,26 @@ st7789_dc = Pin(17, mode=Pin.OUT)  # Data/command pin for the display
 st7789_cs = Pin(21, mode=Pin.OUT)  # Chip select pin for the display
 st7789_blk = Pin(16, mode=Pin.OUT)  # Backlight pin for the display
 
-# Initialize the display
-spi = SPI(0, 62500000, sck=Pin(18), mosi=Pin(19), polarity=1, phase=1)  # SPI bus for communication
-display = st7789.ST7789(spi, 320, 240, reset=st7789_res, dc=st7789_dc, cs=st7789_cs, backlight=st7789_blk, rotation=1)
-# Create an instance of the ST7789 class for the display
-# with the specified parameters
+# Initialize the SPI bus and the display
+spi = SPI(0, 62500000, sck=Pin(18), mosi=Pin(19), polarity=1, phase=1)  # Initialize the SPI bus
+display = st7789.ST7789(spi, 320, 240, reset=st7789_res, dc=st7789_dc, cs=st7789_cs, backlight=st7789_blk, rotation=1)  # Initialize the display
 
-display.fill(0)  # Clear the display
-display.text(fonts_vga1_16x32, "Picopad", 20, 40, 0xF800, 0)  # Display "Picopad" using a specific font
-display.text(fonts_vga2_8x8, "DEMO", 20, 75, 0x0FFF, 0)  # Display "DEMO" using a different font
+# Check if WLAN module is available and set is_pico_w accordingly
+try:
+    import network
+    wlan = network.WLAN(network.STA_IF)
+    is_pico_w = True
+except ImportError:
+    is_pico_w = False
+    
+# Fill the display with color and set some initial text
+display.fill(0)  # Fill the display with black
+if is_pico_w == True:
+    display.text(fonts_vga1_16x32, "Picopad Wifi", 20, 40, 0xF800, 0)  # Display "Picopad Wifi" text on the display
+else:
+    display.text(fonts_vga1_16x32, "Picopad", 20, 40, 0xF800, 0)  # Display "Picopad" text on the display
+
+display.text(fonts_vga2_8x8, "DEMO", 20, 75, 0x0FFF, 0)  # Display "DEMO" text on the display
 
 # Define buttons
 left_button = Pin(3, Pin.IN, Pin.PULL_UP)  # Define the left button
@@ -38,10 +49,40 @@ pin_led_usr.high()  # Turn off the user LED initially
 buzzerPIN = 15  # Define the pin for the buzzer
 BuzzerObj = PWM(Pin(buzzerPIN))  # Create a PWM object for the buzzer
 
-# Read voltage
-Pin(29, Pin.IN)  # Configure pin for voltage reading
-vsysChannel = machine.ADC(3)  # Create an ADC object for voltage measurement
+# Function to measure the system voltage
+def get_vsys():
+    global is_pico_w
+    conversion_factor = 3 * 3.3 / 65535
+    DiodeVoltageDrop = 0.311 
 
+    if (is_pico_w == False):  # If using a regular Pico
+        Pin(29, Pin.IN)  # Configure pin for voltage reading
+        vsysChannel = machine.ADC(3)
+        return vsysChannel.read_u16() * conversion_factor + DiodeVoltageDrop
+
+    # If using a Pico W
+    wlan = network.WLAN(network.STA_IF)
+    wlan_active = wlan.active()
+
+    try:
+        # Temporarily disable WLAN
+        wlan.active(False)
+
+        # Ensure pin 25 is high
+        Pin(25, mode=Pin.OUT, pull=Pin.PULL_DOWN).high()
+
+        # Configure pin 29 as an input
+        Pin(29, Pin.IN)
+
+        vsysChannel = machine.ADC(3)
+        return vsysChannel.read_u16() * conversion_factor + DiodeVoltageDrop
+
+    finally:
+        # Restore the pin state and possibly reactivate WLAN
+        Pin(29, Pin.ALT, pull=Pin.PULL_DOWN, alt=7)
+        wlan.active(wlan_active)
+
+# Function to toggle the state of a given pin
 def toggle_pin(pin):
     pin.value(not pin.value())  # Toggle the state of the specified pin
 
@@ -78,12 +119,13 @@ while True:
             buzzer(BuzzerObj, 784, 0.5, 0.2)
             BuzzerObj.deinit()  # Deinitialize the buzzer after playing the sound
 
-        # Read voltage and draw on display
-        adcReading = vsysChannel.read_u16()  # Read the ADC value
-        adcVoltage = (adcReading * 3.3) / 65535  # Convert the ADC value to voltage
-        vsysVoltage = adcVoltage * 3  # Multiply by a factor to get the actual voltage
-        display.text(fonts_vga1_16x32, f'{vsysVoltage:.2f}V ', 230, 200, 0xff0f, 0)
-        # Display the voltage value on the screen
-    
+        # Show the system voltage
+        display.text(fonts_vga1_16x32, f'{get_vsys():.2f}V ', 230, 200, 0xff0f, 0)
+
+        # Delay before the next iteration
+        sleep(0.1)
+
+    # Stop the loop if a keyboard interrupt is detected
     except KeyboardInterrupt:
         break
+
