@@ -174,7 +174,7 @@ all: createdirs elf bin hex lst sym siz
 # Create temporary directory
 
 createdirs:
-	@mkdir -p $(TEMP)
+	@mkdir.exe -p $(TEMP)
 
 ##############################################################################
 # Dependencies of output files
