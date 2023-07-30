@@ -14,7 +14,7 @@ You can find the required librarie in the CircuitPython library bundle (https://
 import board
 
 import displayio
-import adafruit_requests as requests
+import adafruit_requests
 
 import wifi
 import ssl
@@ -97,7 +97,7 @@ def display_page():
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
 
 pool = socketpool.SocketPool(wifi.radio)
-requests = requests.Session(pool, ssl.create_default_context())
+requests = adafruit_requests.Session(pool, ssl.create_default_context())
 group = displayio.Group()
 
 # Download and display first page

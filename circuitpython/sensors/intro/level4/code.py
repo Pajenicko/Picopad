@@ -3,8 +3,8 @@ In this advanced example, we will build upon our previous work with the Sensirio
 We will now enhance the project with asynchronous programming to manage concurrent tasks efficiently.
 
 We will define two asynchonous tasks:
-- measure_and_display_task: to measure the sensor data and display them on the screen
-- blink_led_task: to blink the LED every second - just for fun
+- measure_and_display task: to measure the sensor data and display them on the screen
+- blink_led task: to blink the LED every second - just for fun
 
 It requires the adafruit_scd4x, adafruit_display_text, adafruit_imageload and asyncio libraries placed in /lib directory.
 You can find the libraries in the CircuitPython library bundle (https://circuitpython.org/libraries).
