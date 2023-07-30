@@ -1,9 +1,26 @@
+"""
+In this example, you'll get hands-on experience with Picopad peripherals,
+learning how to make it react to your commands.
+
+You'll press buttons, light up LEDs, display texts and images on screen and even play music!
+
+You'll use the following CircuitPython libraries:
+- displayio - to display text and images on the screen
+- adafruit_display_text - to create text labels on screen
+- digitalio - to interact with buttons and LEDs
+- adafruit_debouncer - to solve the button bouncing problem
+- simpleio - to generate tones
+
+You can find the required librarie in the CircuitPython library bundle (https://circuitpython.org/libraries).
+"""
+
 import board
 import displayio
 import terminalio
 from adafruit_display_text import label
 from digitalio import DigitalInOut, Direction, Pull
 from adafruit_debouncer import Debouncer
+import digitalio
 import simpleio
 import time
 
@@ -55,7 +72,11 @@ Bb5 = 932.33
 B5 = 987.77
 
 # basic note duration
-T = 0.16
+T = 0.15
+
+# initialize the LED
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
 
 
 display = board.DISPLAY
@@ -78,6 +99,7 @@ text_area.y = 110
 group.append(text_area)
 
 # Create a bitmap object
+# the bitmap is in 4bpp BGR format
 image = displayio.OnDiskBitmap('picopad.bmp')
 image_area = displayio.TileGrid(image, pixel_shader=image.pixel_shader)
 
@@ -94,30 +116,30 @@ display.show(group)
 melody = [
     (E4, 1*T),
     (F4, 1*T),
-    
     (G4, 2*T),
     (C5, 4*T),
+    
     (D4, 1*T),
     (E4, 1*T),
-
     (F4, 6*T),
+
     (G4, 1*T),
     (A4, 1*T),
-
     (B4, 2*T),
     (F5, 4*T),
     
     (A4, 1*T),
     (B4, 1*T),
-
     (C5, 2*T),
     (D5, 2*T),
     (E5, 2*T),
 ]
 
+# Play the melody and blink the LED in the rhythm :-)
 for note in melody:
     frequency, duration = note
     simpleio.tone(board.AUDIO, frequency, duration)
+    led.value = not led.value
     time.sleep(0.05)
 
 

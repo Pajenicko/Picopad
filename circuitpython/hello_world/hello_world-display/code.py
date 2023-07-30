@@ -1,3 +1,12 @@
+"""
+In this example, you will learn how to use the display on your Picopad with displayio library.
+
+We will use the adafruit_display_text library to display text anywhere on the screen.
+
+It requires the adafruit_display_text library placed in /lib directory.
+You can find the library in the CircuitPython library bundle (https://circuitpython.org/libraries).
+"""
+
 import board
 import displayio
 import terminalio

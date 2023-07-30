@@ -1,6 +1,13 @@
-import time
+"""
+In this simple example, you will learn how to interact with peripherals on your Picopad.
+Will access the USR LED (yellow) and blink it.
+
+We need to initialize the LED pin as an output, and then we can set the value to True or False to turn it on or off.
+"""
+
 import board
 import digitalio
+import time
 
 # use the USR LED (yellow)
 led = digitalio.DigitalInOut(board.LED)
