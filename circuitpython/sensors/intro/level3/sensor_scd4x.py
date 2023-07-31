@@ -1,20 +1,13 @@
 """
-In this example, you will learn how to simplify sensor data collection using custom classes.
-Instead of directly accessing the sensor data as in the previous example,
-we will create universal classes to handle measurements and encapsulate the functionality, making the code more organized, maintainable and versatile.
+This is handler for SCD4x sensor to use in our demos.
 
 It requires the adafruit_scd4x library placed in /lib directory.
-You can find the library in the CircuitPython library bundle (https://circuitpython.org/libraries).
-
-You can easily use the same structure and concept to interface with other I2C sensors as well.
-
-If you don't have SCD4x sensor, goto Level 3 and try to use internal temperature sensor od RP2040.
+You can find the libraries in the CircuitPython library bundle (https://circuitpython.org/libraries).
 """
-
 import board
 import busio
-import time
 import adafruit_scd4x
+import time
 
 # Measurement class to store the sensor data in a structured way
 class Measurement:
@@ -56,7 +49,7 @@ class Sensor:
         self.measurements = []
         # wait for data to be ready
         while not self.sensor.data_ready:
-            time.sleep(1)
+            time.sleep(0.2)
 
         # Read data from sensor and save them into the list of Measurement objects
         # SCD4x sensor measures temperature, relative humidity and CO2, so we will add three measurements
@@ -88,18 +81,3 @@ class Sensor:
             if measurement.tag == tag:
                 return measurement
         return None
-
-# initialize the sensor
-sensor = Sensor()
-
-# read and show measured values every 5 seconds
-while True:
-
-    # measure the sensor data
-    measurements = sensor.measure()
-
-    # print the measured values
-    for measurement in measurements:
-        print(measurement)
-
-    time.sleep(5)

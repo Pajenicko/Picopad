@@ -92,7 +92,7 @@ def display_page():
     
     group.append(tile_grid)
     display.show(group)
-         
+
 # Initialize WiFi
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
 
@@ -128,22 +128,24 @@ while True:
         gc.collect()
 
     if (btn_y.value == False):
-        page += 10
+        # this is nice alternative to math.ceil()
+        # it rounds page to next 10 (eg. from 113 to 120)
+        page = int((page + 10)/10)*10
         teletext(page)
         gc.collect()
 
     if (btn_x.value == False):
-        page -= 10
+        page = int((page)/10)*10
         teletext(page)
         gc.collect()
 
     if (btn_b.value == False):
-        page += 100
+        page = int((page + 100)/100)*100
         teletext(page)
         gc.collect()
 
     if (btn_a.value == False):
-        page -= 100
+        page = int((page)/100)*100
         teletext(page)
         gc.collect()
 
