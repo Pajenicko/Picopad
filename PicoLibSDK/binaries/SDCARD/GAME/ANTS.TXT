@@ -1,0 +1,11 @@
+^YAnts^0
+
+Card game
+v1.2 multiplayer
+
+^WLEFT^0 ........ left
+^WRIGHT^0 ....... right
+^WDOWN or A^0 ... select
+^WUP or B^0 ..... discard
+^WX^0 ........... help
+^WY^0 ........... quit
