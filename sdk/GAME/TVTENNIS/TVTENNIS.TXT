@@ -1,8 +1,0 @@
-^YTV Tennis^0
-
-Program control:
-
-^WUP/DOWN^0 .............. control left player
-^WX/A^0 .................. control right player
-^WB or LEFT or RIGHT^0 ... serve ball
-^WY^0 .................... exit game

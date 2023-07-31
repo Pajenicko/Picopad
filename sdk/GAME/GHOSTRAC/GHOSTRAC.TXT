@@ -1,8 +1,0 @@
-^YGhost Racing^0
-
-Program control:
-
-^WUP^0 ...... spead up
-^WDOWN^0 .... breaks
-^WLEFT^0 .... turn left
-^WRIGHT^0 ... turn right
