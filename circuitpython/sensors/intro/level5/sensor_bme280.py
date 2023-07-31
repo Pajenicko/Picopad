@@ -1,20 +1,13 @@
 """
-In this example, you will learn how to simplify sensor data collection using custom classes.
-Instead of directly accessing the sensor data as in the previous example,
-we will create universal classes to handle measurements and encapsulate the functionality, making the code more organized, maintainable and versatile.
+This is handler for BME280 sensor to use in our demos.
 
-It requires the adafruit_scd4x library placed in /lib directory.
-You can find the library in the CircuitPython library bundle (https://circuitpython.org/libraries).
-
-You can easily use the same structure and concept to interface with other I2C sensors as well.
-
-If you don't have SCD4x sensor, goto Level 3 and try to use internal temperature sensor od RP2040.
+It requires the adafruit_bme280 library placed in /lib directory.
+You can find the libraries in the CircuitPython library bundle (https://circuitpython.org/libraries).
 """
-
 import board
 import busio
-import time
-import adafruit_scd4x
+from adafruit_bme280 import basic as adafruit_bme280
+
 
 # Measurement class to store the sensor data in a structured way
 class Measurement:
@@ -41,25 +34,21 @@ class Sensor:
         self.measurements = []
         # initialize i2c bus and SCD4x sensor
         i2c = busio.I2C(board.SCL, board.SDA)
-        self.sensor = adafruit_scd4x.SCD4X(i2c)
-        self.sensor.start_periodic_measurement()
-
+        self.sensor = adafruit_bme280.Adafruit_BME280_I2C(i2c)
+        self.sensor.sea_level_pressure = 1013.25
         # define your sensor capabilities
         self.readings = {
            "temp": {"name": "Temperature", "type": "temperature", "unit": "°C"},
            "humi": {"name": "Humidity", "type": "humidity", "unit": "%"},
-           "CO2":  {"name": "CO2", "type": "co2", "unit": "ppm"}
+           "pres":  {"name": "Pressure", "type": "pressure", "unit": "hPa"}
         }
 
     # measure the sensor data and return a list of Measurement objects
     def measure(self):
         self.measurements = []
-        # wait for data to be ready
-        while not self.sensor.data_ready:
-            time.sleep(1)
 
         # Read data from sensor and save them into the list of Measurement objects
-        # SCD4x sensor measures temperature, relative humidity and CO2, so we will add three measurements
+        # BME280 sensor measures temperature, relative humidity and pressure, so we will add three measurements
 
         tag = "temp"
         measurement = Measurement(
@@ -71,9 +60,9 @@ class Sensor:
             self.readings[tag]["name"], tag, self.readings[tag]["type"], self.sensor.relative_humidity, self.readings[tag]["unit"])
         self.measurements.append(measurement)
         
-        tag = "CO2"
+        tag = "pres"
         measurement = Measurement(
-            self.readings[tag]["name"], tag, self.readings[tag]["type"], self.sensor.CO2, self.readings[tag]["unit"])
+            self.readings[tag]["name"], tag, self.readings[tag]["type"], self.sensor.pressure, self.readings[tag]["unit"])
         self.measurements.append(measurement)
 
         return self.measurements
@@ -88,18 +77,3 @@ class Sensor:
             if measurement.tag == tag:
                 return measurement
         return None
-
-# initialize the sensor
-sensor = Sensor()
-
-# read and show measured values every 5 seconds
-while True:
-
-    # measure the sensor data
-    measurements = sensor.measure()
-
-    # print the measured values
-    for measurement in measurements:
-        print(measurement)
-
-    time.sleep(5)

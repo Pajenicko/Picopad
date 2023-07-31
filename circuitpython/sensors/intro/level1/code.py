@@ -8,6 +8,8 @@ It requires the adafruit_scd4x library placed in /lib directory.
 You can find the library in the CircuitPython library bundle (https://circuitpython.org/libraries).
 
 You can use the same concept to interface with other I2C sensors as well.
+
+If you don't have SCD4x sensor, goto Level 3 and try to use internal temperature sensor od RP2040.
 """
 
 import board
@@ -28,7 +30,7 @@ while True:
     # wait for data to be ready
     # section 3.5.2 https://sensirion.com/media/documents/48C4B7FB/6426E14D/CD_DS_SCD40_SCD41_Datasheet_D1_052023.pdf
     while not sensor.data_ready:
-        time.sleep(1)
+        time.sleep(0.2)
     
     # read and show measured values
     print("Temperature: %0.2f °C" % sensor.temperature)
