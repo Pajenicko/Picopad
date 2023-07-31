@@ -2,4 +2,4 @@
 rem Delete...
 
 set TARGET=SCD41
-call ..\..\_d1.bat
+call ..\..\sdk\_d1.bat

@@ -24,7 +24,7 @@ int main() {
     TextInit(&txt);
 
     do {
-        DrawClear(COL_BLACK);
+        DrawClear();
 
         DrawImgRle(SensorImg_RLE, SensorImg_Pal, 0, 0, 320, 240);
 

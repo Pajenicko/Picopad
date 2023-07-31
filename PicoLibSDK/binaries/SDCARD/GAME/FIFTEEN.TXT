@@ -8,5 +8,5 @@ tiles from 1 to 15
 ^WLEFT^0 .... left
 ^WDOWN^0 .... down
 ^WA^0 ....... new game
-^WX^0 ....... help hint
+^WX^0 ....... solver
 ^WY^0 ....... quit

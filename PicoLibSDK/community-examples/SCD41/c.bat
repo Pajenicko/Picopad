@@ -2,12 +2,15 @@
 rem Compilation...
 
 set TARGET=SCD41
-set DEVICE=picopad
-call ..\..\_c1.bat
+set DEVICE=picopad10
 
-if not exist %TARGET%.uf2 goto stop
-..\..\_tools\PicoPadLoaderCrc\LoaderCrc.exe %TARGET%.bin %TARGET%.uf2
-if errorlevel 1 goto stop
-if not exist ..\..\!PicoPad\DEMO\*.UF2 md ..\..\!PicoPad\DEMO
-copy /b %TARGET%.uf2 ..\..\!PicoPad\DEMO\%TARGET%.UF2 > nul
-:stop
+set "origin_folder=%CD%"
+mkdir "..\..\sdk\DEMO\TMP" 2>nul
+xcopy /E /Y "*.*" "..\..\sdk\DEMO\TMP"
+cd /d "..\..\sdk\DEMO\TMP"
+
+call ..\..\_c1.bat picopad10
+
+cd /d "%origin_folder%"
+xcopy /E /Y "..\..\sdk\DEMO\TMP\*" "%origin_folder%"
+rmdir /S /Q "..\..\sdk\DEMO\TMP"

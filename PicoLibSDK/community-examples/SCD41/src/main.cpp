@@ -45,7 +45,7 @@ void DrawGauge(int x0, int y0, int r_outer, int r_inner, int percentage, u16 gau
 
 int main() {
 
-    DrawClear(COL_BLACK);
+    DrawClear();
     KeyFlush();
     DrawImgRle(Scd41Img_RLE, Scd41Img_Pal, 0, 0, 320, 240);
     DrawImgRle(DconnectedImg_RLE, DconnectedImg_Pal, 284, 8, 30, 30);
@@ -72,7 +72,7 @@ int main() {
 
     if (connected) {
         do {
-            DrawClear(COL_BLACK);
+            DrawClear();
             DrawImgRle(Scd41Img_RLE, Scd41Img_Pal, 0, 0, 320, 240);
             DrawImgRle(ConnectedImg_RLE, ConnectedImg_Pal, 284, 8, 30, 30);
 

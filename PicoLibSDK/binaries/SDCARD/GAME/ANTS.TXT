@@ -1,6 +1,7 @@
 ^YAnts^0
 
 Card game
+v1.2 multiplayer
 
 ^WLEFT^0 ........ left
 ^WRIGHT^0 ....... right

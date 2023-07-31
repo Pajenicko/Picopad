@@ -1,0 +1,10 @@
+^YMat2D^0
+
+Test Matrix 2D
+transformations.
+
+^WLEFT^0 .... decr
+^WRIGHT^0 ... incr
+^WUP^0 ...... up
+^WDOWN^0 .... down
+^WY^0 ....... quit

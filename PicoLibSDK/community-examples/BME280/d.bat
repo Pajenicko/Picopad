@@ -2,4 +2,4 @@
 rem Delete...
 
 set TARGET=BME280
-call ..\..\_d1.bat
+call ..\..\sdk\_d1.bat

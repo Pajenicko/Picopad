@@ -1,0 +1,7 @@
+^YBig Factorial^0
+
+Demo - calculating factorial
+       of number 123456789
+       to 1150 digits
+
+^WY^0 ....... quit

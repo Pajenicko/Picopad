@@ -2,4 +2,4 @@
 rem Export to hardware...
 
 set TARGET=BME280
-call ..\..\_e1.bat
+call ..\..\sdk\_e1.bat
