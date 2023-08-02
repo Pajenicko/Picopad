@@ -1,10 +1,12 @@
 """
-In this simple example, you will learn how to interface with the Sensirion SCD4x sensor,
-which enables us to measure temperature, humidity, and CO2 levels in the surroundings.
-This example demonstrates the step-by-step process of setting up the necessary components,
-initializing the I2C bus, and accessing sensor data.
+In this simple example, you will learn how to interface with Picopad HS-SR04 module.
+It is ultrasound sensor measuring distance. To calculate distance you use 2 pins - trigger and echo.
+Trigger pin is used to send the signal and echo pin is used to receive the signal. The time between
+sending and receiving the signal is used to calculate the distance.
 
-It requires the ### libraries placed in /lib directory.
+You can use adafuit_hcsr04 library to handle all the calculations.
+
+It requires the adafruit_hcsr04 libraries placed in /lib directory.
 You can find the libraries in the CircuitPython library bundle (https://circuitpython.org/libraries).
 
 """
