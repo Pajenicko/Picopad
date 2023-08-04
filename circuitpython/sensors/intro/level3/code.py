@@ -27,9 +27,9 @@ group = displayio.Group(scale=2)
 # initialize the sensor
 sensor = Sensor()
 
-# we will use a sprite sheet to display the icons, color on index 6 will be transparent
+# we will use a sprite sheet to display the icons, color on index 3 will be transparent
 sprite_sheet, palette = adafruit_imageload.load("/assets.bmp")
-palette.make_transparent(6)
+palette.make_transparent(3)
 
 # prepare the text areas for the measured values
 top = 20
