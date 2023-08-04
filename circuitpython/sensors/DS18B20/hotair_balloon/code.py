@@ -15,6 +15,7 @@ You can find the libraries in the CircuitPython library bundle (https://circuitp
 import board
 import displayio
 import asyncio
+import random
 
 from adafruit_onewire.bus import OneWireBus
 from adafruit_ds18x20 import DS18X20
@@ -39,6 +40,17 @@ palette = displayio.Palette(1)
 palette[0] = 0xDFF6F5
 background = displayio.TileGrid(bg_bmp, pixel_shader=palette)
 group.append(background)
+
+# Clouds bitmap
+cloud_bmp = displayio.OnDiskBitmap(open("cloud.bmp", "rb"))
+clouds = []
+for i in range(3):
+    cloud = displayio.TileGrid(cloud_bmp, pixel_shader=cloud_bmp.pixel_shader)
+    clouds.append(cloud)
+    cloud.x = random.randint(50, 270)
+    cloud.y = random.randint(0, 150)
+    group.append(cloud)
+                       
 
 # Balloon bitmap
 image = displayio.OnDiskBitmap('balloon.bmp')
@@ -93,9 +105,9 @@ async def move_balloon():
             move_x = 1
         # stop balloon at the top and bottom
         if(image_area.y > 210):
-            move_y = 0
+            move_y = -1
         if(image_area.y < 0):
-            move_y = 0
+            move_y = 1
 
         # move balloon
         image_area.x += move_x
@@ -107,11 +119,38 @@ async def move_balloon():
         await asyncio.sleep(0.1)
 
 
+async def move_clouds():
+    global cloud1
+    global cloud2
+    global cloud3
+
+    while True:
+        rand_x = random.randint(-1, 1)
+        rand_y = random.randint(-1, 1)
+        cloud1.x += rand_x
+        cloud1.y += rand_y
+        
+        rand_x = random.randint(-1, 1)
+        rand_y = random.randint(-1, 1)
+        cloud2.x += rand_x
+        cloud2.y += rand_y
+        
+        rand_x = random.randint(-1, 1)
+        rand_y = random.randint(-1, 1)
+        cloud3.x += rand_x
+        cloud3.y += rand_y
+
+        await asyncio.sleep(random.randint(0, 10)/4)
+        
+
+
+
 # Prepare the event loop    
 loop = asyncio.get_event_loop()
 
 # Schedule both tasks to run concurrently
 loop.run_until_complete(asyncio.gather(
     move_balloon(),
+    move_clouds(),
     measure()
 ))
