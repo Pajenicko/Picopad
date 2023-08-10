@@ -75,7 +75,7 @@ def teletext(page):
         if page > 899:
             page = 899
 
-        response = requests.get("https://teletext.lynt.cz/?page=%s" % (page))
+        response = requests.get("http://teletext.lynt.cz/?page=%s" % (page))
         
         with open("/sd/picture.bmp", "wb") as f:
             for chunk in response.iter_content(chunk_size=512):

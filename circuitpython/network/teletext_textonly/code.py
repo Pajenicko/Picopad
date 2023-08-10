@@ -71,7 +71,7 @@ def teletext(page):
         if page > 899:
             page = 899
 
-        with requests.get("https://teletext.lynt.cz/text?page=%s" % (page)) as resp:
+        with requests.get("http://teletext.lynt.cz/text?page=%s" % (page)) as resp:
             data = resp.json()
             lines = data["text"].splitlines()
             
