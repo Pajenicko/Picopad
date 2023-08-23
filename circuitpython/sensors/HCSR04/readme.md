@@ -20,6 +20,8 @@ Initialize the HC-SR04, trigger readings, and print distance values.
 - Calculating distance
 - Printing sensor values
 
+![cp_sensors_hcsr04_quick](https://github.com/MakerClassCZ/Picopad/assets/3875093/110da735-88d5-4381-ae3b-23b97ae2e61b)
+
 ## Music Meter - Distance Instrument
 Use distance to play notes on a buzzer. LED blinks as metronome.
 
@@ -28,6 +30,8 @@ Use distance to play notes on a buzzer. LED blinks as metronome.
 - Mapping distance to music notes
 - Playing tones with PWM buzzer
 - Async tasks for sensor, sound and LED
+
+https://github.com/MakerClassCZ/Picopad/assets/3875093/b4a97e53-f044-4438-8140-b9111ead4fd5
 
 ## Summary
 The tutorial covers ultrasonic distance measurement, noise reduction, value mapping, sound generation, and concurrent async programming. You'll learn to build an interactive instrument using the HC-SR04 distance sensor.
