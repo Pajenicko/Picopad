@@ -120,27 +120,18 @@ async def move_balloon():
 
 
 async def move_clouds():
-    global cloud1
-    global cloud2
-    global cloud3
+    global clouds
 
     while True:
-        rand_x = random.randint(-1, 1)
-        rand_y = random.randint(-1, 1)
-        cloud1.x += rand_x
-        cloud1.y += rand_y
         
-        rand_x = random.randint(-1, 1)
-        rand_y = random.randint(-1, 1)
-        cloud2.x += rand_x
-        cloud2.y += rand_y
+        for cloud in clouds:
+            rand_x = random.randint(-1, 1)
+            rand_y = random.randint(-1, 1)
+            cloud.x += rand_x
+            cloud.y += rand_y
         
-        rand_x = random.randint(-1, 1)
-        rand_y = random.randint(-1, 1)
-        cloud3.x += rand_x
-        cloud3.y += rand_y
-
         await asyncio.sleep(random.randint(0, 10)/4)
+        
         
 
 
