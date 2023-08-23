@@ -15,6 +15,7 @@ You'll start from simple examples and build up to interacting with buttons, LEDs
 
 ## Lesson 1 - Hello World 
 Directory: *hello_world*
+
 The simplest CircuitPython program prints a message to the serial console. This verifies your environment is setup properly.
 
 ### Key concepts:
@@ -25,6 +26,7 @@ The simplest CircuitPython program prints a message to the serial console. This 
 
 ## Lesson 2 - Display Text
 Directory: *hello_world-display*
+
 Use the displayio and adafruit_display_text libraries to show text labels on the Picopad screen.
   
 ### Key concepts:
@@ -36,6 +38,7 @@ Use the displayio and adafruit_display_text libraries to show text labels on the
 
 ## Lesson 3 - Blink LED
 Directory: *hello_world-led*
+
 Access the on-board LED and turn it on/off. Intro to digital IO.
 
 ### Key concepts:
@@ -47,6 +50,7 @@ Access the on-board LED and turn it on/off. Intro to digital IO.
 
 ## Lesson 4 - Picopad Demo
 Directory: *hello_world-picopad*
+
 Bring everything together into an interactive demo using Picopad hardware like buttons, LEDs, screen and audio.
 
 ### Key concepts:
