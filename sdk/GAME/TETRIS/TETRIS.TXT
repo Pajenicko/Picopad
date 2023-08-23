@@ -1,9 +1,0 @@
-^YTetris^0
-
-Program control:
-
-^WLEFT^0 ........... left
-^WRIGHT^0 .......... right
-^WUP or X^0 ........ turn stone
-^WDOWN or A^0 ...... drop stone
-^WB^0 .............. pause

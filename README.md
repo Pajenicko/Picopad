@@ -5,17 +5,17 @@ Picopad - open source gaming console based on Raspberry Pi Pico (RP2040)
 
 ## Folder descriptions:
 
-### `binaries`
-The `binaries` folder contains UF2 images used for flashing the device and the contents of the SD card for flashing from the card.
-
 ### `hardware`
 The `hardware` folder contains schematics and photos of the Picopad.
+
+### `circuitpython`
+The `circuitpython` folder contains libraries and examples for CircuitPython.
 
 ### `micropython`
 The `micropython` folder contains libraries and examples for MicroPython.
 
-### `sdk`
-The `sdk` folder contains the C language SDK for Picopad.
+### `PicoLibSDK`
+The `PicoLibSDK` folder contains an alternative extended C/C++ SDK library for the Raspberry Pico.
 
 ## External connector
 The console also features an external connector that provides battery power, 3.3V, and GND. It supports communication through UART, has two I2C interfaces, three analog inputs, and six GPIO pins.
