@@ -20,6 +20,8 @@ Use RP2040's internal temperature sensor to read CPU temperature.
 - Reading sensor data
 - Printing measurements
 
+![cp_sensors_level0](https://github.com/MakerClassCZ/Picopad/assets/3875093/6795a5f6-b511-48e1-bb35-e3f3f93995e7)
+
 ## Level 1 - Basic I2C Sensor
 Initialize I2C bus and read temperature, humidity and CO2 data from SCD4x sensor.
 
@@ -28,6 +30,10 @@ Initialize I2C bus and read temperature, humidity and CO2 data from SCD4x sensor
 - I2C initialization
 - Reading sensor data
 - Printing measurements
+
+![cp_sensors_i2c](https://github.com/MakerClassCZ/Picopad/assets/3875093/cecf415f-e1df-468c-a907-5c85e9d93df8)
+
+![cp_sensors_level1](https://github.com/MakerClassCZ/Picopad/assets/3875093/217f76a6-2384-4d35-b7d9-a6815195b641)
 
 ## Level 2 - Object Oriented Sensor
 Encapsulate sensor interaction into Sensor class and represent readings as Measurement objects.
@@ -44,6 +50,8 @@ Display sensor readings on screen using displayio and adafruit_display_text.
 - Updating values on display
 - Using spritesheets
 - Refreshing display
+
+![cp_sensors_level3](https://github.com/MakerClassCZ/Picopad/assets/3875093/5504f8c2-c763-45f2-b602-ea67f5fa2821)
 
 ## Level 4 - Asynchronous Tasks
 Use asyncio to concurrently blink LED while displaying sensor data.
