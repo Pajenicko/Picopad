@@ -13,6 +13,13 @@ The code examples use the **SCD4x** sensor, but you can also follow along using 
 - Send data to cloud service
 - Manage concurrent tasks with asyncio
 
+## Level 0 - Read some value
+Use RP2040's internal temperature sensor to read CPU temperature.
+
+### Key concepts:
+- Reading sensor data
+- Printing measurements
+
 ## Level 1 - Basic I2C Sensor
 Initialize I2C bus and read temperature, humidity and CO2 data from SCD4x sensor.
 
