@@ -1,5 +1,5 @@
 
-# CircuitPython Tutorial for Beginners
+# Picopad CircuitPython Tutorial
 
 ## Introduction
 
@@ -20,6 +20,8 @@ The guide is organized into lessons that progress in complexity. Each lesson inc
 
 Dive in, practice, and before you know it, you'll be designing your own innovative projects using CircuitPython!
 
+![cp_examples](https://github.com/MakerClassCZ/Picopad/assets/3875093/f0160824-a54e-4ffd-984b-d4e50aa664f1)
+
 ## Quick Start
 
 **Prerequisites:**
@@ -39,6 +41,8 @@ To run the provided tutorial examples, copy both the `code.py` file and the `/li
 
 Each example directory contains an accompanying README file. This file offers insights into what each example teaches.
 
+The recommended way is to start with hello_world examples, continue to sensors/intro and then explore more complex stuff.
+
 ## External Connector Overview
 
 The external connector on the PicoPad provides multiple connection points:
@@ -50,5 +54,8 @@ The external connector on the PicoPad provides multiple connection points:
 - Power and ground connections for your circuits.
 
 You can directly reference these pins in CircuitPython by their respective names, such as `board.D1`.
+
+![cp_picopad_external_connector](https://github.com/MakerClassCZ/Picopad/assets/3875093/e639f8b5-4055-4ee7-8759-27813cc37943)
+
 
 Happy coding!
