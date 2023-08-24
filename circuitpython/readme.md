@@ -29,6 +29,9 @@ Dive in, practice, and before you know it, you'll be designing your own innovati
 - A USB cable for connecting your device to a computer.
 - The latest CircuitPython UF2 firmware image.
 
+![cp_org](https://github.com/MakerClassCZ/Picopad/assets/3875093/0a4c45df-8d69-4a6e-8e6a-49c0504980a7)
+
+
 **Setting up CircuitPython:**
 1. Download the most recent CircuitPython UF2 file for your device from [CircuitPython's official site](https://circuitpython.org/board/pajenicko_picopad/).
 2. With the BOOTSEL button pressed (found at the bottom), connect your PicoPad to a power source using the USB cable.
