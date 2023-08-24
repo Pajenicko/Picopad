@@ -23,10 +23,17 @@ Connect to WiFi network and print network info.
 -   Printing MAC and IP
 -   Use ping to test network connectivity
 
+![cp_network_wifitest](https://github.com/MakerClassCZ/Picopad/assets/3875093/8586d82f-5dc1-45ac-9ff1-5d1ce81b4fed)
+
 ## Teletext
 
-There are two example how to use a web API to fetch Czech Teletext as image or text.
+There are **two examples** how to use a web API to fetch Czech Teletext as image or text.
 The image example (teletext_sdcard) requires SD Card as temporary storage for the teletext screen.
+
+![cp_network_teletext_image](https://github.com/MakerClassCZ/Picopad/assets/3875093/161c0029-e763-443f-bd32-5266838cf937)
+
+![cp_network_teletext_text](https://github.com/MakerClassCZ/Picopad/assets/3875093/c8ef82b7-fbab-4ee1-99f9-b9d0f66641af)
+
 
 ### Key concepts:
 
@@ -37,11 +44,11 @@ The image example (teletext_sdcard) requires SD Card as temporary storage for th
 
 ### Interesting techniques:
 - saving memory techniques
--- use of garbage collector
--- use of bitmap label
--- split large bitmap label to multiple smaller
--- use context manager (with)
-- rounding number to tens/hundreds  with simple arithmetics
+  * use of garbage collector
+  * use of bitmap label
+  * split large bitmap label to multiple smaller
+  * use context manager (with)
+- rounding number to tens/hundreds  with simple arithmetic
 - custom fonts
 
 
@@ -57,6 +64,10 @@ Build a Telegram bot to control your board remotely.
 
 ### Interesting techniques:
 - Use long polling with Telegram API to reduce number of requests
+
+![cp_network_telegram](https://github.com/MakerClassCZ/Picopad/assets/3875093/ebfd61ec-c9e4-430a-a811-07f92255d43d)
+
+
 
 ## Summary
 
