@@ -29,6 +29,10 @@ Use light level to control owl eye color. Eyes get brighter in dark.
 - Updating Circle fill color
 - Displaying reactive graphics
 
+### Intersting techniques:
+- Use simpleio to map different ranges
+- Using HSL color format
+
 ![cp_sensors_photoresistor_owl](https://github.com/MakerClassCZ/Picopad/assets/3875093/7efcfc41-5fbe-4571-98ab-c5bbb3c83512)
 
 ## Summary

@@ -31,6 +31,10 @@ Use distance to play notes on a buzzer. LED blinks as metronome.
 - Playing tones with PWM buzzer
 - Async tasks for sensor, sound and LED
 
+### Interesting techniques:
+- On/Off buzzer with PWM duty cycle
+- Use standard deviation to remove outlier
+
 https://github.com/MakerClassCZ/Picopad/assets/3875093/b4a97e53-f044-4438-8140-b9111ead4fd5
 
 ## Summary

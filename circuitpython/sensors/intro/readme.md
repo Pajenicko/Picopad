@@ -51,6 +51,9 @@ Display sensor readings on screen using displayio and adafruit_display_text.
 - Using spritesheets
 - Refreshing display
 
+### Interesting techniques:
+- Extend built-in font with missing characters (extra_font.py)
+
 ![cp_sensors_level3](https://github.com/MakerClassCZ/Picopad/assets/3875093/5504f8c2-c763-45f2-b602-ea67f5fa2821)
 
 ## Level 4 - Asynchronous Tasks
