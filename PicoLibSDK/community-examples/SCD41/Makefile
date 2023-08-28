@@ -11,4 +11,4 @@ SRC += src/scd4x.cpp
 SRC += img/images.cpp
 
 # Makefile includes
-include ../../Makefile.inc
+include ../../../Makefile.inc

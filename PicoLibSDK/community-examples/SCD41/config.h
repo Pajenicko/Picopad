@@ -14,6 +14,6 @@
 // *********
 
 #define USE_PICOPAD	1	// use PicoPad device configuration
-#include "../../config_def.h"	// default configuration
+#include "../../../config_def.h"	// default configuration
 
 #endif // _CONFIG_H

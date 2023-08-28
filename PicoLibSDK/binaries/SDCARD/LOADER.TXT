@@ -1,4 +1,4 @@
-^YPicoPad Boot Loader^0
+^YPicoPad Boot3 Loader^0
 
 Boot Loader can be loaded
 only over USB interface.
@@ -27,6 +27,4 @@ loading text *.TXT
 		^[ ... start invert
 		^] ... stop invert
 
-Image BMP:
-- PicoPad RGB565 16-bit
-- Picoino paletted 8-bit with RGB332 palette
+Image BMP: RGB565 16-bit
