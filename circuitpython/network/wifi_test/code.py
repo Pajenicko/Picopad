@@ -35,5 +35,5 @@ google_ipv4 = ipaddress.ip_address("8.8.4.4")
 # ping Google every 15 seconds
 while True:
     
-    print("Ping google.com: %f ms" % (wifi.radio.ping(google_ipv4)*1000))
+    print("Ping google.com: %.1f ms" % (wifi.radio.ping(google_ipv4)*1000))
     time.sleep(15)

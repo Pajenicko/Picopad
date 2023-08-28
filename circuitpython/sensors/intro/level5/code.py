@@ -19,11 +19,11 @@ You can find the required libraries in the CircuitPython library bundle (https:/
 import board
 import busio
 import displayio
-import terminalio
 from adafruit_display_text import label
 import adafruit_imageload
 import asyncio
 import digitalio
+from extra_font import ExtraFont
 
 import wifi
 import ssl
@@ -51,6 +51,10 @@ measurements = None
 display = board.DISPLAY
 group = displayio.Group(scale=2)
 
+# The built-in missing some useful glyphs (characters) e.g. degree (°), so I made a small workaround.
+# ExtraFont class from extra_font.py extends the terminalio.FONT and adds the missing character from extra.bdf bitmap font contains only that glyph. 
+font = ExtraFont()
+
 # initialize the sensor
 sensor = Sensor()
 
@@ -59,9 +63,9 @@ led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
 
-# we will use a sprite sheet to display the icons, color on index 6 will be transparent
+# we will use a sprite sheet to display the icons, color on index 3 will be transparent
 sprite_sheet, palette = adafruit_imageload.load("/assets.bmp")
-palette.make_transparent(6)
+palette.make_transparent(3)
 
 # prepare the text areas for the measured values
 top = 20
@@ -77,7 +81,7 @@ types_to_icons = {
 }
 
 for reading, data in sensor.readings.items():
-    text_areas[reading] = label.Label(terminalio.FONT, text='', color=0xFFFFFF, x=45, y=top)
+    text_areas[reading] = label.Label(font, text='', color=0xFFFFFF, x=45, y=top)
 
     group.append(text_areas[reading])
 

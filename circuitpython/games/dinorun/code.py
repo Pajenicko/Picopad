@@ -1,3 +1,6 @@
+"""
+Original Dino image source: https://arks.itch.io/
+"""
 import ugame
 import stage
 import time

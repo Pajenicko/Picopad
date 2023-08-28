@@ -14,18 +14,29 @@ You'll use the following CircuitPython libraries:
 You can find the required librarie in the CircuitPython library bundle (https://circuitpython.org/libraries).
 """
 
+# board provides access to the built-in display, pins and other hardware
 import board
+# displayio handles graphics rendering
 import displayio
+# terminalio contains default font we will use for displaying text
 import terminalio
+# adafruit_display_text has Label class for display text on screen
 from adafruit_display_text import label
+# digitalio allows us to set pin mode and value
 from digitalio import DigitalInOut, Direction, Pull
+# adafruit_debouncer is used to filter out false button presses caused by noise or mechanical switch press "bounce"
 from adafruit_debouncer import Debouncer
-import digitalio
+# simpleio contains various utility functions, including tone generation
 import simpleio
+# time allows us to wait defined amount of time
 import time
 
 
 # Setup buttons and debouncers
+# The default pin mode is input, so we don't need to change it.
+# Debouncing is a technique used to filter out false button presses caused by noise or mechanical switch press "bounce".
+# https://learn.adafruit.com/debouncer-library-python-circuitpython-buttons-sensors/overview
+
 pin = DigitalInOut(board.SW_DOWN)
 pin.pull = Pull.UP
 btn_down = Debouncer(pin)
@@ -75,13 +86,15 @@ B5 = 987.77
 T = 0.15
 
 # initialize the LED
-led = digitalio.DigitalInOut(board.LED)
-led.direction = digitalio.Direction.OUTPUT
+led = DigitalInOut(board.LED)
+led.direction = Direction.OUTPUT
 
-
+# initialize the display
 display = board.DISPLAY
 
 # Create a display group
+# Group is a special type of displayio object that can hold other displayio objects indepently
+# https://learn.adafruit.com/circuitpython-display-support-using-displayio/group
 group = displayio.Group()
 
 # Set the default font for the text
@@ -89,17 +102,18 @@ font = terminalio.FONT
 
 # Create a text label
 text = "Hello World!"
-text_area = label.Label(font, text=text, color=0xFFFFFF, scale=2)
+text_label = label.Label(font, text=text, color=0xFFFFFF, scale=2)
 
 # Position the text label
-text_area.x = 100
-text_area.y = 110
+text_label.x = 100
+text_label.y = 110
 
 # Add the text label to the display group
-group.append(text_area)
+group.append(text_label)
 
-# Create a bitmap object
-# the bitmap is in 4bpp BGR format
+# Create a bitmap object directly from the bitmap file stored on the disk - it saves some memory
+# The bitmap is in 4bpp format.
+# https://learn.adafruit.com/circuitpython-display-support-using-displayio/display-a-bitmap
 image = displayio.OnDiskBitmap('picopad.bmp')
 image_area = displayio.TileGrid(image, pixel_shader=image.pixel_shader)
 
@@ -110,7 +124,9 @@ image_area.y = 20
 # Add the bitmap to the display group
 group.append(image_area)
 
-# Show the display group
+# Show the whole display group
+# It will display the text and the bitmap as well
+# You can move every item in the group independently later
 display.show(group)
 
 melody = [
@@ -143,7 +159,7 @@ for note in melody:
     time.sleep(0.05)
 
 
-# Move the Picopad logo when the buttons are pressed
+# Move the Picopad logo when the buttons are pressed (the debouncer detects the button down/fell event)
 
 while True:
     # Update button debouncer status
@@ -155,21 +171,21 @@ while True:
     if (btn_down.fell):
         image_area.y += 5
         simpleio.tone(board.AUDIO, D4, T)
-        board.DISPLAY.show(group)
+
     
     if (btn_up.fell):
         image_area.y -= 5
         simpleio.tone(board.AUDIO, E4, T)
-        board.DISPLAY.show(group)
+
 
     if (btn_left.fell):
         image_area.x -= 5
         simpleio.tone(board.AUDIO, D5, T)
-        board.DISPLAY.show(group)
+
 
     if (btn_right.fell):
         image_area.x += 5
         simpleio.tone(board.AUDIO, E5, T)
-        board.DISPLAY.show(group)
+
 
 

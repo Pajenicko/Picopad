@@ -74,13 +74,12 @@ def teletext(page):
             page = 100
         if page > 899:
             page = 899
-
-        response = requests.get("https://teletext.lynt.cz/?page=%s" % (page))
+            
+        with requests.get("http://teletext.lynt.cz/?page=%s" % (page)) as response:
+            with open("/sd/picture.bmp", "wb") as f:
+                for chunk in response.iter_content(chunk_size=512):
+                    f.write(chunk)       
         
-        with open("/sd/picture.bmp", "wb") as f:
-            for chunk in response.iter_content(chunk_size=512):
-                f.write(chunk)       
-        response.close()
         display_page()
         
 # Display teletext page from SD card image

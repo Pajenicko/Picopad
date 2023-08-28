@@ -12,13 +12,13 @@ You can find the libraries in the CircuitPython library bundle (https://circuitp
 import board
 import time
 import displayio
-import terminalio
 from adafruit_display_text import label
 import adafruit_imageload
+from extra_font import ExtraFont
 
 from sensor_scd4x import Sensor
 # if you don't have SCD4x, you can try use internal temperature sensor of rp2040 as a demo
-# from sensor_internal import Sensor
+#from sensor_internal import Sensor
 
 # initialize the display
 display = board.DISPLAY
@@ -27,9 +27,9 @@ group = displayio.Group(scale=2)
 # initialize the sensor
 sensor = Sensor()
 
-# we will use a sprite sheet to display the icons, color on index 6 will be transparent
+# we will use a sprite sheet to display the icons, color on index 3 will be transparent
 sprite_sheet, palette = adafruit_imageload.load("/assets.bmp")
-palette.make_transparent(6)
+palette.make_transparent(3)
 
 # prepare the text areas for the measured values
 top = 20
@@ -44,8 +44,15 @@ types_to_icons = {
     "pressure": 3,
 }
 
+
+display = board.DISPLAY
+
+# The built-in missing some useful glyphs (characters) e.g. degree (°), so I made a small workaround.
+# ExtraFont class from extra_font.py extends the terminalio.FONT and adds the missing character from extra.bdf bitmap font contains only that glyph. 
+font = ExtraFont()
+
 for reading, data in sensor.readings.items():
-    text_areas[reading] = label.Label(terminalio.FONT, text='', color=0xFFFFFF, x=45, y=top)
+    text_areas[reading] = label.Label(font, text='', color=0xFFFFFF, x=45, y=top)
 
     group.append(text_areas[reading])
 

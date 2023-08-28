@@ -8,7 +8,7 @@ You can find the library in the CircuitPython library bundle (https://circuitpyt
 
 You can easily use the same structure and concept to interface with other I2C sensors as well.
 
-If you don't have SCD4x sensor, goto Level 3 and try to use internal temperature sensor od RP2040.
+If you don't have SCD4x sensor, goto Level 3 and try to use internal temperature sensor of RP2040.
 """
 
 import board
