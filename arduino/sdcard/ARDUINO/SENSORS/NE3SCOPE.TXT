@@ -1,0 +1,5 @@
+^YNE3SCOPE^0
+
+NE3 scope camera
+
+^WY^0 ....... quit
