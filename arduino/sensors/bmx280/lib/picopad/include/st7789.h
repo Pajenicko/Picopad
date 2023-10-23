@@ -28,6 +28,12 @@ extern "C" {
 // transfer time: 51 ms, real time: 70 ms
 #define DISP_FRAME_MS (320*240*2*9*1000/DISP_SPI_BAUD)  // transfer time of whole frame in [ms]
 
+#define BACKLIGHT_SLICE	PWM_GPIOTOSLICE(DISP_BLK_PIN) // backlight slice index
+#define BACKLIGHT_CHAN	PWM_GPIOTOCHAN(DISP_BLK_PIN) // backlight channel index
+#define BACKLIGHT_RATE	22050		// backlight rate [Hz] (use the same frequency as the audio output,
+//	to reduce interference to the audio output)
+#define BACKLIGHT_CLOCK	(BACKLIGHT_RATE*256) // PWM clock (= 22050*256 = 5644800)
+
 extern u8 DispRot;  // current display rotation
 extern u16 DispWidth, DispHeight; // current display size
 
@@ -80,11 +86,8 @@ void DispWindow(u16 x1, u16 x2, u16 y1, u16 y2);
 
 void DispWriteData(const void *data, int len);
 
-void SetBrightness(u8 value, bool save);
-
-void DispOn();
-
-void DispOff();
+// display backlight control config update
+void DispBacklightUpdate();
 
 #ifdef __cplusplus
 }

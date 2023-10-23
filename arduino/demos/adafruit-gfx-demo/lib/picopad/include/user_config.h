@@ -1,18 +1,6 @@
 #ifndef USER_CONFIG_H
 #define USER_CONFIG_H
 
-#define DEFAULT_BRIGHTNESS 5
-#define DEFAULT_VOLUME 5
-#define DEFAULT_SCREEN_SLEEP 1
-#define DEFAULT_REFRESH_BATTERY 1
-#define DEFAULT_BATTERY_ALARM 1
-
-// Battery alarm threshold to play alarm battery low sound. Can be 0..12
-#define BATTERY_ALARM_THRESHOLD 1
-
-// Duration (in seconds) for which the battery alarm will play an annoying sound :)
-#define BATTERY_ALARM_DURATION 0.5
-
 // Use ST7789 driver. Set to 0 to disable.
 #define USE_ST7789    0
 

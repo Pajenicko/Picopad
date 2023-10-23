@@ -140,4 +140,24 @@ uint32_t CRC32(const void *ptr, int len) {
 	return crc;
 }
 
+// Taken from PicoLibSDK https://github.com/Panda381/PicoLibSDK
+// Calculate CRC-16 CCITT Normal (CRC16A), buffer - fast version
+uint16_t Crc16ABufFast(uint16_t crc, const void *buf, int len) {
+	const uint8_t *s = (const uint8_t *) buf;
+
+	for (; len > 0; len--) {
+		crc = (crc >> 8) | (crc << 8);
+		crc ^= *s++;
+		crc ^= (crc & 0xff) >> 4;
+		crc ^= crc << 12;
+		crc ^= (crc & 0xff) << 5;
+	}
+	return crc;
+}
+
+// Taken from PicoLibSDK https://github.com/Panda381/PicoLibSDK
+uint16_t Crc16AFast(const void *buf, int len) {
+	return Crc16ABufFast(CRC16A_INIT, buf, len);
+}
+
 #endif

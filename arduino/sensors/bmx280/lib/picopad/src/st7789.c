@@ -301,7 +301,6 @@ void DispUpdateAll() {
 
 #endif
 
-
 void DispClear() {
 	DispWindow(0, WIDTH, 0, HEIGHT);
 	u16 row[WIDTH] = {0};
@@ -311,36 +310,20 @@ void DispClear() {
 		DispWriteData(&row, WIDTH * 2);
 }
 
-void InitBL() {
-	// https://github.com/elehobica/pico_st7735_80x160/blob/main/main.c
-	// BackLight PWM (125MHz / 65536 / 4 = 476.84 Hz)
-	gpio_set_function(DISP_BLK_PIN, GPIO_FUNC_PWM);
-	uint slice_num = pwm_gpio_to_slice_num(DISP_BLK_PIN);
-	pwm_config config = pwm_get_default_config();
-	pwm_config_set_clkdiv(&config, 4.f);
-	pwm_init(slice_num, &config, true);
-
-#if USE_CONFIG
-	int bl_val = load_config_data().brightness;
-	SetBrightness(bl_val, true);
-#else
-	SetBrightness(5, true);
-#endif
+// display backlight control
+void DispBacklight(u8 backlight) {
+	uint PWM_GPIO_SLICE = pwm_gpio_to_slice_num(DISP_BLK_PIN);
+	uint PWM_GPIO_CHANNEL = pwm_gpio_to_channel(DISP_BLK_PIN);
+	pwm_set_chan_level(PWM_GPIO_SLICE, PWM_GPIO_CHANNEL, backlight);
 }
 
-void DispOn() {
-	DispSleepDisable();
-#if USE_CONFIG
-	int bl_val = load_config_data().brightness;
-	SetBrightness(bl_val, false);
+// display backlight control config update
+void DispBacklightUpdate() {
+#if USE_CONFIG      // use device configuration (lib_config.c, lib_config.h)
+	DispBacklight(Config.backlight);
 #else
-	SetBrightness(5, false);
+	DispBacklight(255);
 #endif
-}
-
-void DispOff() {
-	DispSleepEnable();
-	pwm_set_gpio_level(DISP_BLK_PIN, 0);
 }
 
 // initialize display
@@ -355,10 +338,15 @@ void DispInit(u8 rot) {
 	// TODO TVE is it necessary?
 	//spi_set_format(DISP_SPI, 8, SPI_CPOL_1, SPI_CPHA_1, SPI_MSB_FIRST);
 
-	// setup pins
-	GPIO_Out0(DISP_BLK_PIN);
-	GPIO_DirOut(DISP_BLK_PIN);
-	GPIO_Fnc(DISP_BLK_PIN, GPIO_FNC_SIO);
+	// setup backlight PWM
+	uint PWM_GPIO_SLICE = pwm_gpio_to_slice_num(DISP_BLK_PIN);
+	gpio_set_function(DISP_BLK_PIN, GPIO_FUNC_PWM);
+	pwm_config config = pwm_get_default_config();
+	//  125 MHz: 125000000/5644800 = 22.144, INT=22, FRAC=2,
+	pwm_config_set_clkdiv_int_frac(&config, 22, 2);
+	pwm_config_set_wrap(&config, 255);
+	pwm_init(PWM_GPIO_SLICE, &config, true);
+	DispBacklight(0);
 
 	GPIO_Out1(DISP_DC_PIN);
 	GPIO_DirOut(DISP_DC_PIN);
@@ -392,10 +380,10 @@ void DispInit(u8 rot) {
 	buf[1] =    // data of RAM control 2 (default 0xF0)
 			0 +    //   B1,B0: method of pixel data transfer
 			//B2 +		//   B2: RGB interface bus width 0=18 bits, 1=6 bits
-			(1<<3) +
+			(1 << 3) +
 			//   B3: endian 0=big MSB first, 1=little LSB first (little endian LSB MSB = Intel, big endian MSB LSB = Motorola)
 			(2 << 4) +  //   B5,B4: align 65K data with bit 0: 0=equ 0, 1=equ 1, 2=equ high bit, 3=equ green bit 0
-			(1<<6) + (1<<7);    //   B7,B6: 1
+			(1 << 6) + (1 << 7);    //   B7,B6: 1
 	DispWriteCmdData(ST7789_RAMCTRL, buf, 2); // set RAM control
 
 	DispColorMode(COLOR_MODE_65K | COLOR_MODE_16BIT); // set color mode to RGB 16-bit 565
@@ -403,8 +391,8 @@ void DispInit(u8 rot) {
 	DispRotation(rot);  // set rotation mode
 	DispInvEnable();  // enable inversion
 	WaitMs(10);
-	// GPIO_Out1(DISP_BLK_PIN); // set backlight on
-	InitBL();
+
+	DispBacklightUpdate();  // update backlight
 
 #if USE_DRAWTFT
 	// clear display
@@ -435,22 +423,6 @@ void DispTerm() {
 	GPIO_Reset(DIDP_MOSI_PIN);
 	GPIO_Reset(DISP_RES_PIN);
 	GPIO_Reset(DISP_CS_PIN);
-}
-
-u8 CalcBrightness(u8 value) {
-	u8 bl_val = 50 + (value * 40);
-	if (bl_val >= 250) bl_val = 255;
-	return bl_val;
-}
-
-void SetBrightness(u8 value, bool save) {
-	u8 bl_val = CalcBrightness(value);
-	pwm_set_gpio_level(DISP_BLK_PIN, bl_val * bl_val);
-#if USE_CONFIG
-	if (save) {
-		save_brightness(value);
-	}
-#endif
 }
 
 #endif // USE_ST7789		// use ST7789 TFT display (st7789.c, st7789.h)

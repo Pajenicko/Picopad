@@ -9,6 +9,8 @@
 
 #include "picopad.h"
 
+const u8 OrdBitsTab[16] = { 0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4 };
+
 // do single conversion with denoise (returns value 0..0xffff; takes 32 us on 48 MHz clock
 u16 ADC_SingleDenoise()
 {
@@ -79,4 +81,28 @@ int DecNum(char *buf, s32 num, char sep) {
 	num = -num;
 	*buf++ = '-';
 	return DecUNum(buf, num, sep) + 1;
+}
+
+// get bit order of value (logarithm, returns position of highest bit + 1: 1..32, 0=no bit)
+u8 Order(u32 val)
+{
+	int i = 0;
+	if (val >= 0x10000)
+	{
+		i = 16;
+		val >>= 16;
+	}
+
+	if (val >= 0x100)
+	{
+		i += 8;
+		val >>= 8;
+	}
+
+	if (val >= 0x10)
+	{
+		i += 4;
+		val >>= 4;
+	}
+	return OrdBitsTab[val] + i;
 }

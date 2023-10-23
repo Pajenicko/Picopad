@@ -29,9 +29,12 @@ def read_uf2_blocks(file_path):
     return blocks
 
 
-def create_uf2_block(data, address):
+def create_uf2_block(data, address, block_no, num_blocks):
     # Fill remaining space with 0xFF
-    data += b"\xFF" * (PAYLOAD_SIZE - len(data))
+    data += b"\x00" * (PAYLOAD_SIZE - len(data))
+    datapadding = b""
+    while len(datapadding) < BLOCK_SIZE - PAYLOAD_SIZE - 32 - 4:
+        datapadding += b"\x00\x00\x00\x00"
 
     block_header = struct.pack(
         "<IIIIIIII",
@@ -40,12 +43,15 @@ def create_uf2_block(data, address):
         0x00002000,  # flags
         address,
         len(data),
-        0,  # block_no (not important here)
-        0,  # num_blocks (not important here)
+        block_no,  # block number
+        num_blocks,  # total number of blocks
         BLOCK_SIZE  # total size of this block
     )
 
-    return block_header + data + b"\x00" * (BLOCK_SIZE - len(block_header) - len(data))
+    block = block_header + data + datapadding + struct.pack(b"<I", UF2_MAGIC_END)
+    assert len(block) == 512
+
+    return block
 
 
 def append_app_to_uf2(app_file_path, loader_file_path, uf2_file_path):
@@ -56,25 +62,42 @@ def append_app_to_uf2(app_file_path, loader_file_path, uf2_file_path):
     with open(app_file_path, "rb") as f:
         data_to_append = f.read()
 
+    # Determine the total number of blocks
+    total_data_size = len(data_to_append)
+    num_blocks = (total_data_size + PAYLOAD_SIZE - 1) // PAYLOAD_SIZE  # rounding up
+
     # Determine start address of the new data
     last_block = blocks[-1]
     _, _, _, last_block_address, last_block_payload_size, _, _, _ = struct.unpack("<IIIIIIII", last_block[:32])
     new_data_address = last_block_address + last_block_payload_size
 
+    existing_blocks_count = len(blocks)  # count of blocks that already exist
+
     # Check if padding is needed // 0x10006E00
     if new_data_address < APPLICATION_START_ADDRESS:
         padding_size = APPLICATION_START_ADDRESS - new_data_address
         padding_blocks = padding_size // PAYLOAD_SIZE
-        for _ in range(padding_blocks):
-            block = create_uf2_block(b"", new_data_address)
+        for i in range(padding_blocks):
+            block = create_uf2_block(b"", new_data_address, i, padding_blocks + num_blocks)
             blocks.append(block)
+            existing_blocks_count += 1
             new_data_address += PAYLOAD_SIZE
 
     # Split data into 256-byte chunks and create UF2 blocks for each chunk
     for i in range(0, len(data_to_append), PAYLOAD_SIZE):
         chunk = data_to_append[i:i + PAYLOAD_SIZE]
-        block = create_uf2_block(chunk, new_data_address + i)
+        block = create_uf2_block(chunk, new_data_address, existing_blocks_count, num_blocks)
         blocks.append(block)
+        existing_blocks_count += 1
+        new_data_address += PAYLOAD_SIZE  # update the address for the next block
+
+    for i in range(0, len(blocks)):
+        header = list(struct.unpack("<IIIIIIII", blocks[i][:32]))
+        header[5] = i
+        header[6] = len(blocks)
+        header[7] = 0xE48BFF56
+        new_header = struct.pack("<IIIIIIII", *header)
+        blocks[i] = new_header + blocks[i][32:]
 
     # Write all the blocks back to the UF2 file
     with open(uf2_file_path, "wb") as f:

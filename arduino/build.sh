@@ -2,12 +2,12 @@
 
 # Go through each directory in the current directory
 for dir in */ ; do
-    if [ "$dir" != "sdcard/" ] && [ "$dir" != "tools/" ]; then
-        cd "$dir"
-    
+    cd "$dir"
+
+    if [ -x build.sh ]; then
         ./build.sh || exit 1
-	
-        # Go back to the parent directory
-        cd ..
     fi
+
+    # Go back to the parent directory
+    cd ..
 done

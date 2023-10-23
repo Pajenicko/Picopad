@@ -196,6 +196,15 @@ typedef unsigned char Bool;
 #define ADC_Single() adc_read();
 #define ADC_PinTerm(pin) gpio_deinit(pin)
 
+// compile-time check
+#ifdef __cplusplus
+#define STATIC_ASSERT(c, msg) static_assert((c), msg)
+#else
+#define STATIC_ASSERT(c, msg) _Static_assert((c), msg)
+#endif
+
+u8 Order(u32 val);
+
 // compiler barrier
 INLINE void _cb() {
 	__asm volatile ("":: : "memory");

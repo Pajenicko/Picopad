@@ -36,7 +36,12 @@ bool repeating_timer_callback(struct repeating_timer *t) {
 
 // Device init
 void device_init() {
-	// initialize LEDs
+#if USE_CONFIG			// use device configuration (lib_config.c, lib_config.h)
+	// load config from flash
+	ConfigLoad();
+#endif
+
+// initialize LEDs
 #if USE_PICOPAD_LED
 	led_init();
 #endif
@@ -44,25 +49,11 @@ void device_init() {
 #if USE_SD
 	sd_init();
 	sleep_ms(100);
-
-	// Try to load config file from SD card, if rebooted by watchdog, try to loaded data from memory
-#if USE_CONFIG
-	if (watchdog_hw->scratch[4] == WATCHDOG_MAGIC_VALUE) {
-		load_config_data();
-	} else {
-		load_config_file();
-	}
-	watchdog_hw->scratch[4] = 0;
-#endif
-
 #else
 	// Disable SD LED
 	gpio_init(SD_CS);
 	gpio_put(SD_CS, 1);
 	gpio_set_dir(SD_CS, GPIO_OUT);
-
-	// Try to load config file from memmory
-	load_config_data();
 #endif
 
 #if USE_ST7789
@@ -72,9 +63,6 @@ void device_init() {
 
 	// initilize keys
 	KeyInit();
-
-	// init battery measurement
-	BatInit();
 
 #if USE_PWMSND
 	PWMSndInit();
@@ -99,9 +87,6 @@ void device_terminate() {
 
 	// terminate keys
 	KeyTerm();
-
-	// terminate battery measurement
-	BatTerm();
 
 #if USE_PWMSND
 	// terminate PWM sound output
@@ -130,13 +115,13 @@ void reset_to_bootsel() {
  */
 void reset_to_boot_loader() {
 	// Set a magic value to the watchdog's scratch register to indicate a bootloader reset
-	watchdog_hw->scratch[4] = WATCHDOG_MAGIC_VALUE;
+	watchdog_hw->scratch[4] = WATCHDOG_LOADER_MAGIC;
 
 	// Enable the watchdog with a very short timeout
 	watchdog_enable(1, 1);
 
 	// Infinite loop: The watchdog will reset the system before breaking out of this loop
-	while(true);
+	while (true);
 }
 
 void disable_interrupts() {

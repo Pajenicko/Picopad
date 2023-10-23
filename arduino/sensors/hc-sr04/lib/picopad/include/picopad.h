@@ -257,6 +257,18 @@ extern "C" {
 #define BATTERY_EMPTY_INT 3100    // voltage of empty battery
 #endif
 
+#ifndef ADC_UREF_INT
+#define ADC_UREF_INT	3300		// ADC reference voltage (default value, use Config.adc_ref)
+#endif
+
+#ifndef TEMP_BASE
+#define TEMP_BASE	0.706f		// temperature base voltage at 27�C (default value, use Config.temp_base)
+#endif
+
+#ifndef TEMP_SLOPE
+#define	TEMP_SLOPE	0.001721f	// temperature slope - voltage per 1 degree (default value, use Config.temp_slope)
+#endif
+
 // Gamepad / Buttons GPIO
 #ifndef BTN_UP_PIN
 #define BTN_UP_PIN  4  // up
@@ -295,8 +307,11 @@ extern "C" {
 #define NO_PICO_LED 1
 #endif
 
-#define WATCHDOG_MAGIC_VALUE 0xDEADBEEF
-#define BOOTLOADER_SIZE  0x30000    // size of boot loader 196608
+#define WATCHDOG_CTRL_TIMEMASK	0x00ffffff		// number of ticks*2
+#define WATCHDOG_REBOOT_MAGIC	0xB007C0D3		// magic of soft reset (for using in scratch registers)
+#define WATCHDOG_LOADER_MAGIC	0x64616F4C		// magic of boot loader (= text "Load")
+
+#define BOOTLOADER_SIZE  0x8000    // size of boot loader 196608
 #define BOOTLOADER_DATA  32    // boot loader resident data
 
 extern const __attribute__((aligned(4))) uint8_t FontBold8x8[2048];
@@ -314,23 +329,20 @@ extern const __attribute__((aligned(4))) uint8_t FontItalic8x8[2048];
 extern const __attribute__((aligned(4))) uint8_t FontThin8x8[2048];
 extern const __attribute__((aligned(4))) uint8_t FontTiny5x8[2048];
 
-#include "lib_crc.h"
-#if USE_SD
-#include "ff.h"
-#endif
-#include "picopad_sd.h"
-#include "picopad_conf.h"
-#include "picopad_led.h"
-#include "screensaver.h"
-
 #include "picopad_sdk.h"
+#include "picopad_led.h"
 #include "lib_drawtft.h"
 #include "lib_pwmsnd.h"
+#include "lib_config.h"
 #include "st7789.h"
-#include "picopad_bat.h"
 #include "picopad_key.h"
 #include "picopad_init.h"
 
+#include "lib_crc.h"
+#if USE_SD
+#include "ff.h"
+#include "picopad_sd.h"
+#endif
 
 #ifdef __cplusplus
 }

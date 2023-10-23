@@ -25,6 +25,10 @@
 extern "C" {
 #endif
 
+// Taken from PicoLibSDK https://github.com/Panda381/PicoLibSDK
+// CRC-16 CCITT Normal (CRC16A) init word (not reversed, not inverted)
+#define CRC16A_INIT 0xFFFF
+
 /**
  * Computes the CRC32 checksum for the given data buffer using a specified polynomial.
  *
@@ -45,6 +49,9 @@ uint32_t CRC32POLY(uint32_t crc, const void *buf, int len);
 * @return The CRC32 checksum.
 */
 uint32_t CRC32(const void *ptr, int len);
+
+// Taken from PicoLibSDK https://github.com/Panda381/PicoLibSDK
+uint16_t Crc16AFast(const void* buf, int len);
 
 #ifdef __cplusplus
 }

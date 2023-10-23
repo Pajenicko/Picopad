@@ -5,5 +5,5 @@ picopad-sdk/pico-sdk
 venv
 /**/venv
 picopad-sdk/gb
-sdcard/Custom/GameBoy
-sdcard/Custom/GameBoy.bmp
+sdcard/GAMEBOY
+sdcard/GAMEBOY.BMP
