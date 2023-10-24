@@ -7,3 +7,6 @@ venv
 picopad-sdk/gb
 sdcard/GAMEBOY
 sdcard/GAMEBOY.BMP
+sdcard/ORIGINAL.BMP
+sdcard/ORIGINAL.TXT
+sdcard/ORIGINAL
