@@ -1,0 +1,5 @@
+^YHC-SR04 Distance^0
+
+The HC-SR04 is an affordable ultrasonic distance measuring sensor.
+
+^WY^0 ....... quit

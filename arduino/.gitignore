@@ -1,0 +1,12 @@
+/**/cmake-build-debug/
+/**/cmake-build-release/
+/tools/venv/
+picopad-sdk/pico-sdk
+venv
+/**/venv
+picopad-sdk/gb
+sdcard/GAMEBOY
+sdcard/GAMEBOY.BMP
+sdcard/ORIGINAL.BMP
+sdcard/ORIGINAL.TXT
+sdcard/ORIGINAL
