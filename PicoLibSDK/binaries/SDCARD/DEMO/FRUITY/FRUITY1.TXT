@@ -1,0 +1,9 @@
+^YFruity Loops 1^0
+
+Music loops 1..30
+with ADPCM compression
+
+^WLeft, A^0 ... previous
+^WRight, B^0 ...... next
+^WX^0 ...... mute on/off
+^WY^0 ............. quit

@@ -1,0 +1,10 @@
+         ^YArkanoid^0
+
+^WLEFT/RIGHT^0 .......... move
+^WA^0 .................. start
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WLEFT/RIGHT^0 .......... move
+^WSpace^0 .............. start
+^WPause^0 ............... menu

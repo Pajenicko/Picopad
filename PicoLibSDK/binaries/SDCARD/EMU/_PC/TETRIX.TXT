@@ -1,0 +1,15 @@
+          ^YTetrix^0
+
+^WLEFT/RIGHT^0 ... shift brick
+^WUP^0 ................ rotate
+^WDOWN/A^0 .............. drop
+^WB^0 ................... exit
+^WX^0 ................... zoom
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^WLEFT/RIGHT^0 ... shift brick
+^WUP^0 ................ rotate
+^WDOWN/Enter^0 .......... drop
+^WEsc^0 ................. exit
+^WScrollLock^0 .......... zoom
+^WPause^0 ............... menu

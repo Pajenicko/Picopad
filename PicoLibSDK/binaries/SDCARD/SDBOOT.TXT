@@ -1,0 +1,17 @@
+^YSD-card boot loader^0
+
+Reloads another boot
+loader or unknown program
+from the SD card to flash.
+
+Saves program or whole
+flash to UF2 file.
+
+^WA^0 .. load UF2 to flash
+^WB^0 .. save flash to UF2
+^WX^0 .. save all flash
+^WY^0 ......... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

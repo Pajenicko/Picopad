@@ -10,3 +10,7 @@ Logic game
 ^WB^0 ....... escape password
 ^WX^0 ....... help solve scene
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

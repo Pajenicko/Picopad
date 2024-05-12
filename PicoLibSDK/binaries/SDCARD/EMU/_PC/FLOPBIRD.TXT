@@ -1,0 +1,10 @@
+       ^YFloppy Bird^0
+
+^Wanny key^0 .......... fly up
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Wanny key^0 .......... fly up
+^WEsc^0 ................. exit
+^WPause^0 ............... menu

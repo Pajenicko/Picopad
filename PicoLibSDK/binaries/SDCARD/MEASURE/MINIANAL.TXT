@@ -1,0 +1,10 @@
+^YMini-Analyzer^0
+
+Simple logic analyzer
+on GPIO0 with 125 MHz
+sampling rate and test
+noise generator on
+GPIO1 with sampling
+rate 15.75 MHz.
+
+^WY^0 ....... quit

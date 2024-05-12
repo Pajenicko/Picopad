@@ -10,3 +10,7 @@ tiles from 1 to 15
 ^WA^0 ....... numbers
 ^WX^0 ....... solver
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

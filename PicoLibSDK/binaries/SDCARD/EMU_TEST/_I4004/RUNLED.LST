@@ -1,0 +1,84 @@
+		; I4004 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Copy keys to LEDs
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+		Reset:	
+			; prepare position 0
+000 22 11		fim	R23,0x11	; R2 <- 1 bit mask of LED 0, R3 <- 1 decimal point position 1
+		
+		Loop2:
+			; short delay (not exact, just "sort of")
+002 24 00		fim	R45,0x00	; R4 <- middle loop counter, R5 <- inner loop counter
+004 26 00		fim	R67,0x00	; R7 <- outer loop counter
+006 75 06	Loop3:	ijnz	R5,Loop3	; increment R5, count inner loop
+008 74 06		ijnz	R4,Loop3	; increment R4, count middle loop
+00A 77 06		ijnz	R7,Loop3	; increment R7, count outer loop
+		
+			; output decimal point position
+00C 20 A0		fim	R01,0xA0	; R01 <- 0xA0, output ROM port = 10
+00E 21			src	R01		; setup output ROM port = 10
+00F A3			ld	R3		; A <- R3, decimal point position
+010 E2			wrr			; write A to ROM port
+011 63			inc	R3		; increment decimal point position
+		
+			; clear LEDs HIGH
+012 20 E0		fim	R01,0xE0	; R01 <- 0xE0, output ROM port = 14
+014 21			src	R01		; setup output ROM port = 14
+015 F0			clb			; clear A nad carry
+016 E2			wrr			; write A to ROM port
+		
+			; output LEDs LOW
+017 20 D0		fim	R01,0xD0	; R01 <- 0xD0, output ROM port = 13
+019 21			src	R01		; setup output ROM port = 13
+01A B2			xch	R2		; A <- R2, bit mask of LEDs LOW
+01B E2			wrr			; write A to ROM port
+		
+			; shift LED mask
+01C F1			clc			; clear carry
+01D F5			ral			; shift A left through carry
+01E B2			xch	R2		; R2 <- new bit mask of LEDs LOW
+01F 1A 02		jnc	Loop2		; repeat low 4 bits
+		
+			; prepare position 4	
+021 22 15		fim	R23,0x15	; R2 <- 1 bit mask of LED 4, R3 <- 5 decimal point position 5
+		
+		Loop4:
+			; short delay (not exact, just "sort of")
+023 24 00		fim	R45,0x00	; R4 <- middle loop counter, R5 <- inner loop counter
+025 26 00		fim	R67,0x00	; R7 <- outer loop counter
+027 75 27	Loop5:	ijnz	R5,Loop5	; increment R5, count inner loop
+029 74 27		ijnz	R4,Loop5	; increment R4, count outer loop
+02B 77 27		ijnz	R7,Loop5	; increment R7, count outer loop
+		
+			; output decimal point position
+02D 20 A0		fim	R01,0xA0	; R01 <- 0xA0, output ROM port = 10
+02F 21			src	R01		; setup output ROM port = 10
+030 A3			ld	R3		; A <- R3, decimal point position
+031 E2			wrr			; write A to ROM port
+032 63			inc	R3		; increment decimal point position
+		
+			; clear LEDs LOW
+033 20 D0		fim	R01,0xD0	; R01 <- 0xD0, output ROM port = 13
+035 21			src	R01		; setup output ROM port = 13
+036 F0			clb			; clear A nad carry
+037 E2			wrr			; write A to ROM port
+		
+			; output LEDs HIGH
+038 20 E0		fim	R01,0xE0	; R01 <- 0xE0, output ROM port = 14
+03A 21			src	R01		; setup output ROM port = 14
+03B B2			xch	R2		; A <- R2, bit mask of LEDs HIGH
+03C E2			wrr			; write A to ROM port
+		
+			; shift LED mask
+03D F1			clc			; clear carry
+03E F5			ral			; shift A left through carry
+03F B2			xch	R2		; R2 <- new bit mask of LEDs HIGH
+040 1A 23		jnc	Loop4		; repeat low 4 bits
+		
+			; repeat from start
+042 40 00		jmp	Reset
+		

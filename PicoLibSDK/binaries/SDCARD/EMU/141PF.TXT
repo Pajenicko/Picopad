@@ -1,0 +1,48 @@
+^YBusicom 141-PF^0
+calculator emulator
+with Intel 4004 processor
+and with printer drum
+
+^Warrows^0 .. selection
+^WA^0 .... press button
+^WX^0 ....... help
+^WY^0 ....... quit
+
+Support USB keyboard.
+
+Assign USB keyboard to buttons:
+
+C ... C
+D ... decimal point switch
+E ... CE
+F ... diamond 2 (not on keyboard)
+G ... 00
+H ... 000 (not on keyboard)
+I ... M=+
+J ... M=-
+K ... CM
+M ... M-
+N ... %
+O ... diamond (print sub-total)
+P ... M+
+Q ... SQRT
+R ... RM
+S ... Sign
+W ... rounding switch
+0..9 ... 0...9
+. ... .
++ ... +
+- ... -
+* or U ... x
+/ or : ... :
+Enter ... =
+Tab ... EX
+Space ... ADV
+
+arrows ... selection
+A ... press button
+X ... help
+Y or Esc ... quit
+
+
+How to use 141-PF:

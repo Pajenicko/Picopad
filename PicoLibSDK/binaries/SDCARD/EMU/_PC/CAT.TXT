@@ -1,0 +1,18 @@
+        ^YAlley Cat^0
+^Warrows^0 ........ move, jump
+^WA^0 .............. jump left
+^WB^0 ............. jump right
+^WX^0 ......... special, drink
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^Warrows^0 ........ move, jump
+^W[7]^0 ............ jump left
+^W[9]^0 ........... jump right
+^WLeft-Alt^0 .. special, drink
+^WCtrl+R^0 ........... restart
+^WCtrl+M^0 .............. menu
+^WCtrl+9^0 ........ full lives
+^WPause^0 ............... menu
+^WCtrl+Y^0 .............. exit
+^WEsc^0 ................ pause
+^WCtrl+S^0 ............. sound

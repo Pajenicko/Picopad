@@ -1,0 +1,4 @@
+^YFruity Loops^0
+
+Music loops
+with ADPCM compression

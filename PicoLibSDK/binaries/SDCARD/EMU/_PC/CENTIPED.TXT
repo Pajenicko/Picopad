@@ -1,0 +1,15 @@
+         ^YCentiped^0
+
+Start:Enter to use default
+^Warrows^0 .............. move
+^WX^0 ................... stop
+^WA^0 ............... shooting
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 .............. move
+^W[5]^0 ................. stop
+^WEnter^0 ........... shooting
+^WEsc^0 ................. exit
+^WPause^0 ............... menu

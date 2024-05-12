@@ -3,3 +3,7 @@
 Demo - matrix code rain
 
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

@@ -1,0 +1,158 @@
+^YConfiguration^0
+
+^WUP/DOWN^0 ... cursor
+^WA^0 ......... select
+^WX^0 ..... raw config
+
+^WY^0 ......... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc
+
+
+How to configure:
+
+
+For all configuration setting pages, the settings are saved
+to flash memory by pressing the A button. By pressing the Y
+button, editing is interrupted and the original configuration
+is returned.
+
+
+Volume
+------
+A volume of 100% is the maximum normal volume. The volume can
+be increased up to 250%, this can amplify quiet sounds, but
+the sound may already be distorted.
+
+
+Backlight
+---------
+The backlight can be controlled in 8 stages, 1 to 8. Each
+decrease in backlight by 1 stage means a halving of the power
+consumption of the backlight (the dependence of brightness on
+power consumption is logarithmic). The backlight with
+brightness 0 can only be set programmatically to prevent
+the control from malfunctioning.
+
+
+ADC Reference
+-------------
+The ADC reference voltage can be set by applying a voltage
+of known exact value to any of the GPIO26 to GPIO28 inputs,
+or by measuring the reference voltage on the ADCref pin.
+Also GPIO29 pin can be used, which is normally used to measure
+the battery voltage, but it is necessary to account for the
+voltage drop across the decoupling diode (whose value is set
+in the battery settings) and the following 1/3 division
+resistor branch.
+
+
+Battery
+-------
+The "full" and "empty" parameters are used to set the range
+to indicate the battery charge level. The "diode drop"
+parameter is the voltage across the decoupling diode that
+is added to the measured voltage when measuring the battery
+voltage.
+
+
+Temperature
+-----------
+Temperature measurement measures the internal temperature
+of the microcontroller. It can also be used to measure the
+ambient temperature, but only for a short time immediately
+after switching on before the microcontroller warms up. To
+calibrate the temperature measurement, first let the device
+equilibrate the temperature with the ambient environment
+for an hour when the device is switched off. The ambient
+temperature should be close to 27°C. Turn the device on
+and change the "Base" setting to match the ambient
+temperature. Then place the switched off device in a cool
+environment with a known temperature (refrigerator) and
+let it equilibrate the temperature for an hour. Then turn
+the device on and set the correct temperature by changing
+the "Slope" parameter.  Be careful not to dew the
+electronics of the device. You will probably have to
+repeat the settings as the values may be slightly
+affected.
+
+
+Crystal
+-------
+The crystal frequency calibration does not affect the
+operation of the programs (the frequencies cannot be set
+with such precision), but can be used in software
+post-correction for a clock, frequency generator or
+precise frequency meter.
+
+The frequency of the crystal can either be set manually,
+if we have a precision frequency meter, or we can use a
+precision time clock for calibration. To synchronize the
+clock on the computer, e.g. the AboutTime program can be
+used, which sets the clock according to the ntp server.
+
+At the beginning of the calibration, synchronize the
+clock on the computer with the ntp and view the time
+display. When the seconds reach 00, press the B button.
+This will start counting the time in the device.
+
+Time measurement can take place over several hours or
+even several days. During the measurement, compare the
+seconds reading - wait until the time reading on the
+device differs from the time reading of the real clock
+by about 20 seconds. The higher the deviation, the more
+accurate the calibration will be. However, the deviation
+must not exceed 29 seconds. While waiting for the
+deviation, you can turn off the display with the X
+button, this will save the display from being burned
+out by static. Any button will turn the display back
+on. In addition, the LED flashes at 1-second intervals
+during calibration.
+
+During calibration, the bottom line displays the
+predicted crystal frequency corresponding to the point
+at which you would have completed the calibration.
+However, it will only be displayed within the allowed
+tolerance range of 11998000 Hz to 12002000 Hz, which
+corresponds to an allowed deviation from the nominal
+frequency of 2000 Hz, a tolerance of 167 ppm.
+Calibration can only be ended within the allowed
+frequency range, i.e. when a valid reading is
+displayed in the prediction line. Outside this range,
+the calibration can only be interrupted with the
+Y button.
+
+After reaching the required deviation of about 20
+seconds, first synchronize the clock on the computer
+with the ntp server again. Display the real time
+clock and press the B button when the seconds on the
+real time clock reach 00. The program will calculate
+the crystal frequency from the deviation of the
+indicated time and display the frequency. The
+frequency can be saved in the configuration by
+pressing button A.
+
+
+Config RAW
+----------
+The "Config RAW" page is called up by pressing the
+X button. The page will display all parameters of the
+configuration structure, including the checksum and
+the number of structures in the flash memory. The device
+configuration is stored in the last 4 KB of flash memory.
+One configuration structure is 32 bytes in size. In this
+way, 128 configuration structures fit into the
+configuration memory.
+
+When saving the device configuration, the old structure
+is not overwritten, but additional structures are added
+to the end of the list. This is to save the limited
+number of writes to the flash memory. When the entire
+memory is full, the configuration memory is deleted and
+the structures are stored again from the beginning. If
+the write was interrupted at this point, e.g. by
+powering off the device, the configuration could be
+lost, the default settings would be used when powering
+up again.

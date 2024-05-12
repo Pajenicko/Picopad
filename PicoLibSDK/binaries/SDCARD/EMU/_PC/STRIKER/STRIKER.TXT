@@ -1,0 +1,12 @@
+         ^YStriker^0
+
+^Warrows^0 .............. move
+^WA^0 ................... bomb
+^WB^0 ............... shooting
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 .............. move
+^Wspacebar^0 ............ bomb
+^WX^0 ............... shooting
+^WPause^0 ............... menu

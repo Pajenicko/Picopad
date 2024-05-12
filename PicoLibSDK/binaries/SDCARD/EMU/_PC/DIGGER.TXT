@@ -1,0 +1,12 @@
+           ^YDigger^0
+
+^Warrows^0 .............. move
+^WA^0 ............... shooting
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 .............. move
+^WEnter^0 ........... shooting
+^WEsc^0 ................. exit
+^WPause^0 ............... menu

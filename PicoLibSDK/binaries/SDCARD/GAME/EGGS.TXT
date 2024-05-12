@@ -9,3 +9,7 @@ Logic game (Reversi)
 ^WA^0 ....... put stone
 ^WX^0 ....... help turn
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

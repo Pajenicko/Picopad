@@ -1,0 +1,9 @@
+^YLineArt^0
+
+LineArt - draw line flower
+
+^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

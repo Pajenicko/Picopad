@@ -8,3 +8,7 @@ Action game
 ^WDOWN^0 .... down
 ^WA^0 ....... pause
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

@@ -12,3 +12,7 @@ ball to blue wall.
 ^WX^0 ....... solve scene
     (only first 8 scenes)
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

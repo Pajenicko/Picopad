@@ -8,3 +8,7 @@ Gingerbread House
 ^WUP^0 ...... scroll text up
 ^WDOWN^0 .... scroll text down
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

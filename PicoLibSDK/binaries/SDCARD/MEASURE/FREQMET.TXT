@@ -1,0 +1,12 @@
+^YFrequency Meter^0
+
+Inputs: GPIO1, GPIO14
+
+Precision 5 digits
+in range 0.0256 Hz
+to 100 MHz.
+
+Calibrate crystal to
+get more precision.
+
+^WY^0 ....... quit

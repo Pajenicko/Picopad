@@ -1,0 +1,11 @@
+^YI4004 CPU emulator^0
+
+^WUP/DOWN^0 ...... move cursor
+^WLEFT/RIGHT^0 ... move page
+^WA^0 ............ run sample
+^WB^0 .......... directory up
+^WY^0 ......... exit emulator
+
+^WUP+Y^0 ....... exit sample
+
+Support USB keyboard.

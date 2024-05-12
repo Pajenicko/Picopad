@@ -13,3 +13,10 @@ Chess game
 
 Difficulty: 2..5 forward
 moves (up to 2 minutes)
+
+Warning - castle moves to
+the wrong target positions!
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

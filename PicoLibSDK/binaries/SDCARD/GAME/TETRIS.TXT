@@ -8,3 +8,7 @@ Game stacking blocks
 ^WDOWN or A^0 ... drop stone
 ^WB^0 ........... pause
 ^WY^0 ........... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

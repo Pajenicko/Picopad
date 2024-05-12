@@ -1,0 +1,17 @@
+          ^YMision^0
+^Warrows^0 .............. move
+^WA^0 ............... shooting
+^WB^0 ................... exit
+^WX^0 .................. start
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^WO/P^0 ........... left/right
+^WQ/A^0 .............. up/down
+^WSpace^0 ........... shooting
+^WD^0 ................... demo
+^WS^0 .................. start
+^WEnter^0 .............. pause
+^WEsc^0 ................. exit
+^WPause^0 ............... menu
+
+Immortality cheat: write OPERA

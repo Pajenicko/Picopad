@@ -16,3 +16,7 @@ directory.
 You can get more sample
 videos on web page:
 www.breatharian.eu/hw/picolibsdk
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

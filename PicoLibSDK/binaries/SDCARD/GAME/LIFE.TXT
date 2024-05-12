@@ -13,3 +13,7 @@ Cell rules:
 ^W3 cells^0 ... born new cell
 ^W2 cells^0 ... stable state
 ^Wother^0 ..... dead 
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

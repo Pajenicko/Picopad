@@ -11,3 +11,7 @@ Logic game
 ^WRIGHT+A^0 ... next level
 ^WUP+A^0 ...... fast mode
 ^WDOWN+A^0 .... slow mode
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

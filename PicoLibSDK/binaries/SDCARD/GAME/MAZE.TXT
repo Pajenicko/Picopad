@@ -8,3 +8,7 @@ Find way out of maze
 ^WDOWN^0 .... down
 ^WA^0 ....... show door
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

@@ -1,0 +1,76 @@
+		; I4040 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Text message
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+		Reset:	
+			; prepare pointer to message data (must be located in the same 256-byte page)
+000 20 2D		fim	R01,@MsgData	; R0R1 <- pointer to message data
+		
+			; load one character [R0R1] -> R2R3
+002 32		Msg2:	fin	R23		; R2R3 <- load one character (R2=high part, R3=low part)
+		
+			; increment pointer to message data
+003 71 06		ijnz	R1,Msg4		; increment register R1, skip if not zero (low part of message pointer)
+005 60			inc	R0		; increment register R0 (high part of message pointer)
+		
+			; check end of text
+006 A2		Msg4:	ld	R2		; A <- R2, character high part
+007 1C 17		jnz	Msg6		; not 0, valid character, continue
+		
+			; long delay after message
+009 24 00		fim	R45,0x00	; R4 <- middle loop counter, R5 <- inner loop counter
+00B 26 00		fim	R67,0x00	; R7 <- outer loop counter, R6 <- max outer loop counter
+00D 75 0D	Msg5:	ijnz	R5,Msg5		; increment R5, count inner loop
+00F 74 0D		ijnz	R4,Msg5		; increment R4, count outer loop
+011 77 0D		ijnz	R7,Msg5		; increment R7, count outer loop
+013 76 0D		ijnz	R6,Msg5		; increment R6, count max outer loop
+015 14 00		jz	Reset		; reset text
+		
+			; output HIGH part of the character
+017 24 90	Msg6:	fim	R45,0x90	; R45 <- 0x90, output ROM port = 9
+019 25			src	R45		; setup output ROM port = 9
+01A A2			ld	R2		; A <- R2, character high part
+01B E2			wrr			; write A to ROM port
+		
+			; output LOW part of the character
+01C 24 80		fim	R45,0x80	; R45 <- 0x80, output ROM port = 8
+01E 25			src	R45		; setup output ROM port = 8
+01F A3			ld	R3		; A <- R3, character low part
+020 E2			wrr			; write A to ROM port
+		
+			; short delay between characters
+021 24 00		fim	R45,0x00	; R4 <- middle loop counter, R5 <- inner loop counter
+023 26 00		fim	R67,0x00	; R7 <- outer loop counter
+025 75 25	Msg8:	ijnz	R5,Msg8		; increment R5, count inner loop
+027 74 25		ijnz	R4,Msg8		; increment R4, count outer loop
+029 77 25		ijnz	R7,Msg8		; increment R7, count outer loop
+02B 40 02		jmp	Msg2		; continue to next cahracter
+		
+		; message data (20 characters)
+		MsgData:
+02D 20		= ' '
+02E 20		= ' '
+02F 48		= 'H'
+030 65		= 'e'
+031 6C		= 'l'
+032 6C		= 'l'
+033 6F		= 'o'
+034 20		= ' '
+035 66		= 'f'
+036 72		= 'r'
+037 6F		= 'o'
+038 6D		= 'm'
+039 20		= ' '
+03A 49		= 'I'
+03B 34		= '4'
+03C 30		= '0'
+03D 34		= '4'
+03E 30		= '0'
+03F 21		= '!'
+040 20		= ' '
+041 00		= 0		; flag - end of text
+		

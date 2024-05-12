@@ -12,6 +12,10 @@ Winning Slot Machine
 ^WDOWN^0 ... bank to credits
 ^WY^0 ...... exit game
 
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc
+
 - Maximal win is 750. Higher winnings can be used as a bonus in the next game (no credits are subtracted
   in the bonus game and the reels spin in the opposite direction)
 - The win rate is 94%.

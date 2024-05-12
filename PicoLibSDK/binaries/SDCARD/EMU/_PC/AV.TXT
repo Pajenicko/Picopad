@@ -1,0 +1,14 @@
+    ^YArcade Volleyball^0
+
+^WLeft/Right^0 .......... move
+^WDown or X^0 ........... jump
+^WA^0 ............ select menu
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WLeft/Right^0 .......... move
+^WDown^0 ................ jump
+^WEnter^0 ........ select menu
+^WEsc^0 ................. exit
+^WPause^0 ............... menu
