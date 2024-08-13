@@ -73,14 +73,24 @@ extern "C" {
 #define BATTERY_ALARM_DURATION 0.5
 #endif
 
+#ifndef COLBITS
+#define COLBITS		16		// number of output color bits (4, 8, 15 or 16)
+#endif
+
+#define COLTYPE		u16		// type of color: u8, u16 or u32
+#define FRAMETYPE	u16		// type of frame entry: u8 or u16
+#define WIDTHLEN	WIDTH		// length of one line of one plane, in number of frame elements
+#define FRAMESIZE 	(WIDTHLEN*HEIGHT) // frame size in number of colors
+#define	DISP_STRIP_NUM	1		// number of back strips
+
 // Use ST7789 driver. Set to 0 to disable.
 #ifndef USE_ST7789
 #define USE_ST7789    1
 #endif
 
 // Use DRAWTFT driver. Set to 0 to disable.s
-#ifndef USE_DRAWTFT
-#define USE_DRAWTFT  1
+#ifndef USE_DRAW
+#define USE_DRAW  1
 #endif
 
 // PWM sound
@@ -144,8 +154,8 @@ extern "C" {
 #define DISP_SCK_PIN  18    // serial clock pin
 #endif
 
-#ifndef DIDP_MOSI_PIN
-#define DIDP_MOSI_PIN  19    // master out TX MOSI pin
+#ifndef DISP_MOSI_PIN
+#define DISP_MOSI_PIN	19		// master out TX MOSI pin
 #endif
 
 #ifndef DISP_RES_PIN
@@ -314,6 +324,14 @@ extern "C" {
 #define BOOTLOADER_SIZE  0x8000    // size of boot loader 196608
 #define BOOTLOADER_DATA  32    // boot loader resident data
 
+#ifndef USE_FRAMEBUF
+#if USE_DRAW
+#define USE_FRAMEBUF	1    // use default display frame buffer
+#else
+#define USE_FRAMEBUF	0
+#endif
+#endif
+
 extern const __attribute__((aligned(4))) uint8_t FontBold8x8[2048];
 extern const __attribute__((aligned(4))) uint8_t FontBold8x14[3584];
 extern const __attribute__((aligned(4))) uint8_t FontBold8x16[4096];
@@ -331,10 +349,10 @@ extern const __attribute__((aligned(4))) uint8_t FontTiny5x8[2048];
 
 #include "picopad_sdk.h"
 #include "picopad_led.h"
-#include "lib_drawtft.h"
+#include "st7789.h"
+#include "lib_draw.h"
 #include "lib_pwmsnd.h"
 #include "lib_config.h"
-#include "st7789.h"
 #include "picopad_key.h"
 #include "picopad_init.h"
 

@@ -39,9 +39,10 @@ void ConfigSetDef(sConfig* cfg)
 	cfg->bat_empty = BATTERY_EMPTY_INT;	// voltage of empty batter in [mV] (default BATTERY_EMPTY_INT = 3100)
 	cfg->bat_diode = BAT_DIODE_FV_INT;	// voltage drop on diode in [mV] (default BAT_DIODE_FV_INT = 311)
 	cfg->adc_ref = ADC_UREF_INT;		// ADC reference voltage in [mV] (default ADC_UREF_INT = 3300)
-	cfg->temp_base = TEMP_BASE;		// temperature base voltage at 27�C (default TEMP_BASE = 0.706f)
+	cfg->temp_base = TEMP_BASE;		// temperature base voltage at 27°C (default TEMP_BASE = 0.706f)
 	cfg->temp_slope = TEMP_SLOPE;		// temperature slope - voltage per 1 degree (default TEMP_SLOPE = 0.001721f)
 	cfg->crystal = 12000000;		// crystal frequency in [Hz] (default 12000000)
+	cfg->screensaver = 255;			// screensaver default ON
 }
 
 // clear configuration memory
@@ -304,7 +305,7 @@ void ConfigDecAdcRef()
 
 // === Temperature
 
-// set temperature base voltage at 27�C (limits range, does not save configuration)
+// set temperature base voltage at 27°C (limits range, does not save configuration)
 void ConfigSetTempBase(float mv)
 {
 	if (mv < CONFIG_TEMP_BASE_MIN) mv = CONFIG_TEMP_BASE_MIN;
@@ -312,13 +313,13 @@ void ConfigSetTempBase(float mv)
 	Config.temp_base = mv;
 }
 
-// increase temperature base voltage at 27�C (limits range, does not save configuration)
+// increase temperature base voltage at 27°C (limits range, does not save configuration)
 void ConfigIncTempBase()
 {
 	ConfigSetTempBase(Config.temp_base + 0.00001f);
 }
 
-// decrease temperature base voltage at 27�C (limits range, does not save configuration)
+// decrease temperature base voltage at 27°C (limits range, does not save configuration)
 void ConfigDecTempBase()
 {
 	ConfigSetTempBase(Config.temp_base - 0.00001f);

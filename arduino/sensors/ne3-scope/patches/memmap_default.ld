@@ -21,7 +21,6 @@
     __stack (== StackTop)
 */
 
-/* Skip 196kB at the start of flash, that's where our bootloader is */
 MEMORY
 {
     FLASH(rx) : ORIGIN = 0x10000000 + 0x8000, LENGTH = __FLASH_LENGTH__ - 0x8000 - 4K /* flash ROM memory 2MB-32K-4KB */
