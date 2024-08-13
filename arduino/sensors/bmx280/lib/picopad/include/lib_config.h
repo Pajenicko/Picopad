@@ -49,8 +49,8 @@ extern "C" {
 #define CONFIG_ADC_REF_MIN	2400		// min. ADC reference
 #define CONFIG_ADC_REF_MAX	4200		// max. ADC reference
 
-#define CONFIG_TEMP_BASE_MIN	0.69f		// min. temperature base voltage at 27�C
-#define CONFIG_TEMP_BASE_MAX	0.72f		// max. temperature base voltage at 27�C
+#define CONFIG_TEMP_BASE_MIN	0.69f		// min. temperature base voltage at 27°C
+#define CONFIG_TEMP_BASE_MAX	0.72f		// max. temperature base voltage at 27°C
 #define CONFIG_TEMP_SLOPE_MIN	0.0015f		// min. temperature slope - voltage per 1 degree
 #define CONFIG_TEMP_SLOPE_MAX	0.0019f		// max. temperature slope - voltage per 1 degree
 
@@ -60,24 +60,27 @@ extern "C" {
 
 // configuration structure (pay attention to correct alignment of structure members!)
 typedef struct {
-	// 32-bit aligned
-	u16	crc;		// 0: checksum Crc16AFast (CRC-16 CCITT normal)
-	u8	volume;		// 2: sound volume percentage 0..255, level 0..25 (0..250%) in multiply of 10 (default 100% = 10*10 = 100 = CONFIG_VOLUME_FULLSTEP)
-	u8	backlight;	// 3: display backlight 0..255 (default 255), level 0..8 (values 0, 1, 3, 7, 15, 31, 63, 127, 255)
-	// 32-bit aligned
-	u16	bat_full;	// 4: voltage of full battery in [mV] (default BATTERY_FULL_INT = 4200)
-	u16	bat_empty;	// 6: voltage of empty batter in [mV] (default BATTERY_EMPTY_INT = 3100)
-	// 32-bit aligned
-	u16	bat_diode;	// 8: voltage drop on diode in [mV] (default BAT_DIODE_FV_INT = 311)
-	u16	adc_ref;	// 10: ADC reference voltage in [mV] (default ADC_UREF_INT = 3300)
-	// 32-bit aligned
-	float	temp_base;	// 12: temperature base voltage at 27�C (default TEMP_BASE = 0.70600f)
-	// 32-bit aligned
-	float	temp_slope;	// 16: temperature slope - voltage per 1 degree (default TEMP_SLOPE = 0.001721f)
-	// 32-bit aligned
-	u32	crystal;	// 20: crystal frequency in [Hz] (default 12000000) ... value (u32)-1 indicates invalid config
-	// 32-bit aligned
-	u8	stuffing[CONFIG_SIZE-24]; // 24: (8) alignment to page size (default value 0xff)
+		// 32-bit aligned
+		u16	crc;		// 0: checksum Crc16AFast (CRC-16 CCITT normal)
+		u8	volume;		// 2: sound volume percentage 0..255, level 0..25 (0..250%) in multiply of 10 (default 100% = 10*10 = 100 = CONFIG_VOLUME_FULLSTEP)
+		u8	backlight;	// 3: display backlight 0..255 (default 255), level 0..8 (values 0, 1, 3, 7, 15, 31, 63, 127, 255)
+		// 32-bit aligned
+		u16	bat_full;	// 4: voltage of full battery in [mV] (default BATTERY_FULL_INT = 4200)
+		u16	bat_empty;	// 6: voltage of empty batter in [mV] (default BATTERY_EMPTY_INT = 3100)
+		// 32-bit aligned
+		u16	bat_diode;	// 8: voltage drop on diode in [mV] (default BAT_DIODE_FV_INT = 311)
+		u16	adc_ref;	// 10: ADC reference voltage in [mV] (default ADC_UREF_INT = 3300)
+		// 32-bit aligned
+		float	temp_base;	// 12: temperature base voltage at 27°C (default TEMP_BASE = 0.70600f)
+		// 32-bit aligned
+		float	temp_slope;	// 16: temperature slope - voltage per 1 degree (default TEMP_SLOPE = 0.001721f)
+		// 32-bit aligned
+		u32	crystal;	// 20: crystal frequency in [Hz] (default 12000000) ... value (u32)-1 indicates invalid config
+		// 32-bit aligned
+		u8	screensaver;	// 24: 0=do not use screen saver on charging, not 0=use screen saver
+		u8	res[3];		// 25: ... reserved (align)
+		// 32-bit aligned
+		u8	stuffing[CONFIG_SIZE-28]; // 28: (8) alignment to page size (default value 0xff)
 } sConfig;
 
 // compile-time check
@@ -196,16 +199,16 @@ void ConfigDecAdcRef();
 
 // === Temperature
 
-// get temperature base voltage at 27�C
+// get temperature base voltage at 27°C
 INLINE float ConfigGetTempBase() { return Config.temp_base; }
 
-// set temperature base voltage at 27�C (limits range, does not save configuration)
+// set temperature base voltage at 27°C (limits range, does not save configuration)
 void ConfigSetTempBase(float mv);
 
-// increase temperature base voltage at 27�C (limits range, does not save configuration)
+// increase temperature base voltage at 27°C (limits range, does not save configuration)
 void ConfigIncTempBase();
 
-// decrease temperature base voltage at 27�C (limits range, does not save configuration)
+// decrease temperature base voltage at 27°C (limits range, does not save configuration)
 void ConfigDecTempBase();
 
 // get temperature slope - voltage per 1 degree
@@ -233,6 +236,14 @@ void ConfigIncCrystal();
 
 // decrease crystal (limits range, does not save configuration)
 void ConfigDecCrystal();
+
+// === ScreenSaver
+
+// get screensaver state
+INLINE Bool ConfigGetScreenSaver() { return Config.screensaver != 0; }
+
+// set screensaver state
+INLINE void ConfigSetScreenSaver(Bool on) { Config.screensaver = on ? 0xff : 0; }
 
 #ifdef __cplusplus
 }

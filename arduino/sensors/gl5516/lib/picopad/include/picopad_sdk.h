@@ -167,6 +167,8 @@ typedef unsigned char Bool;
 // place time critical function into RAM
 #define NOFLASH(fnc) NOINLINE __attribute__((section(".time_critical." #fnc))) fnc
 
+#define FASTCODE __attribute__ ((optimize("-Ofast")))
+
 #define FRACT        12    // number of bits of fractional part of fractint number (use max. 13, min. 8)
 #define FRACTMUL (1<<FRACT)    // - update vga_config.h too
 #define TOFRACT(f) ((int)((f)*FRACTMUL + (((f) < 0) ? -0.5f : 0.5f)))
@@ -189,12 +191,24 @@ typedef unsigned char Bool;
 #define GPIO_Fnc(pin, fnc) gpio_set_function(pin, fnc)
 #define GPIO_Reset(pin) gpio_deinit(pin)
 #define GPIO_Flip(pin) gpio_xor_mask(1UL << pin)
+#define GPIO_Drive4mA(pin) gpio_set_drive_strength(pin, GPIO_DRIVE_STRENGTH_4MA)
+#define GPIO_Drive8mA(pin) gpio_set_drive_strength(pin, GPIO_DRIVE_STRENGTH_8MA)
 
 #define ADC_Init() adc_init()
 #define ADC_PinInit(pin) adc_gpio_init(pin)
 #define ADC_Mux(pin) adc_select_input(pin)
 #define ADC_Single() adc_read();
 #define ADC_PinTerm(pin) gpio_deinit(pin)
+
+INLINE void PWM_GpioInit(int gpio) { GPIO_Fnc(gpio, GPIO_FUNC_PWM); }
+static INLINE void PWM_Disable(int pwm) { pwm_set_enabled(pwm, false); }
+static INLINE void PWM_Comp(int pwm, int chan, u16 cmp) { pwm_set_chan_level(pwm, chan, cmp); }
+void PWM_Reset(int pwm);
+#define PWM_GPIOTOSLICE(gpio) pwm_gpio_to_slice_num(gpio)
+#define PWM_GPIOTOCHAN(gpio) pwm_gpio_to_channel(gpio)
+
+
+INLINE void SPI_Init(spi_inst_t *spi, u32 baudrate) { spi_init(spi, baudrate); }
 
 // compile-time check
 #ifdef __cplusplus

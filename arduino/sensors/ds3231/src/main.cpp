@@ -281,26 +281,26 @@ void loop() {
 
 		int ny = 63;
 		num = hrs > 9 ? hrs / 10 : 0;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx, ny, 32, 41, 354);
 		num = hrs > 9 ? hrs % 10 : hrs;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx + 32, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx + 32, ny, 32, 41, 354);
 		nx += 72;
 		num = mins > 9 ? mins / 10 : 0;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx, ny, 32, 41, 354);
 		num = mins > 9 ? mins % 10 : mins;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx + 32, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx + 32, ny, 32, 41, 354);
 
 		nx = 165;
 		ny += 70;
 		num = day > 9 ? day / 10 : 0;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx, ny, 32, 41, 354);
 		num = day > 9 ? day % 10 : day;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx + 32, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx + 32, ny, 32, 41, 354);
 		nx += 72;
 		num = mon > 9 ? mon / 10 : 0;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx, ny, 32, 41, 354);
 		num = mon > 9 ? mon % 10 : mon;
-		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, nx + 32, ny, 32, 41, 354);
+		DrawImgPal(NumbersImg + (num * 36), NumbersImg_Pal, 0, 0, nx + 32, ny, 32, 41, 354);
 
 		pDrawFont = FontBold8x8;
 		DrawFontHeight = 8;

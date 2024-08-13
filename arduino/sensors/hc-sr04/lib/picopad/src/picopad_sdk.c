@@ -106,3 +106,14 @@ u8 Order(u32 val)
 	}
 	return OrdBitsTab[val] + i;
 }
+
+void PWM_Reset(int pwm)
+{
+	pwm_set_irq_enabled(pwm, false);
+	pwm_hw->slice[pwm].csr = 0;
+	pwm_clear_irq(pwm);
+	pwm_hw->slice[pwm].div = 0x10;
+	pwm_hw->slice[pwm].ctr = 0;
+	pwm_hw->slice[pwm].cc = 0;
+	pwm_hw->slice[pwm].top = 0xffff;
+}

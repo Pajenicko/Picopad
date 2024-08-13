@@ -1,6 +1,4 @@
 .pio
 __pycache__
 .idea
-roms
-rom_builds
 src/rom.c
