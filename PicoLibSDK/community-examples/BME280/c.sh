@@ -4,11 +4,13 @@
 
 export TARGET="BME280"
 export GRPDIR="DEMO"
+export MEMMAP=""
 
 origin_folder=$(pwd)
 mkdir -p "../../sdk/PicoPad/DEMO/$TARGET" 2>/dev/null
-cp -r *.* "../../sdk/PicoPad/DEMO/$TARGET"
+cp -r * "../../sdk/PicoPad/DEMO/$TARGET"
 cd "../../sdk/PicoPad/DEMO/$TARGET"
+pwd
 
 ../../../_c1.sh picopad10
 

@@ -33,8 +33,6 @@
 
 // #define SCD4x_ENABLE_DEBUGLOG 0 // OFF/disabled/excluded on demand
 
-#include <stdint.h>
-
 //The default I2C address for the SCD4x is 0x62.
 #define SCD4x_ADDRESS 0x62
 

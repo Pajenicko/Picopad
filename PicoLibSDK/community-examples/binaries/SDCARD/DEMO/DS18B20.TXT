@@ -1,0 +1,5 @@
+^YTemperature^0
+
+DS18B20 temperature sensor
+
+^WY^0 ....... quit
