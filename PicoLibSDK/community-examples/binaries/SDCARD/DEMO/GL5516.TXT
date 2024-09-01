@@ -1,0 +1,6 @@
+^YLIGHT^0
+
+GL5516 photoresistor
+
+^WX^0 ....... read me
+^WY^0 ....... quit
