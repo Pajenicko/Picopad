@@ -1,19 +1,16 @@
 """
-In this example, you'll connect Picopad to real world. SD card required!!!
+In this example, you'll connect Picopad to real world.
 
-We will use the adafruit_requests library to download teletext page from the https://teletext.ceskatelevize.cz/ and display it on the screen.
+We download teletext page image from api.makerclass.cz as 4-bit BMP and display it on screen.
+The API converts the original CT teletext PNG to a format suitable for our MCU.
 
-The teletext page is png image 320x276 pixels. To display it on the screen, we need to convert it to 4bpp bmp image.
-Becouse of limited memory, we will offload the conversion to the api.makerclass.cz proxy server that convert the image and send it back to us.
-For futher memory saving, we will save the image to SD card and display it from there.
+We use raw sockets with recv_into for zero-allocation streaming - adafruit_requests
+cannot handle repeated 44KB downloads without memory fragmentation on RP2040.
 
-We will use buttons to scroll the page up and down and to change the teletext page number.
-
-You can find the required librarie in the CircuitPython library bundle (https://circuitpython.org/libraries).
+Use buttons to scroll the page and change the teletext page number.
 """
-import adafruit_requests
-import socketpool
 import wifi
+import socketpool
 import displayio
 import board
 import os
@@ -53,9 +50,6 @@ page = 100
 # Initialize WiFi
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
 
-pool = socketpool.SocketPool(wifi.radio)
-requests = adafruit_requests.Session(pool)
-
 display = board.DISPLAY
 display.auto_refresh = False
 group = displayio.Group()
@@ -65,99 +59,105 @@ display.root_group = group
 bitmap = None
 palette = None
 
+# Pre-allocate small reusable buffer for header + one row
+_hdr_buf = bytearray(118)  # 14 BMP + 40 DIB + 64 palette
+_row_buf = bytearray(160)  # 320px * 4bpp / 8
+
+def _recv_into(sock, buf, length):
+    """Read exactly length bytes from socket into buf, no new allocations."""
+    mv = memoryview(buf)
+    pos = 0
+    while pos < length:
+        n = sock.recv_into(mv[pos:length])
+        if n == 0:
+            break
+        pos += n
+
 def teletext(page):
 
-    # We use global palette and bitmap. 
+    # We use global palette and bitmap.
     # It is slower, but prevents memory fragmentation - they have same size for all pages
     global bitmap
     global palette
 
-    with requests.get(f"http://api.makerclass.cz/teletext/getBmp?page={page}", stream=True) as resp:
-        # Get headers with previous and next page number
-        try:
-            prev = int(resp.headers['prev'])
-        except:
-            prev = page
-        try:
-            next = int(resp.headers['next'])
-        except:
-            next = page    
+    gc.collect()
 
-        # Read BMP header and first 4 bytes from DIB header - they contains size of DIB header (14 + 4 bytes)
-        chunk_size = 18
-        data = b''
-        # We use while loop to read the whole chunk, becouse resp.iter_content() can return less bytes than requested
-        while len(data) < chunk_size:
-            data += resp.iter_content(chunk_size=chunk_size-len(data)).__next__()
+    # Manual HTTP request to get raw socket for recv_into
+    import socketpool
+    pool = socketpool.SocketPool(wifi.radio)
+    addr_info = pool.getaddrinfo("api.makerclass.cz", 80)[0]
+    sock = pool.socket(addr_info[0], addr_info[1])
+    sock.settimeout(10)
+    sock.connect(addr_info[4])
 
-        # Read the rest of DIB header (usually 40 bytes - 4 already read)
-        # data[14:18] from previous chunk contains size of DIB header
-        chunk_size = int.from_bytes(data[14:18], "little") - 4            
-        data = b''
-        while len(data) < chunk_size:
-            data += resp.iter_content(chunk_size=chunk_size-len(data)).__next__()
+    request = f"GET /teletext/getBmp?page={page} HTTP/1.0\r\nHost: api.makerclass.cz\r\n\r\n"
+    sock.send(request.encode())
 
-        # Extract image size and bit depth from DIB header
-        width = int.from_bytes(data[0:4], "little")
-        height = int.from_bytes(data[4:8], "little")
-        bit_depth = int.from_bytes(data[10:12], "little")
-        color_count = 2**bit_depth
-        
-        # BMP row size in bytes must be multiple of 4, so we need to pad it
-        line_width_pad = ((width + width % 4) // 8 * bit_depth)
+    # Read HTTP response headers line by line
+    prev = page
+    next_p = page
+    header_line = bytearray(128)
+    pos = 0
+    headers_done = False
+    while not headers_done:
+        one = bytearray(1)
+        sock.recv_into(one)
+        if one[0] == 0x0A:  # \n
+            line = str(header_line[:pos], "utf-8").strip()
+            if line == "":
+                headers_done = True
+            elif line.lower().startswith("prev:"):
+                try:
+                    prev = int(line.split(":")[1].strip())
+                except:
+                    pass
+            elif line.lower().startswith("next:"):
+                try:
+                    next_p = int(line.split(":")[1].strip())
+                except:
+                    pass
+            pos = 0
+        elif one[0] != 0x0D:  # skip \r
+            if pos < 128:
+                header_line[pos] = one[0]
+                pos += 1
 
-        # Read and process the color palette (64 bytes for 16 colors, 4BPP)
-        chunk_size = color_count * bit_depth
-        data = b''
-        while len(data) < chunk_size:
-            data += resp.iter_content(chunk_size=chunk_size-len(data)).__next__()
-            
-        #print(width, height, bit_depth, color_count)
+    # Read BMP header + DIB header + palette (118 bytes)
+    _recv_into(sock, _hdr_buf, 118)
 
-        if palette is None:
-            palette = displayio.Palette(color_count)
+    width = int.from_bytes(_hdr_buf[18:22], "little")
+    height = int.from_bytes(_hdr_buf[22:26], "little")
 
-        # Extract colors from the palette and convert them from BGR to RGB
-        for i in range(0, len(data), 4):
-            blue, green, red, _ = data[i:i+4]
-            palette[i//4] = (red << 16) + (green << 8) + blue
+    if palette is None:
+        palette = displayio.Palette(16)
 
-        if bitmap is None:
-            bitmap = displayio.Bitmap(width, height, color_count)
+    # Extract colors from palette (offset 54, each 4 bytes BGRA)
+    for i in range(16):
+        off = 54 + i * 4
+        blue, green, red = _hdr_buf[off], _hdr_buf[off + 1], _hdr_buf[off + 2]
+        palette[i] = (red << 16) + (green << 8) + blue
 
-        # Process the image data row by row from bottom to top
+    if bitmap is None:
+        bitmap = displayio.Bitmap(width, height, 16)
 
-        # Row counter
-        row = 1
-        # We try to load whole row + padding at once
-        chunk_size = line_width_pad
+    # Read and process pixel data row by row (bottom-up BMP)
+    for row in range(1, height + 1):
+        _recv_into(sock, _row_buf, 160)
 
-        for data in resp.iter_content(chunk_size=chunk_size):
-            # pixel position in the row
-            index = 0
+        y = height - row
+        x = 0
+        for i in range(160):
+            byte = _row_buf[i]
+            bitmap[x, y] = byte >> 4
+            x += 1
+            bitmap[x, y] = byte & 0x0F
+            x += 1
 
-            while len(data) < chunk_size:
-                data += resp.iter_content(chunk_size=chunk_size-len(data)).__next__()
+    sock.close()
+    del sock
+    gc.collect()
 
-            # Calculate the current row from bottom
-            row_offset = (height - row) * width
-
-            # Process every byte returned
-            for byte in data:
-                # BMP is 4BPP, so every byte contains 2 pixels - we extract them
-                pixel1 = byte >> 4
-                pixel2 = byte & 0x0F
-                
-                # Set the pixels in the bitmap
-                bitmap[row_offset + index] = pixel1
-                index += 1
-
-                bitmap[row_offset + index] = pixel2
-                index += 1
-
-            row += 1
-
-    return prev, next
+    return prev, next_p
 
 # Download and display first page
 prev, next = teletext(page)
