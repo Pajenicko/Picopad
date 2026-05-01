@@ -12,6 +12,8 @@ You'll learn to make HTTP requests, interact with web APIs, send sensor data to 
 -   Log sensor data to cloud
 -   Control devices over internet
 -   Build Telegram bot
+-   Build web server dashboards
+-   Real-time communication (polling, SSE, WebSocket)
 
 ## WiFi Test
 
@@ -25,15 +27,26 @@ Connect to WiFi network and print network info.
 
 ![cp_network_wifitest](https://github.com/MakerClassCZ/Picopad/assets/3875093/8586d82f-5dc1-45ac-9ff1-5d1ce81b4fed)
 
+## WiFi Scanner
+
+WiFi network scanner that visualizes nearby networks as parabolas on a channel graph, showing signal strength and channel usage at a glance. See the `wifi_scanner/readme.md` for details.
+
+### Key concepts:
+
+-   WiFi scanning
+-   Signal strength visualization
+-   Channel mapping
+
 ## Teletext
 
-There are **two examples** how to use a web API to fetch Czech Teletext as image or text.
-The image example (teletext_sdcard) requires SD Card as temporary storage for the teletext screen.
+Three examples showing different approaches to fetching Czech Television teletext via [api.makerclass.cz](http://api.makerclass.cz):
+- **teletext** - downloads 4-bit BMP image using raw sockets with `recv_into()` for direct control over memory allocation. No external libraries needed.
+- **teletext_sdcard** - uses `adafruit_requests` to stream the BMP in chunks to SD card, then displays via `OnDiskBitmap`. SD card acts as cache.
+- **teletext_textonly** - fetches page text as JSON via `adafruit_requests` and renders with a custom 8×12 bitmap font (`teletext.bdf`) with Czech diacritics.
 
 ![cp_network_teletext_image](https://github.com/MakerClassCZ/Picopad/assets/3875093/161c0029-e763-443f-bd32-5266838cf937)
 
 ![cp_network_teletext_text](https://github.com/MakerClassCZ/Picopad/assets/3875093/c8ef82b7-fbab-4ee1-99f9-b9d0f66641af)
-
 
 ### Key concepts:
 
@@ -43,14 +56,32 @@ The image example (teletext_sdcard) requires SD Card as temporary storage for th
 -   Saving images to storage
 
 ### Interesting techniques:
-- saving memory techniques
-  * use of garbage collector
-  * use of bitmap label
-  * split large bitmap label to multiple smaller
-  * use context manager (with)
-- rounding number to tens/hundreds  with simple arithmetic
-- custom fonts
+- raw socket with `recv_into()` and pre-allocated buffers to avoid memory fragmentation on repeated large downloads
+- streaming HTTP response to SD card file in chunks
+- saving memory techniques (garbage collector, bitmap labels, context managers)
+- custom BDF font extracted from teletext test page with full Czech/Slovak diacritics
+- rounding number to tens/hundreds with simple arithmetic
 
+## Network Clock
+
+NTP-synced clock with animated day/night sky. The sun moves across the sky following real time, and stars appear at night via palette swap.
+
+### Key concepts:
+
+-   NTP time synchronization
+-   Display animation and sprite layering
+-   EU daylight saving time calculation
+
+## Alarm Clock
+
+NTP-synced alarm clock with time display and alarm functionality. Set the time and alarm using buttons on the device.
+
+### Key concepts:
+
+-   NTP time synchronization
+-   Alarm scheduling
+-   Audio output
+-   Button-based UI for time and alarm setting
 
 ## Telegram Bot
 
@@ -67,8 +98,41 @@ Build a Telegram bot to control your board remotely.
 
 ![cp_network_telegram](https://github.com/MakerClassCZ/Picopad/assets/3875093/ebfd61ec-c9e4-430a-a811-07f92255d43d)
 
+## Web Server
 
+Three examples demonstrating different real-time communication patterns for a web dashboard running on the microcontroller. All three show CPU temperature, LED control, and button state. The frontend uses Alpine.js and Bulma CSS loaded from CDN.
+
+- **webserver_polling** - the browser polls the server every 2 seconds for fresh data. Simplest approach.
+- **webserver_sse** - the server pushes data to the browser via Server-Sent Events. Typically the best fit for MCU projects - the server streams sensor updates efficiently, and user interactions (like toggling an LED) are simple HTTP requests.
+- **webserver_websocket** - full duplex communication via WebSocket. The browser can also send commands back through the same connection.
+
+### Key concepts:
+
+-   HTTP server on a microcontroller
+-   Real-time communication patterns (polling, SSE, WebSocket)
+-   Serving HTML files and JSON API
+-   Alpine.js reactive frontend
+
+## Mapa tvoji mamy
+
+Czech regions map with real-time environmental data fetched from tmep.cz. Select a region and see live sensor readings displayed on the map.
+
+### Key concepts:
+
+-   HTTP API integration
+-   Data visualization and color mapping
+-   Interactive UI
+
+## Zivy obraz
+
+E-ink / digital display integration with the zivyobraz.eu service. The device downloads a BMP image over HTTP and displays it, then enters deep sleep until the next scheduled update.
+
+### Key concepts:
+
+-   Streaming HTTP responses
+-   BMP image processing
+-   Deep sleep scheduling
 
 ## Summary
 
-The tutorial covers core network concepts like WiFi, HTTP requests, APIs, IoT data logging, and remote control. Follow along to connect your CircuitPython projects to the internet!
+This tutorial covers a wide range of network concepts: WiFi connectivity and scanning, HTTP requests, JSON APIs, NTP time synchronization, Telegram bots, web servers with real-time dashboards (polling, SSE, WebSocket), live data visualization, and e-ink display integration. Follow along to connect your CircuitPython projects to the internet!
