@@ -46,6 +46,14 @@ Each example directory contains an accompanying README file. This file offers in
 
 The recommended way is to start with hello_world examples, continue to sensors/intro and then explore more complex stuff.
 
+
+### Where to find modules and libraries
+
+CircuitPython has a bunch of built-in modules. If you need more, [download bundle](https://circuitpython.org/libraries) for your version of CircuitPython. To use a module in your project, copy its `.mpy` file (or directory with its `.mpy` files, if there are more) into `/lib` directory of your project. After that, you may use `import module_name` like with any other module.
+
+There is also [CircuitPyhon community bundle](https://circuitpython.org/libraries) with more modules created by CircuitPython community, but they are not officially supported.
+
+
 ## External Connector Overview
 
 The external connector on the PicoPad provides multiple connection points:
