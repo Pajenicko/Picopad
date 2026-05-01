@@ -81,7 +81,7 @@ def note_on(notenum, vel=100):
     oscs.clear()  # chuck out old oscs to make new ones
     for i in range(oscs_per_note):
         fr = f * (1 + (osc_detune*i))
-        lpf = synth.low_pass_filter(filter_freq, filter_res)
+        lpf = synthio.Biquad(synthio.FilterMode.LOW_PASS, frequency=filter_freq, Q=filter_res)
         # in synthio, 'Note' objects are more like oscillators
         oscs.append(synthio.Note(frequency=fr, filter=lpf, envelope=amp_env,
                                  waveform=s.shapes[s.shape], bend=lfo_vibrato))
@@ -199,7 +199,7 @@ while True:
 
     # to do global filtermod we must iterate over all oscillators in each note
     for osc in oscs:
-        osc.filter = synth.low_pass_filter(filter_freq, filter_res)
+        osc.filter = synthio.Biquad(synthio.FilterMode.LOW_PASS, frequency=filter_freq, Q=filter_res)
 
     for item in range(4):
 

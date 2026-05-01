@@ -22,7 +22,7 @@ class KickDrum:
         self.lfo.rate=20
         
         self.filter_fr = 2000
-        self.lpf = self.synth.low_pass_filter(frequency=self.filter_fr)
+        self.lpf = synthio.Biquad(synthio.FilterMode.LOW_PASS, frequency=self.filter_fr)
 
         self.amp_env1 = synthio.Envelope(attack_time=0.0, decay_time=0.075, release_time=0, attack_level=1, sustain_level=0)
         self.note1 = synthio.Note(frequency=53, envelope=self.amp_env1, waveform=sinwave2, filter=self.lpf, bend=self.lfo)
@@ -35,11 +35,11 @@ class KickDrum:
     
     def setLPF(self, fr):
         self.filter_fr = fr
-        self.lpf = self.synth.low_pass_filter(frequency=self.filter_fr)
+        self.lpf = synthio.Biquad(synthio.FilterMode.LOW_PASS, frequency=self.filter_fr)
         self.note1.filter = self.lpf
         self.note2.filter = self.lpf
         self.note3.filter = self.lpf
-    
+
     def play(self, synth=None):
         if synth is None:
             synth = self.synth
@@ -57,7 +57,7 @@ class Snare:
         self.lfo.rate=20
 
         self.filter_fr = 9500
-        self.lpf = self.synth.low_pass_filter(self.filter_fr)
+        self.lpf = synthio.Biquad(synthio.FilterMode.LOW_PASS, frequency=self.filter_fr)
 
         self.amp_env1 = synthio.Envelope(attack_time=0.0, decay_time=0.115, release_time=0, attack_level=1, sustain_level=0)
         self.note1 = synthio.Note(frequency=90, envelope=self.amp_env1, waveform=w1, filter=self.lpf, bend=self.lfo)
@@ -70,7 +70,7 @@ class Snare:
 
     def setLPF(self, fr):
         self.filter_fr = fr
-        self.lpf = self.synth.low_pass_filter(frequency=self.filter_fr)
+        self.lpf = synthio.Biquad(synthio.FilterMode.LOW_PASS, frequency=self.filter_fr)
         self.note1.filter = self.lpf
         self.note2.filter = self.lpf
         self.note3.filter = self.lpf
@@ -80,7 +80,7 @@ class Snare:
             synth = self.synth
         self.lfo.retrigger()
         synth.press((self.note1, self.note2, self.note3))
-        
+
 class HighHat:
     def __init__(self, synth, t=0.115):
         self.lfo = synthio.LFO(waveform=downwave)
@@ -94,7 +94,7 @@ class HighHat:
         self.t = t
 
         self.filter_fr = 9500
-        self.hpf = self.synth.high_pass_filter(self.filter_fr)
+        self.hpf = synthio.Biquad(synthio.FilterMode.HIGH_PASS, frequency=self.filter_fr)
 
         self.amp_env1 = synthio.Envelope(attack_time=0.0, decay_time=t, release_time=0, attack_level=1, sustain_level=0)
         self.note1 = synthio.Note(frequency=90, envelope=self.amp_env1, waveform=noisewave, filter=self.hpf, bend=self.lfo)
@@ -107,7 +107,7 @@ class HighHat:
 
     def setHPF(self, fr):
         self.filter_fr = fr
-        self.hpf = self.synth.high_pass_filter(frequency=self.filter_fr)
+        self.hpf = synthio.Biquad(synthio.FilterMode.HIGH_PASS, frequency=self.filter_fr)
         self.note1.filter = self.hpf
         self.note2.filter = self.hpf
         self.note3.filter = self.hpf
