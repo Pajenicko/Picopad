@@ -35,5 +35,9 @@ google_ipv4 = ipaddress.ip_address("8.8.4.4")
 # ping Google every 15 seconds
 while True:
     
-    print(f"Ping google.com: {wifi.radio.ping(google_ipv4)*1000:.1f} ms")
+    ping = wifi.radio.ping(google_ipv4)
+    if ping is not None:
+        print(f"Ping google.com: {ping*1000:.1f} ms")
+    else:
+        print("Ping google.com: no response")
     time.sleep(15)
