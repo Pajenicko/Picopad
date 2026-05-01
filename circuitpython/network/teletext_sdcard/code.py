@@ -17,7 +17,7 @@ import displayio
 import adafruit_requests
 
 import wifi
-import ssl
+# import ssl  # not needed for HTTP, use ssl.create_default_context() for HTTPS
 import socketpool
 import os
 
@@ -106,7 +106,8 @@ def display_page():
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
 
 pool = socketpool.SocketPool(wifi.radio)
-requests = adafruit_requests.Session(pool, ssl.create_default_context())
+# requests = adafruit_requests.Session(pool, ssl.create_default_context())  # for HTTPS
+requests = adafruit_requests.Session(pool)
 group = displayio.Group()
 
 # Download and display first page
