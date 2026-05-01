@@ -66,7 +66,10 @@ def ConnectWifi(wifi_ssid, wifi_password):
     print("Connected to WiFi", wifi_ssid)
 
     pool = socketpool.SocketPool(wifi.radio)
-    request = adafruit_requests.Session(pool, ssl.create_default_context())
+    ssl_context = ssl.create_default_context()
+    with open("/gtsr4.pem", "r") as f:
+        ssl_context.load_verify_locations(cadata=f.read())
+    request = adafruit_requests.Session(pool, ssl_context)
     return request
 
 
