@@ -1,0 +1,14 @@
+        ^YHelicopter^0
+
+^Warrows^0 ............ flight
+^WB^0 .............. game menu
+^WUp/Down^0 ... move game menu
+^WA^0 ....... select game menu
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 ............ flight
+^WEsc^0 ............ game menu
+^WUp/Down^0 ... move game menu
+^WEnter^0 ... select game menu
+^WPause^0 ............... menu

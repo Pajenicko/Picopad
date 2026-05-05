@@ -1,0 +1,15 @@
+          ^YChess^0
+
+Start ^WLeft^0=W/^WRight^0=B/^WUp^0=A
+^Warrows^0 ............ cursor
+^WA^0 ................... move
+^WB^0 ................... quit
+^WX^0 ................... zoom
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 ............ cursor
+^WSpace^0 ............... move
+^WEsc, Ctrl+Break^0 ..... quit
+^WScrollLock^0 .......... zoom
+^WPause^0 ............... menu

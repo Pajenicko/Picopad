@@ -1,0 +1,6 @@
+^YDebug USB host^0
+^Ydevice enumeration^0
+
+^WA^0 .... log to SD
+^WB^0 .... restart
+^WY^0 .... quit

@@ -1,0 +1,12 @@
+          ^YSnipes^0
+
+^Warrows^0 .............. move
+^WB+arrows^0 ....... fast move
+^WA+arrows^0 ........ shooting
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 .............. move
+^WSpace+arrows^0 ... fast move
+^WA/S/D/W^0 ......... shooting
+^WPause^0 ............... menu

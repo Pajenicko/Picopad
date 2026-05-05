@@ -39,11 +39,10 @@ BME280::BME280(uint8_t i2cInst) {
 }
 
 bool BME280::begin(uint8_t addrValue, uint8_t chipIdValue) {
-    this->addr = addrValue;
-    _sensorID = read8(BME280_REGISTER_CHIPID);
-    if (_sensorID != chipIdValue) {
-        return false;
-    }
+    addr = addrValue;
+		if (!this->readSensorId(chipIdValue)) {
+			return false;
+		}
 
     readCoefficients();
     setSampling();
@@ -51,9 +50,9 @@ bool BME280::begin(uint8_t addrValue, uint8_t chipIdValue) {
     return true;
 }
 
-bool BME280::readSensorId(uint8_t addrValue, uint8_t chipIdValue) {
-    _sensorID = read8(BME280_REGISTER_CHIPID);
-    if (_sensorID != BME280_CHIPID) {
+bool BME280::readSensorId(uint8_t chipIdValue) {
+	_sensorID = read8(BME280_REGISTER_CHIPID);
+    if (_sensorID != chipIdValue) {
         return false;
     }
 

@@ -2,15 +2,16 @@
 rem Compilation...
 
 set TARGET=SCD41
-set DEVICE=picopad10
+set GRPDIR=DEMO
+set MEMMAP=
 
 set "origin_folder=%CD%"
-mkdir "..\..\sdk\DEMO\TMP" 2>nul
-xcopy /E /Y "*.*" "..\..\sdk\DEMO\TMP"
-cd /d "..\..\sdk\DEMO\TMP"
+mkdir "..\..\sdk\PicoPad\DEMO\SCD41" 2>nul
+xcopy /E /Y "*.*" "..\..\sdk\PicoPad\DEMO\SCD41"
+cd /d "..\..\sdk\PicoPad\DEMO\SCD41"
 
-call ..\..\_c1.bat picopad10
+call ..\..\..\_c1.bat picopad10
 
 cd /d "%origin_folder%"
-xcopy /E /Y "..\..\sdk\DEMO\TMP\*" "%origin_folder%"
-rmdir /S /Q "..\..\sdk\DEMO\TMP"
+xcopy /E /Y "..\..\sdk\PicoPad\DEMO\SCD41\*" "%origin_folder%"
+rmdir /S /Q "..\..\sdk\PicoPad\DEMO\SCD41"

@@ -9,3 +9,7 @@ Shooting game
 ^WA^0 ....... shooting
 ^WB^0 ....... select weapon
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

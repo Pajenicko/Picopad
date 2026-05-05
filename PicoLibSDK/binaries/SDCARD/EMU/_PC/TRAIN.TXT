@@ -1,0 +1,14 @@
+          ^YTrain^0
+
+^Warrows^0 ......... direction
+^WA^0 ......... enter password
+^WUp/Down^0 .. change password
+^WB^0 ........ escape password
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 ......... direction
+^WF4/Enter^0 .. enter password
+^WLetters^0 .. change password
+^WEsc^0 ...... escape password
+^WPause^0 ............... menu

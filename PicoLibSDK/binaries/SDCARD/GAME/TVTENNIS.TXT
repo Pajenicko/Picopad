@@ -6,3 +6,7 @@ Classic game
 ^WX/A^0 ........ right player
 ^WB/LEFT/RIGHT^0 ... serve
 ^WY^0 .......... exit game
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

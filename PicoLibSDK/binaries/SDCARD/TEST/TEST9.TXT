@@ -6,8 +6,4 @@ Check precision by:
 arcsin(arccos(arctan(
   tan(cos(sin(9))))))
 
-^WLEFT^0 .... decr
-^WRIGHT^0 ... incr
-^WUP^0 ...... up
-^WDOWN^0 .... down
 ^WY^0 ....... quit

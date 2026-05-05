@@ -1,0 +1,11 @@
+^YPictor^0
+Picopad Collector
+
+^Warrows^0 .. move
+^WA^0 ....... shooting
+^WB/X^0 ..... transformation
+^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

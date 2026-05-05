@@ -1,0 +1,16 @@
+^YBuck Rogers-Planet of Zoom^0
+ (c) 1984 Sega Interprises
+^WLEFT/RIGHT^0 .... left/right
+^WX^0 ............... straight
+^WUP/DOWN^0 ............ speed
+^WA^0 ............... shooting
+^WB^0 ................... quit
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^W[4]/[6]^0 ....... left/right
+^W[5]^0 ............. straight
+^W[8]/[2]^0 ............ speed
+^WSpace^0 ........... shooting
+^WEsc^0 ................. quit
+^WPause^0 ............... menu
+Cheat: Write ^K U L A S

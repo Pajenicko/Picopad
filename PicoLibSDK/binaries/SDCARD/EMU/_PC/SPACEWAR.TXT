@@ -1,0 +1,16 @@
+        ^YSpace War^0
+^WX^0 ............. start game
+^WLeft/Right^0 ........ rotate
+^WUp^0 ................ engine
+^WDown^0 ......... hyper space
+^WA^0 ................. phaser
+^WB^0 ................ photons
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^WF2^0 ............ start game
+^W[4]/[6]^0 ........... rotate
+^W[5]^0 ............... engine
+^W[2]^0 .......... hyper space
+^W[7]^0 ............... phaser
+^W[9]^0 .............. photons
+^WPause^0 ............... menu

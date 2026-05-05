@@ -36,14 +36,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef __BME280_H__
 #define __BME280_H__
 
-#include <stdint.h>
-
 /*!
  *  I2C ADDRESS/BITS/SETTINGS
  */
-#define BME280_ADDRESS (0x76)     /**< The default I2C address for the sensor. */
-#define BME280_ADDRESS_ALT (0x77) /**< Alternative I2C address for the sensor. */
-#define BME280_CHIPID (0x60)      /**< Default chip ID. */
+#define BMX280_ADDRESS (0x76)     /**< The default I2C address for the sensor. */
+#define BMX280_ADDRESS_ALT (0x77) /**< Alternative I2C address for the sensor. */
+#define BME280_CHIPID (0x60)      /**< BME280 chip ID. */
+#define BMP280_CHIPID (0x58)      /**< BMP280 chip ID. */
 
 #define TIMEOUT_MS 100
 
@@ -174,9 +173,9 @@ public:
     // default to i2c0, pins 4/5
     explicit BME280(uint8_t i2cInst = 0);
 
-    bool begin(uint8_t addr = BME280_ADDRESS, uint8_t chipid = BME280_CHIPID);
+    bool begin(uint8_t addr = BMX280_ADDRESS, uint8_t chipid = BME280_CHIPID);
 
-    bool readSensorId(uint8_t addr = BME280_ADDRESS, uint8_t chipid = BME280_CHIPID);
+    bool readSensorId(uint8_t chipid = BME280_CHIPID);
 
     void reset();
 
@@ -275,7 +274,7 @@ private:
 
 private:
     uint8_t i2cInst = 0;
-    uint8_t addr = BME280_ADDRESS;
+    uint8_t addr = BMX280_ADDRESS;
     int32_t _sensorID = 0;
     bme280_calib_data _bme280_calib;
     config _configReg;

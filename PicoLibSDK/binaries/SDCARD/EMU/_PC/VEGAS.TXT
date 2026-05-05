@@ -1,0 +1,13 @@
+   ^YVegas - Slot Machine^0
+
+^WUp/Down^0 ... deposit amount
+^WA^0 ................... game
+^WB^0 ................... quit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^W1-5^0 ....... deposit amount
+^WUp/Down^0 ... deposit amount
+^WSpace^0 ............... game
+^WEsc, Ctrl+Break^0 ..... quit
+^WPause^0 ............... menu

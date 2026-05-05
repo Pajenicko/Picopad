@@ -1,0 +1,4 @@
+.pio
+__pycache__
+.idea
+src/rom.c

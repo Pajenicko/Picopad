@@ -1,0 +1,13 @@
+       ^YMoon Patrol^0
+^WLeft/Right^0 .......... move
+^WUp^0 .................. jump
+^WA^0 ................... fire
+^WB^0 ............. start game
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WLeft/Right^0 .......... move
+^WUp^0 .................. jump
+^WSpace^0 ............... fire
+^WF1^0 ............ start game
+^WPause^0 ............... menu

@@ -1,0 +1,15 @@
+           ^YEggs^0
+
+^Warrows^0 ............ cursor
+^WA^0 ................... play
+^WB^0 ................... quit
+^WX^0 ................ automat
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^WA^0 ................ automat
+^WS^0 .................. sound
+^WH^0 ................... help
+^Warrows^0 ............ cursor
+^WSpace^0 ............... game
+^WEsc, Ctrl+Break^0 ..... quit
+^WPause^0 ............... menu

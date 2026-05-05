@@ -1,0 +1,15 @@
+ ^YAlphabet for little ones^0
+   (in Czech language)
+
+^Warrows^0 ....... move cursor
+^WB^0 ................... exit
+^WX^0 ................... zoom
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 ....... move cursor
+^Wletter^0 ............. write
+^WBackSpace^0 .... delete char
+^WEsc, Ctrl+Break^0 ..... quit
+^WScrollLock^0 .......... zoom
+^WPause^0 ............... menu

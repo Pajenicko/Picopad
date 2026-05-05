@@ -1,0 +1,12 @@
+^YReset to BOOTSEL^0
+
+Resets Pico to
+mode of loading
+program via USB.
+
+^WA^0 ....... reset
+^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

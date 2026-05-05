@@ -1,0 +1,50 @@
+		; I4040 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Blinking LED with 1-second period
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+000 20 F0	Reset:	fim	R01,0xF0	; R01 <- 0xF0, output ROM port = 15
+002 21			src	R01		; setup output ROM port = 15
+003 D2			ldm	2		; A <- bit 1
+		
+		; To execute loops:
+		;   R0 ... 1 step 16 clock cycles, 16 steps 256 clock cycles
+		;   R1 ... 1 step 256+16=272 clock cycles, 16 steps 4352 clock cycles
+		;   R2 ... 1 step 4352+16=4368 clock cycles, 16 steps 69888 clock cycles
+		;   R3 ... 1 step 69888+16=69904 clock cycles
+		
+		; delay 500 ms = 370000 clock cycles
+		; output to LED and initialize registers 8+16+16+16=56
+		; without output to LED and initialize 370000 - 56 = 369944 clock cycles
+		; number of whole R3 loops 369944/69904 = 5, remains 20424
+		; without ijnz = 20408
+		; number of remaining R2 loops 20408/4368 = 4, remains 2936
+		; without ijnz = 2920
+		; number of remaining R1 loops 2920/272 = 10, remains 200
+		; without ijnz = 184
+		; number of remaining R0 loops 184/16 = 11, remains 8
+		
+		; Initialize (counters are counting up, with overflow on 16):
+		;   R0 = 11 ... 16-11 = 5
+		;   R1 = 10+1 = 11 ... 16-11 = 5
+		;   R2 = 4+1 = 5 ... 16-5 = 11
+		;   R3 = 5+1 = 6 ... 16-6 = 10
+		
+			; [32]
+004 20 55	Loop1:	fim	R01,0x55	; [16] set registers R0<-5, R1<-5
+006 22 BA		fim	R23,0xBA	; [16] set registers R2<-11, R3<-10
+		
+			; [369936]
+008 70 08	Loop2:	ijnz	R0,Loop2	; increment R0 and loop if not zero ... 16*16 = 256 clock cycles, first run (16-5)*16 = 176
+00A 71 08		ijnz	R1,Loop2	; increment R1 and loop if not zero ... (256+16)*16 = 4352 clock cycles, first run 176 + 16 + (16-5-1)*272 = 2912
+00C 72 08		ijnz	R2,Loop2	; increment R2 and loop if not zero ... (4352+16)*16 = 69888 clock cycles, first run 2912 + 16 + (16-11-1)*4368 = 20400
+00E 73 08		ijnz	R3,Loop2	; increment R3 and loop if not zero ... run 20400 + 16 + (16-10-1)*69904 = 369936
+		
+			; [32] flip LED
+010 00			nop			; [8] timings
+011 E2			wrr			; [8] write A to ROM port
+012 40 04		jmp	Loop1		; [16] jump to main loop
+		

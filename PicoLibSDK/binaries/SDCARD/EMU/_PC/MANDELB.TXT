@@ -1,0 +1,8 @@
+   ^YMandelbrot generator^0
+
+^WB^0 ................... quit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WEsc, Ctrl+Break^0 ..... quit
+^WPause^0 ............... menu

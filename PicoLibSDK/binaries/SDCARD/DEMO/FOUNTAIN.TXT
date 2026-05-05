@@ -1,0 +1,30 @@
+^YFountain^0
+
+Fountain - draw 3D graph
+
+^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc
+
+
+
+Orginal source code (BBC BASIC):
+
+ 10 MODE 0:XS=2:YS=2 
+ 20 VDU 23,1,0;0;0;0;
+ 30 VDU 29,640;512;
+ 40 GCOL 0,13
+ 50 A=640:B=A*A:C=512
+ 60 FOR X=0 TO A STEP XS:S=X*X:P=SQR(B-S)
+ 70   FOR I=-P TO P STEP 6*YS
+ 80     R=SQR(S+I*I)/A
+ 90     Q=(R-1)*SIN(24*R)
+100     Y=INT(I/3+Q*C)
+110     IF I=-P M=Y:N=Y
+120     IF Y>M M=Y
+130     IF Y<N N=Y
+140     IF M=Y OR N=Y PLOT 69,NOTX,Y:PLOT 69,X,Y
+150   NEXT:NEXT
+160 REPEAT:UNTIL FALSE

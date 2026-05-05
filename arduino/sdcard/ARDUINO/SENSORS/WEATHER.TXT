@@ -1,0 +1,5 @@
+^YWeather^0
+
+BME280 temperature sensor
+
+^WY^0 ....... quit

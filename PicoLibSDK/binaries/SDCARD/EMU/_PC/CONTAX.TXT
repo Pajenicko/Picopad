@@ -1,0 +1,15 @@
+          ^YContax^0
+^Warrows^0 ....... move cursor
+^WA^0 ................... play
+^WB^0 ................... exit
+^WX^0 ................... zoom
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^Warrows^0 ....... move cursor
+^WEnter^0 ............... play
+^WEsc^0 ................. exit
+^WF1^0 ............ show moves
+^WF2^0 ............. auto play
+^WF10^0 ................. help
+^WScrollLock^0 .......... zoom
+^WPause^0 ............... menu

@@ -15,3 +15,7 @@ Uses both CPU cores.
 
 Blinking LED indicates
 render completed.
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

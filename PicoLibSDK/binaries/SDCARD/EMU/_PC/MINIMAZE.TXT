@@ -1,0 +1,13 @@
+        ^YMini-Maze^0
+
+The goal of the game is
+to find the door.
+
+^Warrows^0 ....... move player
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 ....... move player
+^WEsc, Ctrl+Break^0 ..... quit
+^WPause^0 ............... menu

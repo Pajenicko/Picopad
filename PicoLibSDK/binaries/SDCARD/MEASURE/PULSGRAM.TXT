@@ -1,0 +1,7 @@
+^YPulsegram^0
+
+Pulse spectrum.
+Input: GPIO1
+
+^WA^0 ....... restart
+^WY^0 ....... quit

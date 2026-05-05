@@ -1,0 +1,37 @@
+		; I4040 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Alarm sound
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+		Reset:	
+			; prepare length of tone (number of pulses)
+000 22 70	Alarm1:	fim	R23,0x70	; R23 <- length of tone
+		
+			; prepare frequency of the tone (delay of pulses)
+002 24 E8	Alarm2:	fim	R45,0xE8	; R45 <- delay of impulse
+		
+			; short delay to generate one impulse
+004 75 04	Alarm3:	ijnz	R5,Alarm3	; increment R5 and repeat if not zero
+006 74 04		ijnz	R4,Alarm3	; increment R4 and repeat if not zero
+		
+			; output to speaker
+008 20 70		fim	R01,0x70	; R01 <- 0x70, output ROM port = 7
+00A 21			src	R01		; setup output ROM port = 7
+00B D2			ldi	2		; load 2 into A
+00C E2			wrr			; write A to ROM port
+		
+			; count pulses
+00D 73 02		ijnz	R3,Alarm2	; increment R3 and repeat with next pulse
+00F 72 02		ijnz	R2,Alarm2	; increment R2 and repeat with next pulse
+		
+			; delay before next tone (here is R23 = 0 and R5 = 0)
+011 73 11	Alarm4:	ijnz	R3,Alarm4	; increment R3 and repeat if not zero
+013 72 11		ijnz	R2,Alarm4	; increment R2 and repeat if not zero
+015 75 11		ijnz	R5,Alarm4	; increment R5 and repeat if not zero
+		
+			; next tone
+017 40 00		jmp	Alarm1
+		

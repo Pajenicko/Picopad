@@ -5,3 +5,7 @@ Demo - calculating factorial
        to 1150 digits
 
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

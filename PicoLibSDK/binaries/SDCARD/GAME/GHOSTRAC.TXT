@@ -9,3 +9,7 @@ ghost from best lap.
 ^WLEFT^0 ........ turn left
 ^WRIGHT^0 ....... turn right
 ^WY^0 ........... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

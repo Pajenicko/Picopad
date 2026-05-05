@@ -1,0 +1,4 @@
+.pio
+__pycache__
+.idea
+lib/no-OS-FatFS-SD-SPI-RPi-Pico

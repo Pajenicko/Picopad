@@ -6,3 +6,7 @@ Test SD card and files.
 ^WB^0 ....... HEX LOADER
 ^WX^0 ....... write $TEMP$
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

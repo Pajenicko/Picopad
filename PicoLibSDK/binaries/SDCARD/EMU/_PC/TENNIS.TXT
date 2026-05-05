@@ -1,0 +1,10 @@
+          ^YTennis^0
+^Warrows^0 .............. move
+^WA^0 ................... fire
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WB/N^0 ........... left/right
+^WS/X^0 .............. up/down
+^WSpace^0 ............... fire
+^WPause^0 ............... menu

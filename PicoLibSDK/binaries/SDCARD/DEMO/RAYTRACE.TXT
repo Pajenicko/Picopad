@@ -7,3 +7,7 @@ Demo - 3D pattern
 Demo uses both CPU cores.
 
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

@@ -8,3 +8,7 @@ Game of exploding atoms
 ^WDOWN^0 .... down
 ^WA^0 ....... put stone
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

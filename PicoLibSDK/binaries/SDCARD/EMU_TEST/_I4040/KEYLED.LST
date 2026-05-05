@@ -1,0 +1,31 @@
+		; I4040 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Copy keys to LEDs
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+		Reset:	
+			; input keys HIGH
+000 20 60		fim	R01,0x60	; R01 <- 0x60, input ROM port = 6
+002 21			src	R01		; setup input ROM port = 6
+003 EA			rdr			; read ROM port to A
+		
+			; output LEDs HIGH
+004 20 E0		fim	R01,0xE0	; R01 <- 0xE0, output ROM port = 14
+006 21			src	R01		; setup output ROM port = 14
+007 E2			wrr			; write A to ROM port
+		
+			; input keys LOW
+008 20 50		fim	R01,0x50	; R01 <- 0x50, input ROM port = 5
+00A 21			src	R01		; setup input ROM port = 5
+00B EA			rdr			; read ROM port to A
+		
+			; output LEDs LOW
+00C 20 D0		fim	R01,0xD0	; R01 <- 0xD0, output ROM port = 13
+00E 21			src	R01		; setup output ROM port = 13
+00F E2			wrr			; write A to ROM port
+		
+010 40 00		jmp	Reset		; jump to main loop
+		

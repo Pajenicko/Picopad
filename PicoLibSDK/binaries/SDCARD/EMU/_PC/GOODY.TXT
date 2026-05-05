@@ -1,0 +1,33 @@
+          ^YGoody^0
+^WLeft/Right^0 .......... move
+^WUp^0 .................. jump
+^WDown^0 ............ elevator
+^WA^0 ............... shooting
+^WX^0 ................. ladder
+^WB^0 ................... exit
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^WO/P^0 ................. move
+^WQ^0 ................... jump
+^WA^0 ............... elevator
+^WSpace^0 ........... shooting
+^WEnter^0 ............. ladder
+^WEsc^0 ................. exit
+^WPause^0 ............... menu
+
+Password: 1354943169580
+
+Immortality cheat: write OPERA
+
+Buying things in store: hold space, move cursor, release space
+
+order of placement of items:
+----------------------------
+Underground left: blowtorch (opens the wall just before the vault)
+from the underground to the bank: a drill
+bank on the right: dynamite
+bank further right: nut wrench
+bank further right: hammer
+entrance to the bank through the top: pliers
+then: screwdriver
+if you make the wrong choice, use key to break out of prison (key must be used)

@@ -1,0 +1,23 @@
+^YRC Meter^0
+
+Resistance and capacitor
+meter (including ESR).
+
+Resistors: 0.1 ohm up to
+100 Mohm, precision 5%
+(lower on ends of range).
+
+Capacitors: 5 pF up to
+5 mF, precision 10%.
+
+^WY^0 ....... quit
+
+GPIO0 ... resistor 200 ohm
+GPIO1 ... resistor 2 Kohm
+GPIO14 ... resistor 20 Kohm
+GPIO26 ... resistor 200 Kohm
+GPIO27 ... resistor 2 Mohm
+GPIO28 ... test input
+
+The capacitor measurement method uses a logarithmic
+regression of the capacitor charging and discharging curves.

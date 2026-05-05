@@ -6,3 +6,7 @@ Shooting game
 ^WRIGHT^0 .... right
 ^WA^0 ........ shooting
 ^WY^0 ........ quit game
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

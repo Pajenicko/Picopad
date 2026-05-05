@@ -1,0 +1,8 @@
+        ^YLines Demo^0
+
+^WB^0 ................... exit
+^WX^0 ................... zoom
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WPause^0 ............... menu

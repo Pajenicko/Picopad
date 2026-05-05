@@ -1,0 +1,9 @@
+^YFrequency Generator^0
+
+Output to GPIO14 or
+GPIO15 (speaker).
+
+^WA/B^0 ...... mode
+^WX^0 ........ output
+^WArrows^0 ... setup
+^WY^0 ....... quit

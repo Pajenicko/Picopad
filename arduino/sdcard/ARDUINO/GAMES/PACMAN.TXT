@@ -1,0 +1,10 @@
+^YPacMan^0
+
+Action game
+
+^WLEFT^0 .... left
+^WUP^0 ...... up
+^WRIGHT^0 ... right
+^WDOWN^0 .... down
+^WA^0 ....... pause
+^WY^0 ....... quit

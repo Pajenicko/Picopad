@@ -1,0 +1,10 @@
+^YUSB device^0
+^Ykeyboard+mouse^0
+
+mouse:
+^Warrows^0 . move
+^WA^0 ...... left
+^WB^0 ...... right
+keyboard:
+^WX^0 ...... text
+^WY^0 ...... quit

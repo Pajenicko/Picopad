@@ -1,0 +1,11 @@
+        ^YVGA Leaper^0
+^Warrows^0 .............. move
+^WA^0 ............. start game
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 .............. move
+^WEnter^0 ......... start game
+^WEsc^0 ................. exit
+^WPause^0 ............... menu

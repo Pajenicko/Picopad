@@ -4,8 +4,13 @@
 //
 // ****************************************************************************
 
-#include "bme280.h"
 #include "../img/images.cpp"
+#include "bme280.h"
+
+// BME280
+#define SENSOR_CHIP_ID BME280_CHIPID
+// BMP280
+//#define SENSOR_CHIP_ID BMP280_CHIPID
 
 int main() {
     I2C_Init(0, 400000);
@@ -15,8 +20,8 @@ int main() {
     GPIO_PullUp(1);
     I2C_Enable(0);
 
-    BME280 sensor = BME280(0);
-    bool connected = sensor.begin();
+    auto sensor = BME280(0);
+    bool connected = sensor.begin(BMX280_ADDRESS, SENSOR_CHIP_ID);
     bool lastConnected = true;
     WaitMs(100);
 
@@ -39,7 +44,7 @@ int main() {
         DrawText(TextPtr(&txt), 112, 19, COL_WHITE);
         int x = 112 + (TextLen(&txt) * 8) + 8;
 
-        TextPrint(&txt, "A: 0x%x", BME280_ADDRESS);
+        TextPrint(&txt, "A: 0x%x", BMX280_ADDRESS);
         DrawText(TextPtr(&txt), x, 19, COL_WHITE);
 
         pDrawFont = FontBold8x8; // font 8x8
@@ -89,8 +94,11 @@ int main() {
         WaitMs(100);
 
         lastConnected = connected;
-        connected = sensor.readSensorId();
+        connected = sensor.readSensorId(SENSOR_CHIP_ID);
     } while (KeyGet() == NOKEY);
 
+#if USE_SCREENSHOT		// use screen shots
+		ScreenShot();
+#endif
     ResetToBootLoader();
 }

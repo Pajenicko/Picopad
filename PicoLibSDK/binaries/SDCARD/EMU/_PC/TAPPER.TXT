@@ -1,0 +1,12 @@
+          ^YTapper^0
+
+^WUP/DOWN^0 ............. move
+^WA^0 .................. serve
+^WB^0 ................... quit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WUP/DOWN^0 ............. move
+^WSpace^0 .............. serve
+^W1^0 ................... quit
+^WPause^0 ............... menu

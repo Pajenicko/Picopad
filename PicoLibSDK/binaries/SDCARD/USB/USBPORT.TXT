@@ -1,0 +1,5 @@
+^YCheck speed and^0
+^Yreliability of^0
+^YUSB mini-port^0
+
+^WY^0 .... quit

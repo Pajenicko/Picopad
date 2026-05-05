@@ -1,0 +1,157 @@
+		; I4040 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Run most of the tests (print message, counter, copy keys to LEDs, blinking LED)
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+		Reset:	
+			; clear digits in RAM memory, register 0, RAM chip 0
+000 F0			clb			; clear A and carry
+001 20 00		fim	R01,0x00	; R01 <- 0x00, RAM address 0
+003 21		Count1:	src	R01		; setup RAM address
+004 E0			wrm			; write A into RAM memory
+005 71 03		ijnz	R1,Count1	; increment R1 and loop to next digit
+		
+		; -----------------------------------------------------------
+		;                     Print message
+		; -----------------------------------------------------------
+		
+			; prepare pointer to message data (must be located in the same 256-byte page)
+007 20 26		fim	R01,@MsgData	; R0R1 <- pointer to message data
+		
+			; load one character [R0R1] -> R2R3
+009 32		Msg2:	fin	R23		; R2R3 <- load one character (R2=high part, R3=low part)
+		
+			; increment pointer to message data
+00A 71 0D		ijnz	R1,Msg4		; increment register R1, skip if not zero (low part of message pointer)
+00C 60			inc	R0		; increment register R0 (high part of message pointer)
+		
+			; check end of text
+00D A2		Msg4:	ld	R2		; A <- R2, character high part
+00E 14 3B		jz	MainLoop	; end mark 0, continue to next test
+		
+			; output HIGH part of the character
+010 24 90		fim	R45,0x90	; R45 <- 0x90, output ROM port = 9
+012 25			src	R45		; setup output ROM port = 9
+013 A2			ld	R2		; A <- R2, character high part
+014 E2			wrr			; write A to ROM port
+		
+			; output LOW part of the character
+015 24 80		fim	R45,0x80	; R45 <- 0x80, output ROM port = 8
+017 25			src	R45		; setup output ROM port = 8
+018 A3			ld	R3		; A <- R3, character low part
+019 E2			wrr			; write A to ROM port
+		
+			; short delay between characters
+01A 24 00		fim	R45,0x00	; R4 <- middle loop counter, R5 <- inner loop counter
+01C 26 00		fim	R67,0x00	; R7 <- outer loop counter
+01E 75 1E	Msg8:	ijnz	R5,Msg8		; increment R5, count inner loop
+020 74 1E		ijnz	R4,Msg8		; increment R4, count outer loop
+022 77 1E		ijnz	R7,Msg8		; increment R7, count outer loop
+024 40 09		jmp	Msg2		; continue to next cahracter
+		
+		; message data (20 characters)
+		MsgData:
+026 20		= ' '
+027 20		= ' '
+028 48		= 'H'
+029 65		= 'e'
+02A 6C		= 'l'
+02B 6C		= 'l'
+02C 6F		= 'o'
+02D 20		= ' '
+02E 66		= 'f'
+02F 72		= 'r'
+030 6F		= 'o'
+031 6D		= 'm'
+032 20		= ' '
+033 49		= 'I'
+034 34		= '4'
+035 30		= '0'
+036 34		= '4'
+037 30		= '0'
+038 21		= '!'
+039 20		= ' '
+03A 00		= 0		; flag - end of text
+		
+		; -----------------------------------------------------------
+		;                     Counter
+		; -----------------------------------------------------------
+		
+		MainLoop:
+03B 28 47		fim	R89,0x47	; R89 <- initialize main time counter
+		MainLoop2:
+		
+			; increment number in RAM memory, register 0, RAM chip 0
+03D 20 00	Count2:	fim	R01,0x00	; R01 <- 0x00, RAM address 0
+03F FA			stc			; set carry flag
+040 21		Count3:	src	R01		; setup RAM address
+041 D0			ldi	0		; load 0 to A
+042 EB			adm			; add RAM and carry to A (= increment memory if carry was set)
+043 FB			daa			; decimal adjust: add 6 if A > 9 and set carry
+044 E0			wrm			; write A into RAM memory
+045 71 40		ijnz	R1,Count3	; increment R1 and loop to next digit
+		
+			; send number to shift register
+047 20 09		fim	R01,0x09	; R01 <- 0x00, RAM address 9
+049 21		Count4:	src	R01		; setup RAM address
+04A E9			rdm			; read A from RAM memory
+04B 22 C0		fim	R23,0xC0	; R23 <- 0xC0, output ROM port = 12
+04D 23			src	R23		; setup output ROM port = 12
+04E E2			wrr			; write A to ROM port
+04F A1			ld	R1		; load register R1 to A
+050 F8			dac			; decrement A
+051 B1			xch	R1		; write A to register R1
+052 12 49		jc	Count4		; loop of not borrow
+		
+			; copy digits from shift register to the display
+054 22 B0		fim	R23,0xB0	; R23 <- 0xB0, output ROM port = 11
+056 23			src	R23		; setup output ROM port = 11
+057 E2			wrr			; write A to ROM port
+		
+		; -----------------------------------------------------------
+		;                Copy keys to the LEDs
+		; -----------------------------------------------------------
+		
+			; input keys HIGH
+058 20 60		fim	R01,0x60	; R01 <- 0x60, input ROM port = 6
+05A 21			src	R01		; setup input ROM port = 6
+05B EA			rdr			; read ROM port to A
+		
+			; output LEDs HIGH
+05C 20 E0		fim	R01,0xE0	; R01 <- 0xE0, output ROM port = 14
+05E 21			src	R01		; setup output ROM port = 14
+05F E2			wrr			; write A to ROM port
+		
+			; input keys LOW
+060 20 50		fim	R01,0x50	; R01 <- 0x50, input ROM port = 5
+062 21			src	R01		; setup input ROM port = 5
+063 EA			rdr			; read ROM port to A
+		
+			; output LEDs LOW
+064 20 D0		fim	R01,0xD0	; R01 <- 0xD0, output ROM port = 13
+066 21			src	R01		; setup output ROM port = 13
+067 E2			wrr			; write A to ROM port
+		
+		; -----------------------------------------------------------
+		;                    Blinking LED
+		; -----------------------------------------------------------
+		
+			; count main time counter
+068 79 3D		ijnz	R9,MainLoop2
+06A 78 3D		ijnz	R8,MainLoop2
+		
+			; additional delay
+06C 20 BA		fim	R01,0xBA
+06E 71 6E	Blink2:	ijnz	R1,Blink2
+070 70 6E		ijnz	R0,Blink2
+		
+			; flip LED
+072 20 F0		fim	R01,0xF0	; R01 <- 0xF0, output ROM port = 15
+074 21			src	R01		; setup output ROM port = 15
+075 D2			ldi	2		; A <- bit 1
+076 E2			wrr			; write A to ROM port
+077 40 3B		jmp	MainLoop	; jump to main loop
+		

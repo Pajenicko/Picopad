@@ -1,0 +1,9 @@
+          ^YPC-Man^0
+^Warrows^0 .............. move
+^WA^0 ............. start game
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^Warrows^0 .............. move
+^WSpace^0 ......... start game
+^WPause^0 ............... menu

@@ -8,3 +8,7 @@ transformations.
 ^WUP^0 ...... up
 ^WDOWN^0 .... down
 ^WY^0 ....... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

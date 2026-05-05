@@ -1,4 +1,4 @@
-^YPicoPad Boot Loader^0
+^YPicoPad Boot3 Loader^0
 
 Boot Loader can be loaded
 only over USB interface.
@@ -9,7 +9,7 @@ Do not run it directly.
 ^WA^0 ... run program/direct.
 ^WB^0 ... directory up
 ^WY^0 ... run last program
-^WX^0 ... battery status
+^WX^0 ... setup and battery
 
 
 loading text *.TXT
@@ -27,6 +27,21 @@ loading text *.TXT
 		^[ ... start invert
 		^] ... stop invert
 
-Image BMP:
-- PicoPad RGB565 16-bit
-- Picoino paletted 8-bit with RGB332 palette
+Image BMP: RGB565 16-bit
+
+Most programs and games on the PicoPad can also be
+controlled from the USB keyboard, which is connected
+to the Pico's USB connector via a power splitter that
+also provides an external +5V power supply. Key mapping:
+A->Ctrl, B->Alt, X->Shift, Y->Esc.
+
+All USB key mapping ([] numeric keypad)
+=======================================
+UP ... arror up, [8]
+LEFT ... arrow left, [4]
+RIGHT ... arrow right, [6]
+DOWN ... arrow down, [2], [5]
+X ... Tab, [-], L-shift, R-shift, X
+Y ... Esc, Backspace, [*], Y, Z
+A ... L-Ctrl, R-Ctrl, Enter, [Enter], [0], A
+B ... L-Alt, R-Alt, [+], [.], B

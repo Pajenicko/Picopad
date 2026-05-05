@@ -1,0 +1,44 @@
+		; I4040 CPU speed: 740 kHz, clock period 1.35 us
+		; 1-word instruction 8 clock periods = 10.8 us
+		; 2-word instructon 16 clock periods = 21.6 us
+		
+		; Sample: Counter on 7-segment display
+		
+			.strict			; strict mode (requires register names, not register numbers)
+		
+		Reset:	
+			; clear digits in RAM memory, register 0, RAM chip 0
+000 F0			clb			; clear A and carry
+001 20 00		fim	R01,0x00	; R01 <- 0x00, RAM address 0
+003 21		Count1:	src	R01		; setup RAM address
+004 E0			wrm			; write A into RAM memory
+005 71 03		ijnz	R1,Count1	; increment R1 and loop to next digit
+		
+			; increment number in RAM memory, register 0, RAM chip 0
+007 20 00	Count2:	fim	R01,0x00	; R01 <- 0x00, RAM address 0
+009 FA			stc			; set carry flag
+00A 21		Count3:	src	R01		; setup RAM address
+00B D0			ldi	0		; load 0 to A
+00C EB			adm			; add RAM and carry to A (= increment memory if carry was set)
+00D FB			daa			; decimal adjust: add 6 if A > 9 and set carry
+00E E0			wrm			; write A into RAM memory
+00F 71 0A		ijnz	R1,Count3	; increment R1 and loop to next digit
+		
+			; send number to shift register
+011 20 09		fim	R01,0x09	; R01 <- 0x00, RAM address 9
+013 21		Count4:	src	R01		; setup RAM address
+014 E9			rdm			; read A from RAM memory
+015 22 C0		fim	R23,0xC0	; R23 <- 0xC0, output ROM port = 12
+017 23			src	R23		; setup output ROM port = 12
+018 E2			wrr			; write A to ROM port
+019 A1			ld	R1		; load register R1 to A
+01A F8			dac			; decrement A
+01B B1			xch	R1		; write A to register R1
+01C 12 13		jc	Count4		; loop of not borrow
+		
+			; copy digits from shift register to the display
+01E 22 B0		fim	R23,0xB0	; R23 <- 0xB0, output ROM port = 11
+020 23			src	R23		; setup output ROM port = 11
+021 E2			wrr			; write A to ROM port
+022 40 07		jmp	Count2		; next number
+		

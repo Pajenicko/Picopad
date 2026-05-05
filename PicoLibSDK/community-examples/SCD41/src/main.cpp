@@ -4,8 +4,8 @@
 //
 // ****************************************************************************
 
-#include "scd4x.h"
 #include "../img/images.cpp"
+#include "scd4x.h"
 
 void DrawGauge(int x0, int y0, int r_outer, int r_inner, int percentage, u16 gauge_col, u16 fill_col) {
     float angle;
@@ -44,7 +44,6 @@ void DrawGauge(int x0, int y0, int r_outer, int r_inner, int percentage, u16 gau
 }
 
 int main() {
-
     DrawClear();
     KeyFlush();
     DrawImgRle(Scd41Img_RLE, Scd41Img_Pal, 0, 0, 320, 240);
@@ -135,8 +134,14 @@ int main() {
         DrawText2(d, (HEIGHT / 2) - (strlen(d) * 8) / 2, (WIDTH / 2) - (strlen(d) * 8) / 2, COL_RED);
         DispUpdate();
         do {} while (KeyGet() == NOKEY);
+#if USE_SCREENSHOT		// use screen shots
+				ScreenShot();
+#endif
         ResetToBootLoader();
     }
 
+#if USE_SCREENSHOT		// use screen shots
+		ScreenShot();
+#endif
     ResetToBootLoader();
 }

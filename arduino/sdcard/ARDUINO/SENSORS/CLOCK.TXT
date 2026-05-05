@@ -1,0 +1,5 @@
+^YClock^0
+
+DS3221 temperature sensor
+
+^WY^0 ....... quit

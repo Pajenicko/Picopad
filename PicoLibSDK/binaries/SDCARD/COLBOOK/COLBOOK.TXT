@@ -1,0 +1,18 @@
+^YColouring Book^0
+
+Children's colouring
+pages of images
+320*240/16-bit in
+folder /COLBOOK.
+
+^WARROWS^0 .... move
+^WX+ARROWS^0 .. slow
+^WA^0 ......... paint
+^WB^0 ......... color
+^WX+A^0 ....... previous
+^WX+B^0 ....... next
+^WY^0 ......... quit
+
+Support USB keyboard:
+A->Ctrl, B->Alt, X->Shift,
+Y->Esc

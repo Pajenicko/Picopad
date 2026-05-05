@@ -1,0 +1,15 @@
+     ^YPC/DOS Emulator^0
+^WUP/DOWN^0 ...... move cursor
+^WLEFT/RIGHT^0 ..... move page
+^WA^0 ............ run program
+^WB^0 ........... directory up
+^WY^0 ................... exit
+    ^XIn emulated game:^0
+^Warrows^0 ............ arrows
+^WA^0 ............... as Enter
+^WB^0 ................. as Esc
+^WX^0 ................... zoom
+^WY^0 ................... menu
+      ^XUSB keyboard:^0
+^WScrollLock^0 .......... zoom
+^WPause^0 ............... menu

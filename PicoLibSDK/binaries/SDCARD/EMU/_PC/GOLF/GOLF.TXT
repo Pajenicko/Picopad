@@ -1,0 +1,12 @@
+            ^YGolf^0
+
+^WUp/Down^0 ............. club
+^WLeft/Right^0 ..... direction
+^WA^0 ................... fire
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^W[8]/[2]^0 ............. club
+^W[4]/[6]^0 ........ direction
+^Wspace or [5]^0 ........ fire
+^WPause^0 ............... menu

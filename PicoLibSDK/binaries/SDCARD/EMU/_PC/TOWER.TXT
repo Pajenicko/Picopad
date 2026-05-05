@@ -1,0 +1,13 @@
+      ^YTower Toppler^0
+^WLeft/Right^0 .......... move
+^WUp/Down^0 ......... elevator
+^WA^0 ............... shooting
+^WB^0 ................... exit
+^WY^0 ................... menu
+
+      ^XUSB keyboard:^0
+^WLeft/Right^0 .......... move
+^WUp/Down^0 ......... elevator
+^WSpace^0 ........... shooting
+^WEsc^0 ................. exit
+^WPause^0 ............... menu
