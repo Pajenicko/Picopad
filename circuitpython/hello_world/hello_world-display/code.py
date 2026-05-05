@@ -31,7 +31,7 @@ text_label.x = 100
 text_label.y = 110
 
 # Show the text label
-display.show(text_label)
+display.root_group = text_label
 
 # Do nothing, just leave the text on the screen
 while True:

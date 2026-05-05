@@ -127,7 +127,7 @@ group.append(image_area)
 # Show the whole display group
 # It will display the text and the bitmap as well
 # You can move every item in the group independently later
-display.show(group)
+display.root_group = group
 
 melody = [
     (E4, 1*T),

@@ -33,8 +33,8 @@ while True:
         time.sleep(0.2)
     
     # read and show measured values
-    print("Temperature: %0.2f °C" % sensor.temperature)
-    print("Humidity: %0.2f %%" % sensor.relative_humidity)
-    print("CO2: %d ppm" % sensor.CO2)
+    print(f"Temperature: {sensor.temperature:.2f} °C")
+    print(f"Humidity: {sensor.relative_humidity:.2f} %")
+    print(f"CO2: {sensor.CO2:.0f} ppm")
 
     time.sleep(5)

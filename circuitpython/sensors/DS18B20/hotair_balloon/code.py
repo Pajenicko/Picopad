@@ -61,7 +61,7 @@ image_area.y = 170
 group.append(image_area)
 
 # Show the display group
-display.show(group)
+display.root_group = group
 
 # We will handle refresh ourselves
 display.auto_refresh = False

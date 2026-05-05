@@ -67,7 +67,7 @@ led.direction = digitalio.Direction.OUTPUT
 # Connect to WiFi
 print("Connecting to WiFi")
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
-print("Connected to WiFi %s" % (os.getenv('CIRCUITPY_WIFI_SSID')))
+print(f"Connected to WiFi {os.getenv('CIRCUITPY_WIFI_SSID')}")
 pool = socketpool.SocketPool(wifi.radio)
 requests = adafruit_requests.Session(pool, ssl.create_default_context())
 

@@ -34,7 +34,7 @@ group.append(tile_grid)
 group.append(eye_left)
 group.append(eye_right)
 
-display.show(group)
+display.root_group = group
 
 while True:
     light = sensor.value

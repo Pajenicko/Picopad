@@ -69,7 +69,7 @@ for reading, data in sensor.readings.items():
     top += increment
 
 
-display.show(group)
+display.root_group = group
 
 
 # read and show measured values every 5 seconds
@@ -80,7 +80,7 @@ while True:
 
     # print the measured values
     for measurement in measurements:
-            text_areas[measurement.tag].text = "%.1f %s" %(measurement.value, measurement.unit)
+            text_areas[measurement.tag].text = f"{measurement.value:.1f} {measurement.unit}"
     display.refresh()
 
     time.sleep(5)

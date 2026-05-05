@@ -61,7 +61,7 @@ class Game:
         self.screen.append(self.text)
 
         # Show sprite group on the display
-        display.show(self.screen)
+        display.root_group = self.screen
         
         self.reset()
 
@@ -178,7 +178,7 @@ async def move():
             await asyncio.sleep(snake.speed)
 
         # Show game over message
-        game.text.text = 'Game\nOver\n= %s'%(snake.length)  
+        game.text.text = f"Game\nOver\n= {snake.length}"  
         game.refresh()
         await asyncio.sleep(5)
         

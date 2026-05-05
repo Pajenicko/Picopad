@@ -4,7 +4,7 @@ In this example, you'll connect Picopad to real world. SD card required!!!
 We will use the adafruit_requests library to download teletext page from the https://teletext.ceskatelevize.cz/ and display it on the screen.
 
 The teletext page is png image 320x276 pixels. To display it on the screen, we need to convert it to 4bpp bmp image.
-Becouse of limited memory, we will offload the conversion to the teletext.lynt.cz proxy server that convert the image and send it back to us.
+Becouse of limited memory, we will offload the conversion to the api.makerclass.cz proxy server that convert the image and send it back to us.
 For futher memory saving, we will save the image to SD card and display it from there.
 
 We will use buttons to scroll the page up and down and to change the teletext page number.
@@ -17,7 +17,7 @@ import displayio
 import adafruit_requests
 
 import wifi
-import ssl
+# import ssl  # not needed for HTTP, use ssl.create_default_context() for HTTPS
 import socketpool
 import os
 
@@ -75,12 +75,22 @@ def teletext(page):
         if page > 899:
             page = 899
             
-        with requests.get("http://teletext.lynt.cz/?page=%s" % (page)) as response:
+        with requests.get(f"http://api.makerclass.cz/teletext/getBmp?page={page}") as response:
+            try:
+                prev = int(response.headers['prev'])
+            except:
+                prev = page
+            try:
+                next = int(response.headers['next'])
+            except:
+                next = page
+
             with open("/sd/picture.bmp", "wb") as f:
                 for chunk in response.iter_content(chunk_size=512):
                     f.write(chunk)       
         
         display_page()
+        return (prev, next)
         
 # Display teletext page from SD card image
 def display_page():
@@ -90,17 +100,18 @@ def display_page():
     tile_grid = displayio.TileGrid(image, pixel_shader=image.pixel_shader)
     
     group.append(tile_grid)
-    display.show(group)
+    display.root_group = group
 
 # Initialize WiFi
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
 
 pool = socketpool.SocketPool(wifi.radio)
-requests = adafruit_requests.Session(pool, ssl.create_default_context())
+# requests = adafruit_requests.Session(pool, ssl.create_default_context())  # for HTTPS
+requests = adafruit_requests.Session(pool)
 group = displayio.Group()
 
 # Download and display first page
-teletext(page)
+prev, next = teletext(page)
 
 # Call garbage collector to free memory
 gc.collect()
@@ -109,21 +120,19 @@ while True:
     # Teletext page has resolution 320x276 - we need to scroll down to see the whole page
     if (btn_down.value == False):
         group.y = -40
-        board.DISPLAY.show(group)
+        board.DISPLAY.root_group = group
 
     if (btn_up.value == False):
         group.y = 0
-        board.DISPLAY.show(group)
+        board.DISPLAY.root_group = group
 
     # Change teletext page
     if (btn_right.value == False):
-        page += 1
-        teletext(page)
+        prev, next = teletext(next)
         gc.collect()
     
     if (btn_left.value == False):
-        page -= 1
-        teletext(page)
+        prev, next = teletext(prev)
         gc.collect()
 
     if (btn_y.value == False):

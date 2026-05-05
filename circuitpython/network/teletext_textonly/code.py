@@ -18,7 +18,7 @@ from adafruit_display_text import bitmap_label
 
 
 import wifi
-import ssl
+# import ssl  # not needed for HTTP, use ssl.create_default_context() for HTTPS
 import socketpool
 import os
 
@@ -71,14 +71,14 @@ def teletext(page):
         if page > 899:
             page = 899
 
-        with requests.get("http://teletext.lynt.cz/text?page=%s" % (page)) as resp:
+        with requests.get(f"http://api.makerclass.cz/teletext/getText?page={page}") as resp:
             data = resp.json()
             lines = data["text"].splitlines()
             
             if(data["next"]):
-                next_page = data["next"]
+                next_page = int(data["next"])
             if(data["prev"]):
-                prev_page = data["prev"] 
+                prev_page = int(data["prev"]) 
         
         del data    
         gc.collect()
@@ -96,7 +96,8 @@ def teletext(page):
 wifi.radio.connect(os.getenv('CIRCUITPY_WIFI_SSID'), os.getenv('CIRCUITPY_WIFI_PASSWORD'))
 
 pool = socketpool.SocketPool(wifi.radio)
-requests = adafruit_requests.Session(pool, ssl.create_default_context())
+# requests = adafruit_requests.Session(pool, ssl.create_default_context())  # for HTTPS
+requests = adafruit_requests.Session(pool)
 
 # initialize display
 display = board.DISPLAY
@@ -104,15 +105,14 @@ display = board.DISPLAY
 # Set text, font, and color
 group = displayio.Group()
 
-# load our custom font with czech punctuation support
-font = bitmap_font.load_font("/font.bdf")
+# load our custom teletext font (8x12 with Czech diacritics)
+font = bitmap_font.load_font("/teletext.bdf")
 color = 0xFFFF00
 
-#top offset = 0
-top = 4
+top = 2
 
 # teletext page has 23 lines
-# 
+#
 # label supports multiline text, but 23 lines generated bitmap is too big
 # so we will use 23 smaller text areas instead to save memory
 text_areas = []
@@ -122,12 +122,12 @@ for i in range(0,23):
     # Set the location
     text_area.x = 0
     text_area.y = top
-    top += 15
+    top += 12
     text_areas.append(text_area)
     group.append(text_area)
  
 
-display.show(group)
+display.root_group = group
     
 
 teletext(page)
@@ -138,11 +138,11 @@ while True:
     # Teletext page has resolution 320x276 - we need to scroll down to see the whole page
     if (btn_down.value == False):
         group.y = -120
-        board.DISPLAY.show(group)
+        board.DISPLAY.root_group = group
 
     if (btn_up.value == False):
         group.y = 4
-        board.DISPLAY.show(group)
+        board.DISPLAY.root_group = group
 
     # Change teletext page
     if (btn_right.value == False):

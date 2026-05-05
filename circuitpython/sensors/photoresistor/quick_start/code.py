@@ -11,5 +11,5 @@ sensor = analogio.AnalogIn(board.A0)
 
 # read and show measured values every second
 while True:
-    print("Light intensity: %d" % sensor.value)
+    print(f"Light intensity: {sensor.value}")
     time.sleep(1)

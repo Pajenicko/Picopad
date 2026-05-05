@@ -39,9 +39,9 @@ import sdcardio
 import storage
 
 
-from sensor_scd4x import Sensor
+# from sensor_scd4x import Sensor
 # if you don't have SCD4x, you can try use internal temperature sensor of rp2040 as a demo
-# from sensor_internal import Sensor
+from sensor_internal import Sensor
 
 # global variable to store the measured values
 measurements = None
@@ -97,7 +97,7 @@ for reading, data in sensor.readings.items():
     group.append(sprite)
     top += increment
 
-display.show(group)
+display.root_group = group
 
 
 
@@ -132,7 +132,7 @@ async def send_to_tmep():
             query_string = "?"
             for measurement in measurements:
                 query_string += measurement.tag + "=" + str(measurement.value) + "&"
-            url = "http://%s/%s" % (os.getenv('TMEP_DOMAIN'), query_string)
+            url = f"http://{os.getenv('TMEP_DOMAIN')}/{query_string}"
             # print(url)
             
             requests.get(url)
@@ -155,7 +155,10 @@ async def save_to_sdcard():
                 dt = rtc.RTC().datetime
                 date = "%04d-%02d-%02d %02d:%02d:%02d" %(dt.tm_year, dt.tm_mon, dt.tm_mday, dt.tm_hour, dt.tm_min, dt.tm_sec)
 
-                f.write("%s;%s;%s;%s\n" % (date, temp.value, humi.value, co2.value))
+                if humi is None or co2 is None:
+                    f.write(f"{date};{temp.value}\n") # internal senzor has only temperature
+                else:
+                    f.write(f"{date};{temp.value};{humi.value};{co2.value}\n")
 
             print("Data saved to SD card")
 
@@ -171,7 +174,7 @@ async def measure_and_display(sensor, text_areas, display):
 
         # update the display
         for measurement in measurements:
-            text_areas[measurement.tag].text = "%.1f %s" %(measurement.value, measurement.unit)
+            text_areas[measurement.tag].text = f"{measurement.value:.1f} {measurement.unit}"
         display.refresh()
 
         await asyncio.sleep(5)  # Sleep for 5 seconds
@@ -182,7 +185,7 @@ loop = asyncio.get_event_loop()
 
 # Schedule both tasks to run concurrently
 loop.run_until_complete(asyncio.gather(
-    send_to_tmep(),
+    measure_and_display(sensor, text_areas, display),
     save_to_sdcard(),
-    measure_and_display(sensor, text_areas, display)
+    send_to_tmep()
 ))

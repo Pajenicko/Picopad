@@ -73,7 +73,7 @@ for reading, data in sensor.readings.items():
     group.append(sprite)
     top += increment
 
-display.show(group)
+display.root_group = group
 
 
 # Asynchronous function to blink the LED
@@ -90,7 +90,7 @@ async def measure_and_display(sensor, text_areas, display):
 
         # update the display
         for measurement in measurements:
-            text_areas[measurement.tag].text = "%.1f %s" %(measurement.value, measurement.unit)
+            text_areas[measurement.tag].text = f"{measurement.value:.1f} {measurement.unit}"
         display.refresh()
 
         await asyncio.sleep(5)  # Sleep for 5 seconds

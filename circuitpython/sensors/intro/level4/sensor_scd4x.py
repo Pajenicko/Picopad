@@ -25,7 +25,7 @@ class Measurement:
 
     # basic string representation of the Measurement object
     def __str__(self):
-        return "%s: %.1f %s" % (self.name, self.value, self.unit)
+        return f"{self.name}: {self.value:.1f} {self.unit}"
 
 # Sensor class to handle the sensor inicialization and data collection
 class Sensor:

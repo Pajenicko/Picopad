@@ -21,5 +21,5 @@ sensor = DS18X20(bus, devices[0])
 
 # print temperature every 2 
 while True:
-    print("Temperature: %.1f °C" % (sensor.temperature))
+    print(f"Temperature: {sensor.temperature:.1f} °C")
     time.sleep(2)

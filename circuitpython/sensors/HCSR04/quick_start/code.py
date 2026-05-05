@@ -17,7 +17,7 @@ sensor = adafruit_hcsr04.HCSR04(trigger_pin=board.D3, echo_pin=board.D2)
 
 while True:
     try:
-        print("%s cm" % sensor.distance)
+        print(f"{sensor.distance} cm")
     except RuntimeError:
         print("Measuring error!")
     time.sleep(2)

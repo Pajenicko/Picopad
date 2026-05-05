@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PicoPad - Polling</title>
+<link href="https://cdn.jsdelivr.net/npm/bulma@1/css/bulma.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js" defer></script>
+<style>
+  html,body { min-height:100vh }
+  .card { border-radius:16px; border:1px solid #eee; box-shadow:0 2px 8px rgba(0,0,0,.04) }
+  .card + .card { margin-top:1rem }
+  .stat-value { font-size:2.2rem; font-weight:700; letter-spacing:-1px }
+  .stat-label { font-size:.75rem; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:.25rem }
+  .status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; background:#48c78e; animation:pulse 2s infinite }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .status-dot.off { background:#f14668; animation:none }
+</style>
+</head>
+<body class="has-background-white-ter">
+<div class="container py-5" style="max-width:440px" x-data="{
+  temp: null, led: false, btn: false, ok: false,
+  init() {
+    this.poll();
+    setInterval(() => this.poll(), 2000);
+  },
+  poll() {
+    fetch('/data').then(r => r.json()).then(d => {
+      this.temp = d.temp; this.led = d.led; this.btn = d.btn; this.ok = true;
+    }).catch(() => { this.ok = false; });
+  },
+  toggle() {
+    fetch('/led/toggle').then(r => r.json()).then(d => { this.led = d.led; });
+  }
+}">
+
+  <!-- Header -->
+  <div class="card">
+    <div class="card-content py-4">
+      <div class="is-flex is-justify-content-space-between is-align-items-center">
+        <span class="is-size-4 has-text-weight-bold">PicoPad</span>
+        <span class="tag is-medium is-rounded" :class="ok ? 'is-light' : 'is-danger'">
+          <span class="status-dot" :class="!ok && 'off'"></span>
+          <span x-text="ok ? 'Online' : 'Offline'"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sensors -->
+  <div class="card">
+    <div class="card-content">
+      <div class="columns is-mobile is-variable is-2">
+        <div class="column has-text-centered">
+          <p class="stat-label">Temperature</p>
+          <p class="stat-value has-text-info" x-text="temp !== null ? temp + '°C' : '--'"></p>
+        </div>
+        <div class="column has-text-centered" style="border-left:1px solid #eee">
+          <p class="stat-label">Button A</p>
+          <p class="mt-3">
+            <span class="tag is-medium is-rounded" :class="btn ? 'is-success' : 'is-light'"
+              x-text="btn ? 'Pressed' : 'Released'"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LED Control -->
+  <div class="card">
+    <div class="card-content py-4">
+      <div class="is-flex is-justify-content-space-between is-align-items-center">
+        <div>
+          <p class="stat-label mb-0">LED</p>
+        </div>
+        <button class="button is-rounded" :class="led ? 'is-success' : 'is-light'"
+          @click="toggle()" x-text="led ? 'ON' : 'OFF'" style="min-width:72px; font-weight:600"></button>
+      </div>
+    </div>
+  </div>
+
+  <p class="has-text-centered mt-4 is-size-7" style="color:#aaa">
+    HTTP Polling &mdash; data refreshes every 2 seconds</p>
+
+</div>
+</body></html>
