@@ -1,0 +1,8 @@
+# Local CircuitPython workspace files
+*.mpy
+.dist/
+__pycache__/
+*.pyc
+
+# CircuitPython library bundles users may drop in for testing
+adafruit-circuitpython-bundle-*/

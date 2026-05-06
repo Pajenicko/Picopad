@@ -1,9 +1,0 @@
-^YSpheres^0
-
-Demo - random spheres
-
-^WY^0 ....... quit
-
-Support USB keyboard:
-A->Ctrl, B->Alt, X->Shift,
-Y->Esc

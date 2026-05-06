@@ -1,5 +1,0 @@
-^YCO2^0
-
-SCD41 CO2 sensor
-
-^WY^0 ....... quit

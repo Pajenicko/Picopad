@@ -1,0 +1,7 @@
+# Compiled MicroPython modules
+*.mpy
+__pycache__/
+*.pyc
+
+# Local Thonny config
+.thonny/
