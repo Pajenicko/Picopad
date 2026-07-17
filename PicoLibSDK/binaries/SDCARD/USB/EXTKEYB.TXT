@@ -1,3 +1,0 @@
-^YExtern USB keyboard^0
-
-^WY^0 ....... quit

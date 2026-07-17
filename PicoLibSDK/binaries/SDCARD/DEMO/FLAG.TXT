@@ -1,9 +1,0 @@
-^YFlag^0
-
-Demo - fluttering flag
-
-^WY^0 ....... quit
-
-Support USB keyboard:
-A->Ctrl, B->Alt, X->Shift,
-Y->Esc

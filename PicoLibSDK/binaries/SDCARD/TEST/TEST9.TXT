@@ -1,9 +1,0 @@
-^YTest9^0
-
-Trigonometric Test
-or real numbers.
-Check precision by:
-arcsin(arccos(arctan(
-  tan(cos(sin(9))))))
-
-^WY^0 ....... quit

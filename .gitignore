@@ -1,0 +1,36 @@
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# Build outputs
+build/
+.pio/
+**/build/*.UF2
+**/build/*.uf2
+**/build/*.bin
+**/build/*.elf
+**/build/*.hex
+**/build/*.map
+cmake-build-debug/
+cmake-build-release/
+**/cmake-build-debug/
+**/cmake-build-release/
+
+# Per-project venv
+venv/
+**/venv/
+.venv/
+**/.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs / stats
+stats/
+*.log

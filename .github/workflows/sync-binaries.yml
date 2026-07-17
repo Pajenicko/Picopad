@@ -1,0 +1,32 @@
+name: Sync binaries from upstream PicoLibSDK
+
+on:
+  # Manual trigger from the Actions tab.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (default: binaries-YYYY.MM.DD)"
+        required: false
+        type: string
+
+  # Optional weekly check; remove if you'd rather manage it by hand.
+  schedule:
+    - cron: "0 4 * * 1"   # Mondays 04:00 UTC
+
+permissions:
+  contents: write   # required to create / edit releases
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
+      - name: Run sync script
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          # gh CLI is preinstalled on ubuntu-latest runners; just run.
+          ./scripts/sync-binaries.sh
